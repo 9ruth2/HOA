@@ -6,6 +6,7 @@ class Dummy extends Component {
         selectedColor: this.props.color1
     }
 
+    
     render() {
         return (
             <h1 className='dummy-header' onClick={ this.onClickHandler.bind(this) } style={ {
