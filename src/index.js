@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import initFirebase from './Firebase'
+
+initFirebase()
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
