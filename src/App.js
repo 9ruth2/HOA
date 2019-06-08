@@ -5,6 +5,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import UserPage from './components/UserPage';
+import CreatBuilding from './components/CreatBuilding';
 
 class App extends Component {
 
@@ -22,8 +23,8 @@ class App extends Component {
 
 //loading the name information from the database
 
-  // const fs = firebase.firestore()
-  // fs.collection("Apt").doc("UuBQJ0gnmQZvtPJD9fM0").get().then(result => {
+  // const fb = firebase.firestore()
+  // fb.collection("Apt").doc("UuBQJ0gnmQZvtPJD9fM0").get().then(result => {
   //   this.setState({
   //     name: result.data().name
   //   })
@@ -38,9 +39,9 @@ class App extends Component {
 
 
 
-  return( <UserPage>
-    
-  </UserPage>
+  return( 
+    //<UserPage/>
+    <CreatBuilding/>
   );
 
 //return loading till we get the name from the DB
