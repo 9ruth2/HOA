@@ -6,6 +6,10 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import UserPage from './components/UserPage';
 import CreatBuilding from './components/CreatBuilding';
+import CreateApt from './components/CreateApt'
+import Message from './components/Message';
+import NewComponentText from './components/NewComponentText';
+//import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
 
@@ -14,6 +18,17 @@ class App extends Component {
   }
 
   render() {
+  
+  return(
+    //<NewComponentText/> 
+      <CreateApt/>
+     //<Message/>
+     
+    
+    // <UserPage/>
+    // <CreatBuilding/>
+    
+  );
 
   // const aut = firebase.auth();
   // aut.createUserWithEmailAndPassword("hello@gmail.com", "123456789")
@@ -32,26 +47,9 @@ class App extends Component {
   // })
 
 
-  // fs.collection('Apt').add({
-  //   name: 'hello',
-  //   age: 555
-  // })
 
 
 
-  return( 
-    //<UserPage/>
-    <CreatBuilding/>
-  );
-
-//return loading till we get the name from the DB
-
-  // if(this.state.name == null) {
-  //   return <h1>Loading...</h1>
-  // }
-  // return (
-  //   <h1>{this.state.name}</h1>
-  // );
   }
 
 }
