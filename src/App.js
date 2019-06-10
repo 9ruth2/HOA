@@ -10,6 +10,7 @@ import CreateApt from './components/CreateApt'
 import Message from './components/Message';
 import NewComponentText from './components/NewComponentText';
 //import { BrowserRouter as Router, Route } from 'react-router-dom';
+import EventCalendar from './components/EventCalendar'
 
 class App extends Component {
 
@@ -21,9 +22,9 @@ class App extends Component {
   
   return(
     //<NewComponentText/> 
-      <CreateApt/>
+      //<CreateApt/>
      //<Message/>
-     
+     <EventCalendar/>
     
     // <UserPage/>
     // <CreatBuilding/>
