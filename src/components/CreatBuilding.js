@@ -3,6 +3,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 
+
 //import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
@@ -29,8 +30,6 @@ class CreatBuilding extends Component{
     handleChange(event){
         const target = event.target;
 
-/****************************** func test ****************************** */
-
         if(target.type === 'text'){   
             this.setState({
                 address: target.value
@@ -44,10 +43,6 @@ class CreatBuilding extends Component{
     }
 
     handleSubmit(event){
-        
-/****************************** func test ****************************** */
-
-         console.log('the submitted values are: ' + this.state.address + ', ' + this.state.aptNum)
 
         if(this.state.aptNum<=0){
             alert('מספר הדירות חייב להיות מספר חיובי')

@@ -9,6 +9,7 @@ import CreatBuilding from './components/CreatBuilding';
 import CreateApt from './components/CreateApt'
 import Message from './components/Message';
 import NewComponentText from './components/NewComponentText';
+
 //import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
@@ -26,7 +27,7 @@ class App extends Component {
      
     
     // <UserPage/>
-    // <CreatBuilding/>
+     //<CreatBuilding/>
     
   );
 

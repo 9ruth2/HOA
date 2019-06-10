@@ -5,6 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import initFirebase from './Firebase'
 
+import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
+
 initFirebase()
 
 ReactDOM.render(<App />, document.getElementById('root'));
