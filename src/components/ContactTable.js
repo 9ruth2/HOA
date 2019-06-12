@@ -5,6 +5,7 @@ class ContactTable extends Component{
     ContactTableStyle = () => {
         return{
             border: '1em',
+            float: 'right'
         }
     }
 

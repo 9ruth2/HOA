@@ -9,8 +9,11 @@ import CreatBuilding from './components/CreatBuilding';
 import CreateApt from './components/CreateApt'
 import Message from './components/Message';
 import NewComponentText from './components/NewComponentText';
+import Tenant from './components/Tenant'
+import ContactTable from './components/ContactTable';
+
 //import { BrowserRouter as Router, Route } from 'react-router-dom';
-import EventCalendar from './components/EventCalendar'
+//import EventCalendar from './components/EventCalendar'
 
 class App extends Component {
 
@@ -21,13 +24,18 @@ class App extends Component {
   render() {
   
   return(
-    //<NewComponentText/> 
-      //<CreateApt/>
+      
      //<Message/>
-     <EventCalendar/>
-    
-    // <UserPage/>
-    // <CreatBuilding/>
+     //<EventCalendar/>
+
+     
+// ruth's components 
+
+     //<CreateApt/>
+     //<UserPage/>
+     //<CreatBuilding/>
+     <Tenant/>
+     //<ContactTable/>
     
   );
 
