@@ -1,3 +1,12 @@
+
+
+
+.react-calendar{
+  width:100%
+  
+}
+
+
 /**
  * Base
  *
@@ -7,6 +16,7 @@
     font-weight: 100;
     margin: 0;
     padding: 0;
+    
 }
 
 /**
