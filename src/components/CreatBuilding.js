@@ -76,6 +76,7 @@ class CreatBuilding extends Component{
                         <input name="address" type="text" value={this.state.address} onChange={this.handleChange} />
                         </p>
                     </label>
+                    <br/>
                     <label>
                         <p>
                         מספר דירות
@@ -83,6 +84,7 @@ class CreatBuilding extends Component{
                         <input name="aptNum" type="number" value={this.state.aptNum} onChange={this.handleChange} />
                         </p>
                     </label>
+                    <br/>
                     <input type="submit" value="Submit" />
                 </form>
             </div>
