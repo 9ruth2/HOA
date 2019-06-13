@@ -12,7 +12,8 @@ import NewComponentText from './components/NewComponentText';
 import Tenant from './components/Tenant'
 import ContactTable from './components/ContactTable';
 
-//import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import CreateAptPage from './components/CreateAptPage';
 //import EventCalendar from './components/EventCalendar'
 
 class App extends Component {
@@ -24,7 +25,16 @@ class App extends Component {
   render() {
   
   return(
-      
+    <Switch>
+          <Route path="/create-building" exact component={CreatBuilding} />
+          <Route path="/user-page" exact component={UserPage} />
+          <Route path="/create-apt" exact component={CreateApt} />
+          <Route path="/create-apt-page" exact component={CreateAptPage} />
+          <Route path="/tenant" exact component={Tenant} />
+          <Redirect to='/create-building'/>
+    </Switch>
+
+
      //<Message/>
      //<EventCalendar/>
 
@@ -33,27 +43,11 @@ class App extends Component {
 
      //<CreateApt/>
      //<UserPage/>
-     //<CreatBuilding/>
-     <Tenant/>
+     //<Tenant/>
      //<ContactTable/>
     
   );
 
-  // const aut = firebase.auth();
-  // aut.createUserWithEmailAndPassword("hello@gmail.com", "123456789")
-  // aut.currentUser.email
-  // aut.signOut()
-
-
-//loading the name information from the database
-
-  // const fb = firebase.firestore()
-  // fb.collection("Apt").doc("UuBQJ0gnmQZvtPJD9fM0").get().then(result => {
-  //   this.setState({
-  //     name: result.data().name
-  //   })
-    
-  // })
 
 
 
