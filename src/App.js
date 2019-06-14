@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 //mport logo from './logo.svg';
 import './App.css';
-<<<<<<< HEAD
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
@@ -15,6 +14,9 @@ import ContactTable from './components/ContactTable';
 
 import { Route, Switch, Redirect } from 'react-router-dom';
 import CreateAptPage from './components/CreateAptPage';
+import CreatePayment from './components/Payment/CreatePayment';
+import PaymentTable from './components/Payment/PaymentTable';
+import PaymentMainPage from './components/Payment/PaymentMainPage';
 //import EventCalendar from './components/EventCalendar'
 
 class App extends Component {
@@ -32,6 +34,9 @@ class App extends Component {
           <Route path="/create-apt" exact component={CreateApt} />
           <Route path="/create-apt-page" exact component={CreateAptPage} />
           <Route path="/tenant" exact component={Tenant} />
+          <Route path="/payment/create-payment" exact component={CreatePayment} />
+          <Route path="/payment/payment-table" exact component={PaymentTable} />
+          <Route path="/payment/payment-main-page" exact component={PaymentMainPage} />
           <Redirect to='/create-building'/>
     </Switch>
 
@@ -47,14 +52,6 @@ class App extends Component {
      //<Tenant/>
      //<ContactTable/>
     
-=======
-import Message from './blog/Message'
-
-
-function App() {
-  return (
-    <Message />
->>>>>>> message blob
   );
 
 
