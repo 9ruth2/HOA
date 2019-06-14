@@ -17,6 +17,7 @@ import CreateAptPage from './components/CreateAptPage';
 import CreatePayment from './components/Payment/CreatePayment';
 import PaymentTable from './components/Payment/PaymentTable';
 import PaymentMainPage from './components/Payment/PaymentMainPage';
+import SignIn from './components/SignIn/SignIn';
 //import EventCalendar from './components/EventCalendar'
 
 class App extends Component {
@@ -29,15 +30,16 @@ class App extends Component {
   
   return(
     <Switch>
-          <Route path="/create-building" exact component={CreatBuilding} />
-          <Route path="/user-page" exact component={UserPage} />
-          <Route path="/create-apt" exact component={CreateApt} />
-          <Route path="/create-apt-page" exact component={CreateAptPage} />
-          <Route path="/tenant" exact component={Tenant} />
-          <Route path="/payment/create-payment" exact component={CreatePayment} />
-          <Route path="/payment/payment-table" exact component={PaymentTable} />
-          <Route path="/payment/payment-main-page" exact component={PaymentMainPage} />
-          <Redirect to='/create-building'/>
+      <Route path="/sign-in" exact component={SignIn} />
+      <Route path="/create-building" exact component={CreatBuilding} />
+      <Route path="/user-page" exact component={UserPage} />
+      <Route path="/create-apt" exact component={CreateApt} />
+      <Route path="/create-apt-page" exact component={CreateAptPage} />
+      <Route path="/tenant" exact component={Tenant} />
+      <Route path="/payment/create-payment" exact component={CreatePayment} />
+      <Route path="/payment/payment-table" exact component={PaymentTable} />
+      <Route path="/payment/payment-main-page" exact component={PaymentMainPage} />
+      <Redirect to='/sign-in'/>
     </Switch>
 
 

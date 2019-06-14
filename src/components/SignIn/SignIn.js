@@ -40,8 +40,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
+
 export default function SignIn() {
   const classes = useStyles();
+
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -54,7 +58,7 @@ export default function SignIn() {
          מערכת לניהול ועד בית :
          התחברות
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onChange={handleChange}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -79,7 +83,8 @@ export default function SignIn() {
           />
 
           <Button
-            onClick={()=> this.onClickSignIn()}
+           // onClick={()=> this.onClickSignIn()}
+           onClick={onClickSignIn}
             type="submit"
             fullWidth
             variant="contained"
@@ -105,5 +110,16 @@ export default function SignIn() {
       </Box>
     </Container>
   );
+  
+}
+
+
+function handleChange(e){
+  if(e.name === 'password'){
+    
+  }
+}
+
+function onClickSignIn(e){
   
 }
