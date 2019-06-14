@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 //mport logo from './logo.svg';
 import './App.css';
-<<<<<<< HEAD
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
@@ -35,17 +34,10 @@ class App extends Component {
      //<CreateApt/>
      //<UserPage/>
      //<CreatBuilding/>
-     <Tenant/>
+     //<Tenant/>
+     <Message/>
      //<ContactTable/>
     
-=======
-import Message from './blog/Message'
-
-
-function App() {
-  return (
-    <Message />
->>>>>>> message blob
   );
 
   // const aut = firebase.auth();
