@@ -3,7 +3,7 @@ import './Message.css'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-
+ 
 class Message extends Component {
 
     state = {

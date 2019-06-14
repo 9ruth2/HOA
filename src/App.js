@@ -31,6 +31,7 @@ class App extends Component {
   return(
     <Switch>
       <Route path="/sign-in" exact component={SignIn} />
+      <Route path="/message" exact component={Message} />
       <Route path="/create-building" exact component={CreatBuilding} />
       <Route path="/user-page" exact component={UserPage} />
       <Route path="/create-apt" exact component={CreateApt} />
