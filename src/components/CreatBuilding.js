@@ -56,11 +56,9 @@ class CreatBuilding extends Component{
                 address: this.state.address,
                 aptAmount: this.state.aptNum
             })
-            this.props.push('./createApt');
+            // this.props.push('./createApt');
+            this.props.history.push('./create-apt-page');
         }
-
-
-
     }
 
     render(){

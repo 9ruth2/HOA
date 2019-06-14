@@ -87,21 +87,8 @@ class Tenant extends Component{
                email:this.state.email,
                dob:this.state.dob 
             })
-            //this.props.push('./tenant');
         }
     }
-
-    // handleEdit(event){
-    //     this.setState({
-    //         edit : false
-    //     });
-    // }
-    // handleSubmit(event){
-    //     this.setState({
-    //         edit : true
-    //     });
-    // }
-
     
     render(){
         return (

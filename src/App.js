@@ -12,7 +12,12 @@ import NewComponentText from './components/NewComponentText';
 import Tenant from './components/Tenant'
 import ContactTable from './components/ContactTable';
 
-//import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import CreateAptPage from './components/CreateAptPage';
+import CreatePayment from './components/Payment/CreatePayment';
+import PaymentTable from './components/Payment/PaymentTable';
+import PaymentMainPage from './components/Payment/PaymentMainPage';
+import SignIn from './components/SignIn/SignIn';
 //import EventCalendar from './components/EventCalendar'
 
 class App extends Component {
@@ -24,7 +29,20 @@ class App extends Component {
   render() {
   
   return(
-      
+    <Switch>
+      <Route path="/sign-in" exact component={SignIn} />
+      <Route path="/create-building" exact component={CreatBuilding} />
+      <Route path="/user-page" exact component={UserPage} />
+      <Route path="/create-apt" exact component={CreateApt} />
+      <Route path="/create-apt-page" exact component={CreateAptPage} />
+      <Route path="/tenant" exact component={Tenant} />
+      <Route path="/payment/create-payment" exact component={CreatePayment} />
+      <Route path="/payment/payment-table" exact component={PaymentTable} />
+      <Route path="/payment/payment-main-page" exact component={PaymentMainPage} />
+      <Redirect to='/sign-in'/>
+    </Switch>
+
+
      //<Message/>
      //<EventCalendar/>
 
@@ -35,26 +53,12 @@ class App extends Component {
      //<UserPage/>
      //<CreatBuilding/>
      //<Tenant/>
-     <Message/>
+     //<Message/>
+     //<Tenant/>
      //<ContactTable/>
     
   );
 
-  // const aut = firebase.auth();
-  // aut.createUserWithEmailAndPassword("hello@gmail.com", "123456789")
-  // aut.currentUser.email
-  // aut.signOut()
-
-
-//loading the name information from the database
-
-  // const fb = firebase.firestore()
-  // fb.collection("Apt").doc("UuBQJ0gnmQZvtPJD9fM0").get().then(result => {
-  //   this.setState({
-  //     name: result.data().name
-  //   })
-    
-  // })
 
 
 
