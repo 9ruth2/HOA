@@ -74,22 +74,31 @@ class Message extends Component {
 
     onClickSave()
     {
-          this.setState({ messages: [...this.state.messages, {
-            text: this.state.input,
-            timestamp: new Date().toLocaleString('en-US', {hour12: false}),
-            author: "USER",
-            id: this.state.largestId++
-          }] })
+      if(this.state.input !== ''){
+        this.setState({
+          messages: this.state.messages.push(this.state.input)
+        })
 
-          this.setState({ input: ''});
-        
-         const db = firebase.firestore();
-         db.collection('Messages').doc().set({
-         messages: this.state.messages})
+        this.setState({ 
+          messages: [...this.state.messages, {
+          text: this.state.input,
+          timestamp: new Date().toLocaleString('en-US', {hour12: false}),
+          author: "USER",
+          id: this.state.largestId++
+        }] 
+      })
 
-      }
-
+      this.setState({ input: ''});
+      
+      const db = firebase.firestore();
+      db.collection('Messages').doc("temp-building-messages-id").update({
+      messages: this.state.messages})
+      console.log(this.state.messages)
     }
+
+  }
+
+}
 
 
 export default Message
