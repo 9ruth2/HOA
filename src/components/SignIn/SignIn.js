@@ -17,6 +17,8 @@ import Container from '@material-ui/core/Container';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import LogOut from './LogOut'
+import Tenant from '../Tenant';
 
 
 
@@ -48,8 +50,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
   const classes = useStyles();
-
-
 
   return (
     <Container component="main" maxWidth="xs">
@@ -110,6 +110,17 @@ export default function SignIn() {
 
             </Grid>
           </Grid>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" onClick={logingOut} variant="body2">
+              התנתק
+              </Link>
+            </Grid>
+            <Grid item>
+
+            </Grid>
+          </Grid>
+
         </form>
       </div>
       <Box mt={5}>
@@ -118,8 +129,10 @@ export default function SignIn() {
   );
   
 }
-var username = "aaa";
-var password = "ppp";
+var username = "";
+var password = "";
+
+
 
 function handleChange(e){
   if(e.target.type === 'password'){
@@ -140,3 +153,9 @@ function onClickSignIn(e){
   });
   
 }
+
+function logingOut (){
+  firebase.auth().signOut();
+}
+
+

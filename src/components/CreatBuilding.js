@@ -2,10 +2,7 @@ import React, {Component} from 'react';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-
-
-//import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
+import LogOut from './SignIn/LogOut';
 
 class CreatBuilding extends Component{
     
@@ -16,6 +13,7 @@ class CreatBuilding extends Component{
             paddingRight: '1em'  
         }
     }
+
 
     constructor(props){
         super(props);
@@ -56,15 +54,14 @@ class CreatBuilding extends Component{
                 address: this.state.address,
                 aptAmount: this.state.aptNum
             })
-            // this.props.push('./createApt');
             this.props.history.push('./create-apt-page');
         }
     }
 
     render(){
         return(
-        //<Router>
             <div className="CreatBuilding" style = {this.CreatBuildingStyle()}>
+                <LogOut/>
                 <h3>יצירת בניין</h3>
                 <form onSubmit={this.handleSubmit}>
                     <label>
@@ -86,7 +83,6 @@ class CreatBuilding extends Component{
                     <input type="submit" value="Submit" />
                 </form>
             </div>
-        //</Router>
             );
         }
 }
