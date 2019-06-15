@@ -43,30 +43,10 @@ class App extends Component {
       <Redirect to='/sign-in'/>
     </Switch>
 
-
-     //<Message/>
-     //<EventCalendar/>
-
-     
-// ruth's components 
-
-     //<CreateApt/>
-     //<UserPage/>
-     //<CreatBuilding/>
-     //<Tenant/>
-     //<Message/>
-     //<Tenant/>
-     //<ContactTable/>
     
   );
 
-
-
-
-
-
   }
-
 }
 
 export default App;
