@@ -1,13 +1,15 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import initFirebase from './Firebase'
+//import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import moment from 'moment';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
+
 
 initFirebase()
 

@@ -1,10 +1,14 @@
-import './Message.css'
 import React, { Component } from 'react'
-
+import './Message.css'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
+ 
 class Message extends Component {
 
     state = {
         input: "",
+        largestId: 1,
         messages: []
       }
     
@@ -35,34 +39,58 @@ class Message extends Component {
                         />
                     </div>
                     <br/>
-                    <div className = "messages_btn">
-                        <button type='button' onClick={() => this.onClick()}>Save</button>
-                    </div>
+                    <button className = "messages_btn" type='button' onClick={() => this.onClickSave()}>Save</button>
                 </form>
                 {this.getBubbles()}
-                </div>
+              </div>
           </React.Fragment>
-        );
+        )
       }
 
 
-      getBubbles() {
-        return this.state.messages.map(text => {
-            return  <p className = "messages_talkbubble">Your message is: {text}</p>
+      getBubbles()
+      {
+        return this.state.messages.map(messageObj => {
+          if(messageObj == null || messageObj.text == null || messageObj.text.length <= 0) return null
+         
+         return <div key={messageObj.id} className = "message_button_buuble">
+          <p>reated at: {messageObj.timestamp} by: {messageObj.author}</p>        
+          <p className = "messages_talkbubble">Your message is: {messageObj.text}</p>
+          <br/>
+          <button className = "messages_btnDel" onClick={() => this.onClickDelete(messageObj.id)}>Delete</button>  
+          </div>
         })
+      }
+
+
+      onClickDelete(idToDelete)
+      {
+        this.setState({messages: this.state.messages.filter(item => item.id !== idToDelete) });
+        let db = firebase.firestore();
+        let temp = db.collection('Messages').doc().delete();
+        //  this.props.push('./Message');
+      }    
+
+
+    onClickSave()
+    {
+          this.setState({ messages: [...this.state.messages, {
+            text: this.state.input,
+            timestamp: new Date().toLocaleString('en-US', {hour12: false}),
+            author: "USER",
+            id: this.state.largestId++
+          }] })
+
+          this.setState({ input: ''});
+        
+         const db = firebase.firestore();
+         db.collection('Messages').doc().set({
+         messages: this.state.messages})
 
       }
-/****************************** func test ****************************** */
-      onClick() {
-        if(this.state.input == ''){
-          alert('please type in your message')
-        }else{
-          this.setState({
-            messages: [...this.state.messages, this.state.input]
-          })
-        }
-      }
-}
+
+    }
+
 
 export default Message
 
