@@ -12,7 +12,7 @@ class Message extends Component {
         messages: []
       }
     
-      handleChange = event => {
+      handleChangeText = event => {
         const value = event.target.value;
         this.setState({
           input: value
@@ -26,29 +26,26 @@ class Message extends Component {
             <div className= "messages_body">
                 <h1 className = "messages_h1">Message Blog</h1>
                 <form>
-                    <div>
-                        <label>Enter your message:</label>
-                    </div>
-                    <br/>
+                    <label>Enter your message:</label><br/>
                     <div>
                         <textarea className = "messages_textarea"
                         type="text"
                         value={this.state.input}
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeText}
                         placeholder="Enter a text"
                         />
-                    </div>
-                    <br/>
+                    </div><br/>
                     <button className = "messages_btn" type='button' onClick={() => this.onClickSave()}>Save</button>
                 </form>
-                {this.getBubbles()}
+                {this.getMessage()} 
               </div>
           </React.Fragment>
         )
       }
 
+//----------------------- Functions ---------------------------
 
-      getBubbles()
+      getMessage()
       {
         return this.state.messages.map(messageObj => {
           if(messageObj == null || messageObj.text == null || messageObj.text.length <= 0) return null
@@ -65,15 +62,17 @@ class Message extends Component {
 
       onClickDelete(idToDelete)
       {
-        //const db = firebase.firestore();
-       // db.collection('Messages').doc().delete();
+        const db = firebase.firestore();
+        var temp = db.collection('Messages').doc("temp-building-messages-id")
+        temp.update({messages: this.state.messages.filter(item => item.id !== idToDelete)});
         this.setState({messages: this.state.messages.filter(item => item.id !== idToDelete) });
       }    
 
 
     onClickSave()
     {
-      if(this.state.input !== ''){
+      if(this.state.input !== '')
+      {
         this.setState({
           messages: this.state.messages.push(this.state.input)
         })
@@ -96,9 +95,7 @@ class Message extends Component {
     }
 
   }
-
 }
-
 
 export default Message
 
