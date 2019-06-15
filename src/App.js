@@ -58,7 +58,6 @@ class App extends Component {
   return(
     <div>
     
-
       {this.state.user ?  (
         <Switch>
         <Route path="/sign-in" exact component={SignIn} />
@@ -79,13 +78,7 @@ class App extends Component {
 
   );
 
-
-
-
-
-
   }
-
 }
 
 export default App;
