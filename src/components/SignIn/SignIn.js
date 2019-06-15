@@ -14,6 +14,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
+
+
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -39,7 +44,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
 
 
 export default function SignIn() {
@@ -69,6 +73,7 @@ export default function SignIn() {
             name="userName"
             autoComplete="userName"
             autoFocus
+            onChange={handleChange}
           />
           <TextField
             variant="outlined"
@@ -80,6 +85,7 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleChange}
           />
 
           <Button
@@ -112,14 +118,25 @@ export default function SignIn() {
   );
   
 }
-
+var username = "aaa";
+var password = "ppp";
 
 function handleChange(e){
-  if(e.name === 'password'){
-    
+  if(e.target.type === 'password'){
+    password = e.target.value;
   }
+  if(e.target.name === 'userName'){
+    username = e.target.value;
+  }
+  
 }
 
 function onClickSignIn(e){
+  firebase.auth().signInWithEmailAndPassword(username, password).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
+  });
   
 }
