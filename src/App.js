@@ -56,26 +56,8 @@ class App extends Component {
   render() {
   
   return(
-<<<<<<< HEAD
-    <Switch>
-      <Route path="/sign-in" exact component={SignIn} />
-      <Route path="/message" exact component={Message} />
-      <Route path="/create-building" exact component={CreatBuilding} />
-      <Route path="/user-page" exact component={UserPage} />
-      <Route path="/create-apt" exact component={CreateApt} />
-      <Route path="/create-apt-page" exact component={CreateAptPage} />
-      <Route path="/tenant" exact component={Tenant} />
-      <Route path="/payment/create-payment" exact component={CreatePayment} />
-      <Route path="/payment/payment-table" exact component={PaymentTable} />
-      <Route path="/payment/payment-main-page" exact component={PaymentMainPage} />
-      <Redirect to='/sign-in'/>
-    </Switch>
-
-=======
     <div>
->>>>>>> dca5b6d3530e76e3f1bc3f56556d4a74bec0237a
     
-
       {this.state.user ?  (
         <Switch>
         <Route path="/sign-in" exact component={SignIn} />
