@@ -65,10 +65,9 @@ class Message extends Component {
 
       onClickDelete(idToDelete)
       {
+        //const db = firebase.firestore();
+       // db.collection('Messages').doc().delete();
         this.setState({messages: this.state.messages.filter(item => item.id !== idToDelete) });
-        let db = firebase.firestore();
-        let temp = db.collection('Messages').doc().delete();
-        //  this.props.push('./Message');
       }    
 
 
