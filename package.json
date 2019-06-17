@@ -17,8 +17,10 @@
     "react-calendar": "^2.19.0",
     "react-dom": "^16.8.6",
     "react-format": "^1.2.0",
+    "react-native-table-component": "^1.2.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "react-table": "^6.10.0"
   },
   "scripts": {
     "start": "react-scripts start",

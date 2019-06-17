@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-//mport logo from './logo.svg';
 import './App.css';
-//import Firebase from './Firebase'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
@@ -20,7 +18,6 @@ import PaymentTable from './components/Payment/PaymentTable';
 import PaymentMainPage from './components/Payment/PaymentMainPage';
 import SignIn from './components/SignIn/SignIn';
 import LogOut from './components/SignIn/LogOut';
-//import EventCalendar from './components/EventCalendar'
 
 class App extends Component {
 
@@ -70,7 +67,6 @@ class App extends Component {
         <Route path="/payment/create-payment" exact component={CreatePayment} />
         <Route path="/payment/payment-table" exact component={PaymentTable} />
         <Route path="/payment/payment-main-page" exact component={PaymentMainPage} />
-       <Redirect to='/user-page'/>
       </Switch>
       ) : (<SignIn />)}
 

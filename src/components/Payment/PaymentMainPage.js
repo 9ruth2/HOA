@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import { Link } from 'react-router-dom'
+import './PaymentMainPage.css';
+
 
 class PaymentMainPage extends Component{
 
@@ -14,9 +17,14 @@ class PaymentMainPage extends Component{
     
     render(){
         return(
-            <div>
-                <h1>תשלומים</h1>
-                <h3>עמוד ראשי</h3>
+            <div className = "PaymentMainPage" style = {this.PaymentMainPagetStyle()} >
+                <h1 className = "mainTitle">תשלומים</h1>
+                <h3 className = "smallTitle"> עמוד ראשי</h3>
+
+                <button><Link to="/payment/create-payment" className="movePage">הוספת תשלום</Link></button>
+                <p></p>
+                <button><Link to="/payment/payment-table"className="movePage">דוח תשלומים</Link></button>
+
             </div>
         );
     }
