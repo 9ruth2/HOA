@@ -20,7 +20,7 @@ import PaymentTable from './components/Payment/PaymentTable';
 import PaymentMainPage from './components/Payment/PaymentMainPage';
 import SignIn from './components/SignIn/SignIn';
 import LogOut from './components/SignIn/LogOut';
-//import EventCalendar from './components/EventCalendar'
+import EventCalendar from './components/EventCalendar'
 
 class App extends Component {
 
@@ -58,7 +58,7 @@ class App extends Component {
   return(
     <div>
     
-      {this.state.user ?  (
+
         <Switch>
         <Route path="/sign-in" exact component={SignIn} />
         <Route path="/message" exact component={Message} />
@@ -70,9 +70,10 @@ class App extends Component {
         <Route path="/payment/create-payment" exact component={CreatePayment} />
         <Route path="/payment/payment-table" exact component={PaymentTable} />
         <Route path="/payment/payment-main-page" exact component={PaymentMainPage} />
+        <Route path = "/EventCalendar" exact component={EventCalendar}/>
        <Redirect to='/user-page'/>
       </Switch>
-      ) : (<SignIn />)}
+ 
 
     </div>
 
