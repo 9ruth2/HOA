@@ -55,7 +55,7 @@ class App extends Component {
   return(
     <div>
     
-      {this.state.user ?  (
+
         <Switch>
         <Route path="/sign-in" exact component={SignIn} />
         <Route path="/message" exact component={Message} />
@@ -68,7 +68,7 @@ class App extends Component {
         <Route path="/payment/payment-table" exact component={PaymentTable} />
         <Route path="/payment/payment-main-page" exact component={PaymentMainPage} />
       </Switch>
-      ) : (<SignIn />)}
+ 
 
     </div>
 

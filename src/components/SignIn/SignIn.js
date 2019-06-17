@@ -102,12 +102,15 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link onClick={inputForgotPassword.bind()} href='./sign-in' variant="body2">
               שכחת סיסמא?
               </Link>
             </Grid>
             <Grid item>
-
+  <div /*style={forgotPasswordStyle()}*/>
+  <input onChange={handleChange} placeholder='כתובת דוא"ל' name='forgotPassword'/>
+  <button onClick={renewPassword}>שליחה</button>
+  </div>
             </Grid>
           </Grid>
           <Grid container>
@@ -131,8 +134,22 @@ export default function SignIn() {
 }
 var username = "";
 var password = "";
+var forgotPassword = "";
+let show = true;
 
+// function forgotPasswordStyle(){
+//   if(show){
+//     return{
+//       display: 'block'
+//     }
+//   }
+//   else{
+//     return{
+//       display: 'none'
+//     }
+//   }
 
+// }
 
 function handleChange(e){
   if(e.target.type === 'password'){
@@ -140,6 +157,9 @@ function handleChange(e){
   }
   if(e.target.name === 'userName'){
     username = e.target.value;
+  }
+  if(e.target.mame === 'forgotPassword'){
+    forgotPassword = e.target.value;
   }
   
 }
@@ -156,6 +176,29 @@ function onClickSignIn(e){
 
 function logingOut (){
   firebase.auth().signOut();
+}
+
+
+function inputForgotPassword(){
+  if(show){
+    show = false
+  }else{
+    show = true;
+  }
+}
+function renewPassword(){
+  
+  var auth = firebase.auth();
+  var emailAddress = forgotPassword;
+
+  auth.sendPasswordResetEmail(emailAddress).then(function() {
+    // Email sent.
+    alert("נשלח אליך דואר אלקטרוני עם חידוש סיסמא")
+    show = false;
+  }).catch(function(error) {
+    alert("הכתובת אינה נכונה")
+    // An error happened.
+  });
 }
 
 

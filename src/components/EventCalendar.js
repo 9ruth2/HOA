@@ -1,126 +1,124 @@
-import { render } from 'react-dom';
+//import { render } from 'react-dom';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
- 
+
 moment.locale('en-GB');
 const localizer = BigCalendar.momentLocalizer(moment);
 
-const App = () => (
-  <div style={{ height: 700 }}>
-    <BigCalendar
-      events={this.state.events}
-      step={60}
-      view='week'
-      views={['week']}
-      min={new Date(2008, 0, 1, 8, 0)} // 8.00 AM
-      max={new Date(2008, 0, 1, 17, 0)} // Max will be 6.00 PM!
-      date={new Date(2018, 0, 1)}
-      localizer ={localizer}
-    />
-  </div>
-);
-class CreatBuilding extends Component{
 
-constructor(props){
-  super(props);
-  this.state = {
-    EventTitle: '',
-    allDay: '',
-    start: '',
-    end: '' 
+class EventCalender extends Component {
 
-};
-  this.handleChange = this.handleChange.bind(this);
-  this.handleSubmit = this.handleSubmit.bind(this);
-}
+  BigCalendarStyle = () => {
 
-handleChange(event){
-  const target = event.target;
+    return {
+      height: 700
+    }
+  }
 
-/****************************** func test ****************************** */
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      allDay: '',
+      start: '',
+      end: '',
+      events: []
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  if(target.type === 'text'){   
+  handleChange(event) {
+
+    const target = event.target;
+
+    if (event.target.name === 'title') {
       this.setState({
-        EventTitle: target.value
+        title: target.value
       });
-  }
-  if(target.type === 'boolean'){
-       this.setState({
-         allDay: target.value
+    }
+    if (event.target.name === 'allDay') {
+      this.setState({
+        allDay: target.value
       });
+    }
+    if (event.target.name === 'startDate') {
+      this.setState({
+        start: target.value
+      });
+    }
+    if (event.target.name === 'endDate') {
+      this.setState({
+        end: target.value
+      });
+    }
   }
-  if(target.type === 'Date'){
-    this.setState({
-      start: target.value
-   });
-  }
-  if(target.type === 'Date'){
-    this.setState({
-      end: target.value
-  });
-  }
-}
 
-handleSubmit(event){
-  
-/****************************** func test ****************************** */
+  handleSubmit(event) {
 
- //  console.log('the submitted values are: ' + this.state.EventTitle + ', ' + this.state.aptNum)
-
-  if(this.state.EventTitle== ''){
+    if (this.state.title == '') {
       alert('חסר את שם האירוע')
-  }
-  else{
-      const db = firebase.firestore();
-      db.collection('Events').doc().set({
-        EventTitle: this.state.EventTitle,
+    }
+    else if (this.state.startDate == '' && this.state.endDate == '') {
+      alert('חסרים תאריכים')
+    }
+    else if (this.state.startDate == '') {
+      alert('חסר תאריך התחלה')
+    }
+    else if (this.state.endDate == '') {
+      alert('חסר תאריך סיום')
+    }
+    else {
+      const dataToSave = {
+        title: this.state.title,
         allDay: this.state.allDay,
-        start:  this.state.start,
-        end:  this.state.end
-      })
-     // this.props.push('./createApt');
+        start: this.state.start,
+        end: this.state.end
+      }
+      const db = firebase.firestore();
+      db.collection('Events').doc().set(dataToSave)
+    }
+
+
+
   }
 
-
-
-}
-/*style = {this.CreatBuildingStyle()}>*/
-render(){
-  return(
-      <div className="Events"> 
-          <form onSubmit={this.handleSubmit}>
-              <label>
-                  <p>
-                    <input name="EventTitle" type="text" value={this.state.EventName} onChange={this.handleChange} />
-                  </p>
-              </label>
-              <label>
-                  <p>
-                    <input name="allDay" type="boolean" value={this.state.allDay} onChange={this.handleChange} />
-                  </p>
-              </label>
-              <label>
-                  <p>
-                  <input name="start" type="Date" value={this.state.start} onChange={this.handleChange} />
-                  </p>
-              </label>
-              <label>
-                  <p>
-                    <input name="end" type="Date" value={this.state.end} onChange={this.handleChange} />
-                  </p>
-              </label>
-              <input type="submit" value="Submit" />
-          </form>
-      </div>
-      );
+  componentDidMount() {
+    //צריך לקרוא מהפייר בייס ולהעביר למערך של איבנט
   }
 
+  render() {
+    return (
 
+      <>
+
+ <div>
+ <input name='title' onChange={event => this.handleChange(event)} placeholder='title'/>
+ <input name='startDate' onChange={event => this.handleChange(event)}  type='date' placeholder='start date'/>
+ <input name='endDate' onChange={event => this.handleChange(event)}  type='date' placeholder='end date'/>
+ <label>All Day: </label>
+ <input name = 'allDay' type='checkbox' placeholder='all day' onChange={event => this.handleChange(event)}/>
+ <button onClick={() => this.handleSubmit()}>Save to server</button>
+ </div>
+
+<BigCalendar
+style={{height: '60vh'}}
+      localizer={localizer}
+      events={this.state.events}
+      startAccessor="start"
+      endAccessor="end"
+      
+    />
+
+      </>
+    );
+
+  }
 
 }
-export default App;
+export default EventCalender;
