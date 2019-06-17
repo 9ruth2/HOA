@@ -35,7 +35,7 @@ class Message extends Component {
                         onChange={this.handleChangeText}
                         placeholder="..כתוב כאן טקסט"
                         />
-                    </div><br/>
+                    </div>
                     <button className = "messages_btn" type='button' onClick={() => this.onClickSave()}>שמור</button>
                 </form>
                 {this.getMessage()} 
