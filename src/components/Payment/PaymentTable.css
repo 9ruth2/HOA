@@ -1,0 +1,23 @@
+#paymentTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #paymentTable td, .PaymentTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #paymentTable tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #paymentTable tr:hover {background-color: #ddd;}
+  
+  #paymentTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(148, 202, 150);
+    color: white;
+    text-align: center;
+  }

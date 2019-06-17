@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import './CreatePayment.css';
 
 class CreatePayment extends Component{
 
@@ -54,30 +55,29 @@ class CreatePayment extends Component{
             })
             //this.props.push('./payment/create-payment');
             alert('הוספת התשלום החדש בוצעה בהצלחה!')
-            this.props.history.push('./payment/create-payment');
+            this.props.history.push('/payment/payment-main-page');
         }
     }
-
     render(){
         return(
         //<Router>
             <div className="CreatePayment" style = {this.CreatePaymentStyle()}>
-                <h3>הוספת תשלום חדש</h3>
+                <h1 className="mainTitle">הוספת תשלום חדש</h1>
                 <form onSubmit={this.handleSubmit}>
                     <label>
-                        <p>
+                        <h3 className = "smallTitle">
                         פירוט תשלום
                         <br/>
                         <input name="details" type="text" value={this.state.details} onChange={this.handleAddPayment} />
-                        </p>
+                        </h3>
                     </label>
                     <br/>
                     <label>
-                        <p>
+                        <h3 className = "smallTitle">
                         סכום לתשלום
                         <br/>
                         <input name="amount" type="number" value={this.state.amount} onChange={this.handleAddPayment} />
-                        </p>
+                        </h3>
                     </label>
                     <br/>
                     <input type="submit" value="הוסף תשלום" />
