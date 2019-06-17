@@ -3,6 +3,7 @@ import './Message.css'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+
  
 class Message extends Component {
 
@@ -24,18 +25,18 @@ class Message extends Component {
         return (
           <React.Fragment>
             <div className= "messages_body">
-                <h1 className = "messages_h1">Message Blog</h1>
+                <h1 className = "messages_h1">לוח הודעות</h1>
                 <form>
-                    <label>Enter your message:</label><br/>
+                    <label>:הכנס/י הודעה</label><br/>
                     <div>
                         <textarea className = "messages_textarea"
                         type="text"
                         value={this.state.input}
                         onChange={this.handleChangeText}
-                        placeholder="Enter a text"
+                        placeholder="..כתוב כאן טקסט"
                         />
                     </div><br/>
-                    <button className = "messages_btn" type='button' onClick={() => this.onClickSave()}>Save</button>
+                    <button className = "messages_btn" type='button' onClick={() => this.onClickSave()}>שמור</button>
                 </form>
                 {this.getMessage()} 
               </div>
@@ -45,16 +46,26 @@ class Message extends Component {
 
 //----------------------- Functions ---------------------------
 
+componentDidMount(){
+  const db = firebase.firestore();
+  db.collection('Messages').get().then(snapshot => {
+    snapshot.forEach(docs => {
+      if(docs.exists){
+        this.state.messages= docs.data().messages;
+        this.state.largestId = docs.data().largestId;}
+  })})
+  }
+
       getMessage()
       {
         return this.state.messages.map(messageObj => {
           if(messageObj == null || messageObj.text == null || messageObj.text.length <= 0) return null
          
          return <div key={messageObj.id} className = "message_button_buuble">
-          <p>reated at: {messageObj.timestamp} by: {messageObj.author}</p>        
-          <p className = "messages_talkbubble">Your message is: {messageObj.text}</p>
+          <p>{messageObj.timestamp} :תאריך  {messageObj.author} :נכתב ע"י</p>        
+          <p className = "messages_talkbubble">{messageObj.text} :הודעה</p>
           <br/>
-          <button className = "messages_btnDel" onClick={() => this.onClickDelete(messageObj.id)}>Delete</button>  
+          <button className = "messages_btnDel" onClick={() => this.onClickDelete(messageObj.id)}>מחק</button>  
           </div>
         })
       }
@@ -73,9 +84,6 @@ class Message extends Component {
     {
       if(this.state.input !== '')
       {
-        this.setState({
-          messages: this.state.messages.push(this.state.input)
-        })
 
         this.setState({ 
           messages: [...this.state.messages, {
@@ -84,16 +92,15 @@ class Message extends Component {
           author: "USER",
           id: this.state.largestId++
         }] 
-      })
+      } , () => {
+        const db = firebase.firestore();
+        db.collection('Messages').doc("temp-building-messages-id").update({
+        messages: this.state.messages,
+        largestId: this.state.largestId})
+      });
 
       this.setState({ input: ''});
-      
-      const db = firebase.firestore();
-      db.collection('Messages').doc("temp-building-messages-id").update({
-      messages: this.state.messages})
-      console.log(this.state.messages)
     }
-
   }
 }
 

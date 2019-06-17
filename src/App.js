@@ -9,6 +9,7 @@ import UserPage from './components/UserPage';
 import CreatBuilding from './components/CreatBuilding';
 import CreateApt from './components/CreateApt'
 import Message from './components/Message';
+import HomePage from './components/HomePage';
 import NewComponentText from './components/NewComponentText';
 import Tenant from './components/Tenant'
 import ContactTable from './components/ContactTable';
@@ -22,11 +23,8 @@ import SignIn from './components/SignIn/SignIn';
 import LogOut from './components/SignIn/LogOut';
 //import EventCalendar from './components/EventCalendar'
 
-class App extends Component {
-
-  // state = {
-  //   name: null
-  // }
+class App extends Component 
+{
 
   constructor() {
     super();
@@ -58,9 +56,9 @@ class App extends Component {
   return(
     <div>
     
-      {this.state.user ?  (
-        <Switch>
+    <Switch>
         <Route path="/sign-in" exact component={SignIn} />
+        <Route path="/HomePage" exact component={HomePage} />
         <Route path="/message" exact component={Message} />
         <Route path="/create-building" exact component={CreatBuilding} />
         <Route path="/user-page" exact component={UserPage} />
@@ -70,10 +68,8 @@ class App extends Component {
         <Route path="/payment/create-payment" exact component={CreatePayment} />
         <Route path="/payment/payment-table" exact component={PaymentTable} />
         <Route path="/payment/payment-main-page" exact component={PaymentMainPage} />
-       <Redirect to='/user-page'/>
+       <Redirect to='/HomePage'/>
       </Switch>
-      ) : (<SignIn />)}
-
     </div>
 
   );
