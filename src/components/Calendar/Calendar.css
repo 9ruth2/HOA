@@ -1,0 +1,67 @@
+.calendar_bar{
+  color: rgb(1, 1, 1);
+  font-weight: bold;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  block-size: 100px;
+
+
+}
+.AllallDay_caledar{
+  font-family:Arial;
+  font-size: 15px;
+  background: rgb(39, 156, 150);
+  border-radius: 30px;
+  block-size: 15px;
+  width: 30px;
+  padding: 50px;
+  margin: 20px;
+
+
+}
+
+
+.calendar_save{
+ /* align-items: center;
+  background: rgb(39, 156, 150);
+  position: relative;
+  border-radius: 30px;
+  block-size: 15px
+*/
+  
+  background: rgb(39, 156, 150);
+  border-radius: 30px;
+  block-size: 15px
+}
+.calendar_save:hover{
+  background: rgb(194, 227, 220);
+
+}
+.calendar_startDate{
+  background: rgb(39, 156, 150);
+  border-radius: 30px;
+  block-size: 15px
+}
+.calendar_endDate{
+  background: rgb(39, 156, 150);
+  border-radius: 30px;
+  block-size: 15px
+}
+.calendar_title{
+  background: rgb(39, 156, 150);
+  border-radius: 30px;
+  block-size: 15px
+}
+.calendar_title:hover{
+  background: rgb(194, 227, 220);
+
+}
+.calendar_startDate:hover{
+  background: rgb(194, 227, 220);
+
+}
+.calendar_endDate:hover{
+  background: rgb(194, 227, 220);
+
+}
