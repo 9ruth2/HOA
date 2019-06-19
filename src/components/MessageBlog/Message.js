@@ -51,8 +51,11 @@ componentDidMount(){
   db.collection('Messages').get().then(snapshot => {
     snapshot.forEach(docs => {
       if(docs.exists){
-        this.state.messages= docs.data().messages;
-        this.state.largestId = docs.data().largestId;}
+        this.setState({
+          messages: docs.data().messages,
+          largestId: docs.data().largestId
+        })
+      }
   })})
   }
 

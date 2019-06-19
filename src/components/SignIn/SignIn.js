@@ -91,6 +91,7 @@ export default function SignIn() {
           <Button
            // onClick={()=> this.onClickSignIn()}
            onClick={onClickSignIn}
+           href = "HomePage"
             type="submit"
             fullWidth
             variant="contained"

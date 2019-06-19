@@ -13,6 +13,7 @@ import Tenant from './components/Tenant'
 import CreateAptPage from './components/CreateAptPage';
 import CreatePayment from './components/Payment/CreatePayment';
 import PaymentTable from './components/Payment/PaymentTable';
+import EventCalendar from './components/EventCalendar';
 import PaymentMainPage from './components/Payment/PaymentMainPage';
 import SignIn from './components/SignIn/SignIn';
 import NewComponentText from './components/NewComponentText';
@@ -55,6 +56,7 @@ class App extends Component
       
 
           <Switch>
+          <Route path="/calendar" exact component={EventCalendar} />
           <Route path="/sign-in" exact component={SignIn} />
           <Route path="/HomePage" exact component={HomePage} />
           <Route path="/message" exact component={Message} />
@@ -66,6 +68,7 @@ class App extends Component
           <Route path="/payment/create-payment" exact component={CreatePayment} />
           <Route path="/payment/payment-table" exact component={PaymentTable} />
           <Route path="/payment/payment-main-page" exact component={PaymentMainPage} />
+          <Redirect to='/sign-in'/>
         </Switch>
   
       </div>

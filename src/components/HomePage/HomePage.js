@@ -7,11 +7,13 @@ class HomePage extends Component {
         return(
         <React.Fragment>
             <ul>
-            <li><a class="active" href="#home">לוח הודעות</a></li>
-            <li><a href="#news">לוח אירועים</a></li>
-            <li><a href="#contact">פרטים אישיים</a></li>
-            <li><a href="#about">תשלומים ודוחות</a></li>
-            <li><a href="#about">ניהול משתמשים</a></li>
+            <li><a class="active" href="message">לוח הודעות</a></li>
+            <li><a href="calendar">לוח אירועים</a></li>
+            <li><a href="tenant">פרטים אישיים</a></li>
+            <li><a href="payment/payment-main-page">תשלומים ודוחות</a></li>
+            <li><a href="user-page">ניהול משתמשים</a></li>
+            <li><a href="create-building">ניהול בניינים</a></li>
+            <li><a href="create-apt-page">ניהול דירות</a></li>
             </ul>
             
             <img src="http://www.up2me.co.il/images/48991255.png" ></img>
