@@ -136,7 +136,7 @@ export default function SignIn() {
 var username = "";
 var password = "";
 var forgotPassword = "";
-let show = true;
+let show = false;
 
 // function forgotPasswordStyle(){
 //   if(show){

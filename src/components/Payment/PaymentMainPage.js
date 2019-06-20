@@ -21,9 +21,9 @@ class PaymentMainPage extends Component{
                 <h1 className = "mainTitle">תשלומים</h1>
                 <h3 className = "smallTitle"> עמוד ראשי</h3>
 
-                <button><Link to="/payment/create-payment" className="movePage">הוספת תשלום</Link></button>
+                <button className="paymentMainPageButton"><Link to="/payment/create-payment" className="movePage">הוספת תשלום</Link></button>
                 <p></p>
-                <button><Link to="/payment/payment-table"className="movePage">דוח תשלומים</Link></button>
+                <button className="paymentMainPageButton"><Link to="/payment/payment-table"className="movePage">דוח תשלומים</Link></button>
 
             </div>
         );

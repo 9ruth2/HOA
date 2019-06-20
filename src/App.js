@@ -13,12 +13,13 @@ import Tenant from './components/Tenant'
 import CreateAptPage from './components/CreateAptPage';
 import CreatePayment from './components/Payment/CreatePayment';
 import PaymentTable from './components/Payment/PaymentTable';
-import EventCalendar from './components/EventCalendar';
 import PaymentMainPage from './components/Payment/PaymentMainPage';
 import SignIn from './components/SignIn/SignIn';
 import NewComponentText from './components/NewComponentText';
 import ContactTable from './components/ContactTable';
 import LogOut from './components/SignIn/LogOut';
+import EventCalendar from './components/Calendar/EventCalendar'
+
 
 
 class App extends Component 
