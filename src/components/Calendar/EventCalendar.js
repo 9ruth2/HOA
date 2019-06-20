@@ -8,12 +8,15 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import './Calendar.css'
 
+
 moment.locale('en-GB');
 const localizer = BigCalendar.momentLocalizer(moment);
 
 
 class EventCalender extends Component {
 
+
+  
   BigCalendarStyle = () => {
 
     return {
@@ -28,17 +31,13 @@ class EventCalender extends Component {
       allDay: '',
       start: '',
       end: '',
+      id: 1,
       events: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSelect(event){
-
-
-
-  }
   handleChange(event) {
 
     const target = event.target;
@@ -86,11 +85,13 @@ class EventCalender extends Component {
         title: this.state.title,
         allDay: this.state.allDay,
         start: this.state.start,
-        end: this.state.end
+        end: this.state.end,
+        id: this.state.id++
       }]
     } , () =>{   const db = firebase.firestore();
       db.collection('Events').doc('Events').update({
-        events: this.state.events
+        events: this.state.events,
+        id: this.state.id
       })}
       )
    
@@ -106,7 +107,8 @@ class EventCalender extends Component {
       snapshot.forEach(docs => {
         if(docs.exists){
           this.setState({
-            events: docs.data().events
+            events: docs.data().events,
+            id: docs.data().id
             })
         }          
     })})
@@ -117,22 +119,13 @@ class EventCalender extends Component {
 
  //Clicking an existing event allows you to remove it
 onSelectEvent(pEvent) {
-   const r = window.confirm("Would you like to remove this event?")
+   const r = window.confirm("האם את/ה בטוח/ה שאת/ה רוצה למחוק את האירוע?")
    if(r === true){
-       this.setState((prevState, props) => {
-       const events = [...prevState.events]
-       const idx = events.indexOf(pEvent)
-       events.splice(idx, 1);
-       
+    
        const db = firebase.firestore();
-       var temp = db.collection('Events').doc("Event")
-       temp.update({events: this.state.events.filter(item => item.id !== idx)});
-       //this.setState({events: this.state.events.filter(item => indexof(item) !== idx)});
-   
-      return { events };
-
-
-     });
+       var temp = db.collection('Events').doc("Events")
+       temp.update({events: this.state.events.filter(item => item.id !== pEvent.id)});
+       this.setState({events: this.state.events.filter(item => item.id  !== pEvent.id)});
    }
   }
   

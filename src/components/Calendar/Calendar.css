@@ -1,9 +1,6 @@
 .calendar_bar{
   color: rgb(1, 1, 1);
   font-weight: bold;
-  align-items: center;
-  border-radius: 10px;
-  position: relative;
   block-size: 100px;
 
 
@@ -22,17 +19,12 @@
 }
 
 
-.calendar_save{
- /* align-items: center;
-  background: rgb(39, 156, 150);
-  position: relative;
-  border-radius: 30px;
-  block-size: 15px
-*/
-  
+.calendar_save{ 
   background: rgb(39, 156, 150);
   border-radius: 30px;
-  block-size: 15px
+  block-size: 50px;
+  text-align: center;
+
 }
 .calendar_save:hover{
   background: rgb(194, 227, 220);
@@ -41,17 +33,22 @@
 .calendar_startDate{
   background: rgb(39, 156, 150);
   border-radius: 30px;
-  block-size: 15px
+  block-size: 50px;
+  text-align: center;
+
 }
 .calendar_endDate{
   background: rgb(39, 156, 150);
   border-radius: 30px;
-  block-size: 15px
+  block-size: 50px;
+  text-align: center;
+
 }
 .calendar_title{
   background: rgb(39, 156, 150);
   border-radius: 30px;
-  block-size: 15px
+  block-size: 50px;
+  text-align: center;
 }
 .calendar_title:hover{
   background: rgb(194, 227, 220);
