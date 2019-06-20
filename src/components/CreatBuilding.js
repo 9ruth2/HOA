@@ -19,7 +19,7 @@ class CreatBuilding extends Component{
         super(props);
         this.state = {
             address: '',
-            aptNum: ''
+            aptNum: '' ,
     };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -50,11 +50,15 @@ class CreatBuilding extends Component{
         }
         else{
             const db = firebase.firestore();
-            db.collection('Building').doc().set({
+            db.collection('Building').add({
                 address: this.state.address,
-                aptAmount: this.state.aptNum
+                aptAmount: this.state.aptNum,
+            }).then(result => {
+                
+
+                this.props.history.push('./create-apt-page?buildingId='+result.id);
             })
-            this.props.history.push('./create-apt-page');
+           
         }
     }
 

@@ -13,7 +13,6 @@ class HomePage extends Component {
             <li><a href="payment/payment-main-page">תשלומים ודוחות</a></li>
             <li><a href="user-page">ניהול משתמשים</a></li>
             <li><a href="create-building">ניהול בניינים</a></li>
-            <li><a href="create-apt-page">ניהול דירות</a></li>
             </ul>
             
             <img src="http://www.up2me.co.il/images/48991255.png" ></img>

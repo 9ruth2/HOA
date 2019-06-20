@@ -110,7 +110,7 @@ export default function SignIn() {
             <Grid item>
   <div /*style={forgotPasswordStyle()}*/>
   <input onChange={handleChange} placeholder='כתובת דוא"ל' name='forgotPassword'/>
-  <button onClick={renewPassword}>שליחה</button>
+  <button type='button' onClick={renewPassword}>שליחה</button>
   </div>
             </Grid>
           </Grid>
