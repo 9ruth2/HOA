@@ -68,7 +68,7 @@ class CreatePayment extends Component{
                         <h3 className = "smallTitle">
                         פירוט תשלום
                         <br/>
-                        <input name="details" type="text" value={this.state.details} onChange={this.handleAddPayment} />
+                        <input className="createpaymentinput" name="details" type="text" value={this.state.details} onChange={this.handleAddPayment} />
                         </h3>
                     </label>
                     <br/>
@@ -76,11 +76,11 @@ class CreatePayment extends Component{
                         <h3 className = "smallTitle">
                         סכום לתשלום
                         <br/>
-                        <input name="amount" type="number" value={this.state.amount} onChange={this.handleAddPayment} />
+                        <input className="createpaymentinput" name="amount" type="number" value={this.state.amount} onChange={this.handleAddPayment} />
                         </h3>
                     </label>
                     <br/>
-                    <input type="submit" value="הוסף תשלום" />
+                    <input className="createpaymentinput" type="submit" value="הוסף תשלום" />
                 </form>
             </div>
             );

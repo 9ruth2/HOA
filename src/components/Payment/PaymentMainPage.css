@@ -4,7 +4,7 @@
 .smallTitle{
         text-shadow: 3px 2px rgb(235, 235, 235);
 }
-button {
+.paymentMainPageButton {
     display: inline-block;
     padding: 15px 25px;
     font-size: 24px;
@@ -19,9 +19,9 @@ button {
     box-shadow: 0 9px rgb(121, 116, 116);
   }
   
-  button:hover {background-color: #3e8e41}
+  .paymentMainPageButton:hover {background-color: #3e8e41}
   
-  button:active {
+  .paymentMainPageButton:active {
     background-color: #d1ffd7;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
