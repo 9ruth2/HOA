@@ -4,7 +4,7 @@ import firebase from 'firebase/app'
 import './App.css';
 import 'firebase/firestore'
 import 'firebase/auth'
-import UserPage from './components/UserPage';
+import UserPage from './components/UserPage/UserPage';
 import CreatBuilding from './components/CreatBuilding';
 import CreateApt from './components/CreateApt'
 import Message from './components/MessageBlog/Message';

@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/FormControl';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import NavBar from './navBar/NavBar';
 
 
 class Tenant extends Component{
@@ -93,7 +94,7 @@ class Tenant extends Component{
     render(){
         return (
             <div className="TenantText container" style = {this.TenantStyle()}>
-
+<NavBar/>
             <table style={this.TableStyle()}>
             <tr>
                 <input className="onEdit" value={this.state.fullName} style = {this.onEditStyle()} type='text' name="fullName" onChange={this.handleChange}></input>

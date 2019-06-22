@@ -4,6 +4,7 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import { Link } from 'react-router-dom'
 import './PaymentMainPage.css';
+import NavBar from '../navBar/NavBar';
 
 
 class PaymentMainPage extends Component{
@@ -18,6 +19,7 @@ class PaymentMainPage extends Component{
     render(){
         return(
             <div className = "PaymentMainPage" style = {this.PaymentMainPagetStyle()} >
+                <NavBar/>
                 <h1 className = "mainTitle">תשלומים</h1>
                 <h3 className = "smallTitle"> עמוד ראשי</h3>
 

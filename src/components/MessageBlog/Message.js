@@ -3,6 +3,8 @@ import './Message.css'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import NavBar from '../navBar/NavBar'
+
 
 const uid = 'tmXzL5VWukP4Ke4yJKH7AQXx8E72'
 
@@ -28,6 +30,7 @@ class Message extends Component {
     if (/*firebase.auth().currentUser*/ uid == null) return null
     return (
       <React.Fragment>
+        <NavBar/>
         <div className="messages_body">
           <h1 className="messages_h1">לוח הודעות</h1>
           <form>
