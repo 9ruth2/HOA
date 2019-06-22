@@ -41,7 +41,6 @@ class CreatBuilding extends Component{
     }
 
     handleSubmit(event){
-
         if(this.state.aptNum<=0){
             alert('מספר הדירות חייב להיות מספר חיובי')
         }
@@ -50,12 +49,16 @@ class CreatBuilding extends Component{
         }
         else{
             const db = firebase.firestore();
-            db.collection('Building').doc().set({
+            db.collection('Building').add({
                 address: this.state.address,
                 aptAmount: this.state.aptNum
+                //create an array on apt that will contain the id of each apt
+            }).then(result => {
+                // user react router to extract param
+                this.props.history.push('./create-apt-page?buildingId='+result.id+'?'+this.state.aptNum);
             })
-            this.props.history.push('./create-apt-page');
         }
+        //this.prop.location.params
     }
 
     render(){
@@ -63,7 +66,7 @@ class CreatBuilding extends Component{
             <div className="CreatBuilding" style = {this.CreatBuildingStyle()}>
                 <LogOut/>
                 <h3>יצירת בניין</h3>
-                <form onSubmit={this.handleSubmit}>
+                <form>
                     <label>
                         <p>
                         כתובת הבניין
@@ -80,7 +83,7 @@ class CreatBuilding extends Component{
                         </p>
                     </label>
                     <br/>
-                    <input type="submit" value="Submit" />
+                    <input onClick={this.handleSubmit} type="button" value="Submit" />
                 </form>
             </div>
             );

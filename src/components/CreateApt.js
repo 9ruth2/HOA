@@ -7,6 +7,7 @@ import 'firebase/auth'
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import CreateAptPage from './CreateAptPage';
 
 
 class CreateApt extends Component{
@@ -14,15 +15,17 @@ class CreateApt extends Component{
     CreateAptStyle = () => {
         return{
             textAlign: 'right',
-            paddingRight: '1em',
-            paddingTop: '2em'
+            paddingRight: '1em'
         }
     }
     constructor(props){
         super(props);
+
+//alert(this.props.buildingID)
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            buildingId: this.props.buildingID
     };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -65,12 +68,18 @@ if(){
             var errorMessage = error.message;
             // ...
           });
-       }
-   }
+          const db = firebase.firestore();
+          db.collection('Apt').add({
+              email: this.state.email,
+              buildingId:this.state.buildingId
+       })
+    }
+}
     render(){
         return(
-            <div className="CreateApt container" style = {this.CreateAptStyle()}>
-                <Form onSubmit={this.handleSubmit}>
+            <div className="CreateApt container" style = 
+            {this.CreateAptStyle()}>
+                <Form>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control name="email" type="email" placeholder="Enter email" value={this.state.email} onChange={this.handleChange}/>
@@ -79,13 +88,14 @@ if(){
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange}   />
                     </Form.Group>
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" onClick={this.handleSubmit} type="button" value="Submit">
                         Submit
                     </Button>
                 </Form>
             </div>
-            );
-        }
-}
+        );
+    }
+    
 
+}
 export default CreateApt;
