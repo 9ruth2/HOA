@@ -19,7 +19,7 @@ class CreatBuilding extends Component{
         super(props);
         this.state = {
             address: '',
-            aptNum: ''
+            aptNum: '' ,
     };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
