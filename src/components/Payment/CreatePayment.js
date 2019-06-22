@@ -3,6 +3,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import './CreatePayment.css';
+import NavBar from '../navBar/NavBar';
 
 class CreatePayment extends Component{
 
@@ -62,6 +63,7 @@ class CreatePayment extends Component{
         return(
         //<Router>
             <div className="CreatePayment" style = {this.CreatePaymentStyle()}>
+                <NavBar/>
                 <h1 className="mainTitle">הוספת תשלום חדש</h1>
                 <form onSubmit={this.handleSubmit}>
                     <label>

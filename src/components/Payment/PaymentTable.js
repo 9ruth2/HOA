@@ -3,6 +3,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import './PaymentTable.css';
+import NavBar from '../navBar/NavBar';
 
 
 class PaymentTable extends Component{
@@ -52,7 +53,11 @@ class PaymentTable extends Component{
 
     render() { 
     return(
+        <div>
+            <NavBar/>
+        
      <table id = "paymentTable" border= "1" style = {this.PaymentTableStyle()}>
+         
          <thead>
          <tr>
             <th>   סטטוס תשלומי דיירים   </th>
@@ -64,6 +69,7 @@ class PaymentTable extends Component{
          {this.getTableRows()}
          </tbody>
      </table>
+     </div>
      );
     }
 }
