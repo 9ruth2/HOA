@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './HomePage.css' 
+import LogOut from '../SignIn/LogOut';
 
 class HomePage extends Component {
 
@@ -13,6 +14,7 @@ class HomePage extends Component {
             <li><a href="payment/payment-main-page">תשלומים ודוחות</a></li>
             <li><a href="user-page">ניהול משתמשים</a></li>
             <li><a href="create-building">ניהול בניינים</a></li>
+            <li style={{float:'right'}}><a ><LogOut/></a></li>
             </ul>
             
             <img src="http://www.up2me.co.il/images/48991255.png" ></img>

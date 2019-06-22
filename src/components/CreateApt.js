@@ -43,7 +43,7 @@ if(){
 }
     */
 
-   handleChange(event){
+   handleChange = (event) =>{
         const target = event.target;
         if(target.type === 'email'){
             this.setState({
@@ -72,9 +72,19 @@ if(){
           db.collection('Apt').add({
               email: this.state.email,
               buildingId:this.state.buildingId
-       })
+            });
+            //this.addAptId();
     }
+
 }
+// addAptId = () =>{
+//     const fb = firebase.firestore();
+//     fb.collection('Building').doc(this.state.buildingId).update({
+//         aptLidtId: 'ruth',
+//         buildingId: this.state.buildingId
+//     });
+//     return
+// }
     render(){
         return(
             <div className="CreateApt container" style = 
@@ -82,7 +92,7 @@ if(){
                 <Form>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control name="email" type="email" placeholder="Enter email" value={this.state.email} onChange={this.handleChange}/>
+                        <Form.Control placeholder="Enter email" name="email" type="email"  value={this.state.email} onChange={this.handleChange}/>
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>

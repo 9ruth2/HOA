@@ -19,9 +19,7 @@ class UserPage extends Component{
             // return tenents.map(tenent => <Tenant/>)
             return(
                 <div>
-                    <Tenant></Tenant>
-                    <Tenant></Tenant>
-                    <Tenant></Tenant>
+                  <Tenant/>
                 </div>
             )
         }

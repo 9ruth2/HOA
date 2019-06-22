@@ -11,9 +11,7 @@ class CreateAptPage extends Component{
     
     constructor(props) {
         super(props);
-
         let i=1;
-
         let str = this.props.location.search
         while(str[i]!='?'){
             i++;
@@ -25,8 +23,6 @@ class CreateAptPage extends Component{
           buildingID : id,
           aptNum : aptNum
         });
-
-
       }
 
     CreateAptPageStyle = () => {
@@ -37,8 +33,6 @@ class CreateAptPage extends Component{
     }
 
     render(){
-
-
         return(
             <div className="CreateAptPage" style =   {this.CreateAptPageStyle()}>
                 {this.printApt()}
