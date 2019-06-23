@@ -76,6 +76,7 @@ class Message extends Component {
 
 
   getMessage() {
+    console.log(this.state.messages)
     return this.state.messages.map(messageObj => {
       if (messageObj == null || messageObj.text == null || messageObj.text.length <= 0) return null
       return <div key={messageObj.id} className="message_button_buuble">
@@ -101,21 +102,24 @@ class Message extends Component {
       alert('no building to add the message to')
       return
     }
-    if (this.state.input !== '') {
-      const newMessageObj = {
-        text: this.state.input,
-        timestamp: new Date().toLocaleString('en-US', { hour12: false }),
-        author: (firebase.auth().currentUser == null) ? "UNKNOWN" : firebase.auth().currentUser.fullName,
-      }
+    if (this.state.input === '') return
+    const newMessageObj = {
+      text: this.state.input,
+      timestamp: new Date().toLocaleString('en-US', { hour12: false }),
+      author: (firebase.auth().currentUser == null) ? "UNKNOWN" : firebase.auth().currentUser.fullName,
+    }
+    const db = firebase.firestore();
+    db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
+    .then(result => {
+      newMessageObj.id = result.id
       this.setState({
         messages: [...this.state.messages, newMessageObj]
       }, () => {
         const db = firebase.firestore();
         db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
       });
-
       this.setState({ input: '' });
-    }
+    })
   }
 }
 

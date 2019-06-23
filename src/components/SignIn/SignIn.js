@@ -17,8 +17,12 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import LogOut from './LogOut'
 import Tenant from '../Tenant';
+import { withRouter } from 'react-router-dom';
 
-
+let username = "";
+let password = "";
+let forgotPassword = "";
+let show = false;
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -46,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function SignIn() {
+function SignIn(props) {
   const classes = useStyles();
 
   return (
@@ -88,10 +92,8 @@ export default function SignIn() {
           />
 
           <Button
-           // onClick={()=> this.onClickSignIn()}
            onClick={onClickSignIn}
-           href = "HomePage"
-            type="submit"
+            type="button"
             fullWidth
             variant="contained"
             color="primary"
@@ -130,12 +132,6 @@ export default function SignIn() {
       </Box>
     </Container>
   );
-  
-}
-let username = "";
-let password = "";
-let forgotPassword = "";
-let show = false;
 
 
 function handleChange(e)
@@ -152,14 +148,18 @@ function handleChange(e)
 }
 
 
-function onClickSignIn(e)
+function onClickSignIn()
 {
-  firebase.auth().signInWithEmailAndPassword(username, password).catch(function(error) {
+  firebase.auth().signInWithEmailAndPassword(username, password)
+  .then(result => {
+    props.history.replace('HomePage')
+  })
+  .catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    // ...
-  }); 
+    alert('שכחת את הפרטים יא נעל')
+  })
 }
 
 
@@ -193,4 +193,7 @@ function renewPassword()
   });
 }
 
+  
+}
 
+export default withRouter(SignIn)
