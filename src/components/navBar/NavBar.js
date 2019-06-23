@@ -15,7 +15,9 @@ class NavBar extends Component {
             <li className="NavBar_li"><a className="NavBar_li_a" href="/user-page">ניהול משתמשים</a></li>
             <li className="NavBar_li"><a className="NavBar_li_a" href="/createBuilding">ניהול בניינים</a></li>
 
-            <li className="NavBar_logout" style={{float:'left'}}><a className="NavBar_li_a" ><LogOut/></a></li>
+            <button className="NavBar_logout" >
+                    <LogOut/>
+            </button>
             </ul>
         )
     }

@@ -3,14 +3,14 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-  border: 1px solid #e7e7e7;
+  /*border: 1px solid #e7e7e7;*/
   background-color:rgb(39, 156, 150);
   ;
   }
   
  .NavBar_li {
     float: right;
-
+  
   }
   
   .NavBar_li_a {
@@ -23,4 +23,22 @@
   
   .NavBar_li_a:hover {
     background: rgb(194, 227, 220);
+  }
+  
+  .NavBar_logout{
+    background-color:rgb(39, 156, 150);  border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    /*display: inline-block;*/
+    font-size: 20px;
+    margin: 6px 20px;
+    cursor: pointer;
+
+
+  }
+  .NavBar_logout:hover{
+    background: rgb(194, 227, 220);
+
+
   }
