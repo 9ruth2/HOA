@@ -6,7 +6,7 @@ import 'firebase/auth'
 import NavBar from '../navBar/NavBar'
 
 
-const uid = 'tmXzL5VWukP4Ke4yJKH7AQXx8E72'
+const uid = 'OUxhlc3PgBTAsaX1ZgBqe3mmlXN2'
 
 class Message extends Component {
 
@@ -14,7 +14,6 @@ class Message extends Component {
 
   state = {
     input: "",
-    belongToBuilding: "",
     messages: []
   }
 
@@ -55,18 +54,7 @@ class Message extends Component {
 
   componentDidMount() {
     if (/*firebase.auth().currentUser*/ uid == null) return
-
-    firebase.firestore().collection("Tenants").doc(/* firebase.auth().currentUser.uid */uid).get().then(
-      result => {
-        if (!result.exists) return
-        this.getBuildingFromApt(result.data().apt)
-      }
-    )
-
-  }
-
-  getBuildingFromApt(aptId) {
-    firebase.firestore().collection("Apt").doc(aptId).get().then(
+    firebase.firestore().collection("Apt").doc(uid).get().then(
       result => {
         if (!result.exists) return
         this.buildingId = result.data().buildingId
@@ -74,6 +62,7 @@ class Message extends Component {
       }
     )
   }
+
 
   getMessagesFromServer() {
     firebase.firestore().collection("Building").doc(this.buildingId).collection("Message").get().then(
@@ -84,12 +73,13 @@ class Message extends Component {
     )
   }
 
+  
   getMessage() {
     return this.state.messages.map(messageObj => {
       if (messageObj == null || messageObj.text == null || messageObj.text.length <= 0) return null
       return <div key={messageObj.id} className="message_button_buuble">
         <p>{messageObj.timestamp} :תאריך  {messageObj.author} :נכתב ע"י</p>
-        <p className="messages_talkbubble">{messageObj.text} :הודעה</p>
+        <p className="messages_talkbubble"> הודעה: {messageObj.text}</p>
         <br />
         <button className="messages_btnDel" onClick={() => this.onClickDelete(messageObj.id)}>מחק</button>
       </div>
