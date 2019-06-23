@@ -11,14 +11,10 @@ class CreateAptPage extends Component{
     
     constructor(props) {
         super(props);
-        let i=1;
-        let str = this.props.location.search
-        while(str[i]!='?'){
-            i++;
-        }
-        let id = str.substring(12 , i-1)
-        let aptNum = str.substring(i+1 , str.length)
-
+        const args = this.props.location.search.split('?')
+        const buildingId = args[1].split('=')[1]
+        let id = buildingId
+        let aptNum =args[2]
         this.state = ({
           buildingID : id,
           aptNum : aptNum

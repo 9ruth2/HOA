@@ -13,3 +13,6 @@ let firebaseConfig = {
   export default function initFirebase() {
     firebase.initializeApp(firebaseConfig)
   }
+
+  const secondFirebaseInstance = firebase.initializeApp(firebaseConfig,'secondFirebaseInstance')
+  export { secondFirebaseInstance }

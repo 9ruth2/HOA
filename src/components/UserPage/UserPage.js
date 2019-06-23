@@ -10,8 +10,14 @@ class UserPage extends Component{
     render(){
         return(
             <div className="UserPage">
+                <div>
                 {this.getTenents()}
                 <ContactTable/>
+                </div>
+                <div>
+                    <button>הוסף דייר</button>
+                </div>
+                
             </div>
             );
         }
@@ -21,8 +27,7 @@ class UserPage extends Component{
             // return tenents.map(tenent => <Tenant/>)
             return(
                 <div>
-                    
-                  <Tenant/>
+                    <Tenant/>
                 </div>
             )
         }
