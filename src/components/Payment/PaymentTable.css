@@ -9,15 +9,15 @@
     padding: 8px;
   }
   
-  #paymentTable tr:nth-child(even){background-color: #f2f2f2;}
+  #paymentTable tr:nth-child(even){background-color: rgb(194, 227, 220);}
   
-  #paymentTable tr:hover {background-color: #ddd;}
+  #paymentTable tr:hover {background-color:rgb(223, 155, 78);}
   
   #paymentTable th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: rgb(148, 202, 150);
+    background-color: rgb(189, 191, 74);
     color: white;
     text-align: center;
   }
