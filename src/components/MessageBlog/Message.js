@@ -14,6 +14,7 @@ class Message extends Component {
 
   state = {
     input: "",
+    belongToBuilding: "",
     messages: []
   }
 
@@ -44,7 +45,6 @@ class Message extends Component {
             </div>
             <button className="messages_btn" type='button' onClick={() => this.onClickSave()}>שמור</button>
           </form>
-          <p></p>
           {this.getMessage()}
         </div>
       </React.Fragment>
@@ -55,6 +55,7 @@ class Message extends Component {
 
   componentDidMount() {
     if (/*firebase.auth().currentUser*/ uid == null) return
+
     firebase.firestore().collection("Apt").doc(uid).get().then(
       result => {
         if (!result.exists) return
@@ -62,8 +63,8 @@ class Message extends Component {
         this.getMessagesFromServer()
       }
     )
-  }
 
+  }
 
   getMessagesFromServer() {
     firebase.firestore().collection("Building").doc(this.buildingId).collection("Message").get().then(
@@ -74,14 +75,12 @@ class Message extends Component {
     )
   }
 
-
   getMessage() {
-    console.log(this.state.messages)
     return this.state.messages.map(messageObj => {
       if (messageObj == null || messageObj.text == null || messageObj.text.length <= 0) return null
       return <div key={messageObj.id} className="message_button_buuble">
         <p>{messageObj.timestamp} :תאריך  {messageObj.author} :נכתב ע"י</p>
-        <p className="messages_talkbubble"> הודעה: {messageObj.text}</p>
+        <p className="messages_talkbubble">{messageObj.text} :הודעה</p>
         <br />
         <button className="messages_btnDel" onClick={() => this.onClickDelete(messageObj.id)}>מחק</button>
       </div>
@@ -102,28 +101,22 @@ class Message extends Component {
       alert('no building to add the message to')
       return
     }
-    if (this.state.input === '') return
-    const newMessageObj = {
-      text: this.state.input,
-      timestamp: new Date().toLocaleString('en-US', { hour12: false }),
-      author: (firebase.auth().currentUser == null) ? "UNKNOWN" : firebase.auth().currentUser.fullName,
-    }
-    const db = firebase.firestore();
-    db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
-    .then(result => {
-      newMessageObj.id = result.id
+    if (this.state.input !== '') {
+      const newMessageObj = {
+        text: this.state.input,
+        timestamp: new Date().toLocaleString('en-US', { hour12: false }),
+        author: (firebase.auth().currentUser == null) ? "UNKNOWN" : firebase.auth().currentUser.fullName,
+      }
       this.setState({
         messages: [...this.state.messages, newMessageObj]
       }, () => {
         const db = firebase.firestore();
         db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
       });
+
       this.setState({ input: '' });
-    })
+    }
   }
 }
 
 export default Message
-
-
-
