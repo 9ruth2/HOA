@@ -3,15 +3,14 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import { secondFirebaseInstance } from '../Firebase'
-
-//import 'bootstrap/dist/css/bootstrap.css';
-
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import CreateAptPage from './CreateAptPage';
+import { EXITED } from 'react-transition-group/Transition';
 
 
-class CreateApt extends Component{
+class CreateApt extends Component
+{
 
     CreateAptStyle = () => {
         return{
@@ -19,6 +18,7 @@ class CreateApt extends Component{
             paddingRight: '1em'
         }
     }
+
     constructor(props){
         super(props);
 
@@ -31,7 +31,7 @@ class CreateApt extends Component{
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-   handleChange = (event) =>{
+   handleChange = (event) => {
         const target = event.target;
         if(target.type === 'email'){
             this.setState({
@@ -44,6 +44,7 @@ class CreateApt extends Component{
             });
         }
    }
+
    handleSubmit(event){
        if(this.state.email == '' || this.state.password == ''){
            alert("please type in all the filds")
@@ -52,13 +53,17 @@ class CreateApt extends Component{
 
         let aptId = null
         secondFirebaseInstance.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
-            alert('error...')
+            alert('שם המשתמש קיים')
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
+            return Promise.resolve(null)
             // ...
           })
           .then(result =>{
+              if(result==null){
+                  return
+              }
             const db = firebase.firestore();
             aptId = result.user.uid
             return db.collection('Apt').doc(aptId).set({
@@ -84,15 +89,6 @@ class CreateApt extends Component{
     }
 
 }
-// addAptId = () =>{
-//     const fb = firebase.firestore();
-//     fb.collection('Building').doc(this.state.buildingId).update({
-//         aptLidtId: 'ruth',
-//         buildingId: this.state.buildingId
-//     });
-//     return
-// }
-
 
     render(){
         return(
@@ -118,6 +114,3 @@ class CreateApt extends Component{
 
 }
 export default CreateApt;
-
-
-        //    firebase.auth().currentUser.uid

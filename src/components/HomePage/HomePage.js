@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import LogOut from '../SignIn/LogOut';
 import NavBar from '../navBar/NavBar';
+import firebase from 'firebase/app'
 
 class HomePage extends Component {
 
@@ -16,8 +17,6 @@ class HomePage extends Component {
         </div>
         )
     }
-
-
 }
 
 export default HomePage

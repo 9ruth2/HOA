@@ -1,6 +1,6 @@
 .messages_h1{
-  font-family: 'Courier New', Courier, monospace;
-  color: rgb(0, 119, 4);
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
   font-weight: bold;
   font-size: 43px;
 }
@@ -18,14 +18,25 @@ min-height: 100vh;
 
 
 .messages_textarea{
-  width: 200px;
-  height: 50px;
+  width: 400px;
+  height: 100px;
+  text-align: right;
   font-family:Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  color:rgb(0, 0, 0);
+  background-color: rgb(194, 227, 220);;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 2px rgb(121, 116, 116);
+  
 }
 
 .message_button_buuble{
  align-items: center;
- background: rgb(214, 214, 211);
+ background:rgb(194, 227, 220);
  position: relative;
  -moz-border-radius: 10px;
  -webkit-border-radius: 10px;
@@ -44,7 +55,7 @@ top: 26px;
 width: 0;
 height: 0;
 border-top: 13px solid transparent;
-border-right: 26px solid  rgb(214, 214, 211);
+border-right: 26px solid  rgb(194, 227, 220);
 border-bottom: 13px solid transparent;
 }
 
@@ -62,7 +73,7 @@ border-bottom: 13px solid transparent;
   transition-duration: 0.4s;
   outline: none;
   color: rgb(3, 3, 3);
-  background-color: rgb(148, 202, 150);
+  background-color: rgb(39, 156, 150);
   border: none;
   border-radius: 15px;
   box-shadow: 0 7px rgb(121, 116, 116);
@@ -89,7 +100,7 @@ border-bottom: 13px solid transparent;
   transition-duration: 0.4s;
   outline: none;
   color: rgb(5, 5, 5);
-  background-color: rgb(148, 202, 150);
+  background-color: rgb(39, 156, 150);
   border: none;
   border-radius: 15px;
   box-shadow: 0 5px rgb(121, 116, 116);

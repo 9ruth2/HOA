@@ -12,15 +12,17 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
-
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import LogOut from './LogOut'
 import Tenant from '../Tenant';
+import { withRouter } from 'react-router-dom';
 
-
+let username = "";
+let password = "";
+let forgotPassword = "";
+let show = false;
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -48,13 +50,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function SignIn() {
+function SignIn(props) {
   const classes = useStyles();
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
+        <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -75,6 +77,7 @@ export default function SignIn() {
             autoFocus
             onChange={handleChange}
           />
+
           <TextField
             variant="outlined"
             margin="normal"
@@ -89,10 +92,8 @@ export default function SignIn() {
           />
 
           <Button
-           // onClick={()=> this.onClickSignIn()}
            onClick={onClickSignIn}
-           href = "HomePage"
-            type="submit"
+            type="button"
             fullWidth
             variant="contained"
             color="primary"
@@ -108,10 +109,10 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-  <div /*style={forgotPasswordStyle()}*/>
-  <input onChange={handleChange} placeholder='כתובת דוא"ל' name='forgotPassword'/>
-  <button type='button' onClick={renewPassword}>שליחה</button>
-  </div>
+              <div /*style={forgotPasswordStyle()}*/>
+              <input onChange={handleChange} placeholder='כתובת דוא"ל' name='forgotPassword'/>
+              <button type='button' onClick={renewPassword}>שליחה</button>
+              </div>
             </Grid>
           </Grid>
           <Grid container>
@@ -131,28 +132,10 @@ export default function SignIn() {
       </Box>
     </Container>
   );
-  
-}
-var username = "";
-var password = "";
-var forgotPassword = "";
-let show = false;
 
-// function forgotPasswordStyle(){
-//   if(show){
-//     return{
-//       display: 'block'
-//     }
-//   }
-//   else{
-//     return{
-//       display: 'none'
-//     }
-//   }
 
-// }
-
-function handleChange(e){
+function handleChange(e)
+{
   if(e.target.type === 'password'){
     password = e.target.value;
   }
@@ -161,38 +144,46 @@ function handleChange(e){
   }
   if(e.target.mame === 'forgotPassword'){
     forgotPassword = e.target.value;
-  }
-  
+  } 
 }
 
-function onClickSignIn(e){
-  firebase.auth().signInWithEmailAndPassword(username, password).catch(function(error) {
+
+function onClickSignIn()
+{
+  firebase.auth().signInWithEmailAndPassword(username, password)
+  .then(result => {
+    props.history.replace('HomePage')
+  })
+  .catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    // ...
-  });
-  
+    alert('שכחת את הפרטים יא נעל')
+  })
 }
+
 
 function logingOut (){
   firebase.auth().signOut();
 }
 
 
-function inputForgotPassword(){
+function inputForgotPassword()
+{
   if(show){
-    show = false
-  }else{
+    show = false }
+  else{
     show = true;
   }
 }
-function renewPassword(){
-  
-  var auth = firebase.auth();
-  var emailAddress = forgotPassword;
 
-  auth.sendPasswordResetEmail(emailAddress).then(function() {
+
+function renewPassword()
+{
+  let auth = firebase.auth();
+  let emailAddress = forgotPassword;
+
+  auth.sendPasswordResetEmail(emailAddress).then(function(){
     // Email sent.
     alert("נשלח אליך דואר אלקטרוני עם חידוש סיסמא")
     show = false;
@@ -202,4 +193,7 @@ function renewPassword(){
   });
 }
 
+  
+}
 
+export default withRouter(SignIn)
