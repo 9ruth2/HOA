@@ -6,6 +6,7 @@ import { secondFirebaseInstance } from '../Firebase'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import CreateAptPage from './CreateAptPage';
+import { EXITED } from 'react-transition-group/Transition';
 
 
 class CreateApt extends Component
@@ -52,13 +53,17 @@ class CreateApt extends Component
 
         let aptId = null
         secondFirebaseInstance.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
-            alert('error...')
+            alert('שם המשתמש קיים')
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
+            return Promise.resolve(null)
             // ...
           })
           .then(result =>{
+              if(result==null){
+                  return
+              }
             const db = firebase.firestore();
             aptId = result.user.uid
             return db.collection('Apt').doc(aptId).set({

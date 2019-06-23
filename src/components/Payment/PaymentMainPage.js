@@ -3,9 +3,9 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import { Link } from 'react-router-dom'
-import './PaymentMainPage.css';
+//import './PaymentMainPage.css';
 import NavBar from '../navBar/NavBar';
-
+import '../Style/Style.css';
 
 class PaymentMainPage extends Component{
 
@@ -23,9 +23,9 @@ class PaymentMainPage extends Component{
                 <h1 className = "mainTitle">תשלומים</h1>
                 <h3 className = "smallTitle"> עמוד ראשי</h3>
 
-                <button className="paymentMainPageButton"><Link to="/payment/create-payment" className="movePage">הוספת תשלום</Link></button>
+                <button className="buttonStyle"><Link to="/payment/create-payment" className="LinkStyle">הוספת תשלום</Link></button>
                 <p></p>
-                <button className="paymentMainPageButton"><Link to="/payment/payment-table"className="movePage">דוח תשלומים</Link></button>
+                <button className="buttonStyle"><Link to="/payment/payment-table"className="LinkStyle">דוח תשלומים</Link></button>
 
             </div>
         );
