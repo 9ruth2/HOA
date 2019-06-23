@@ -8,16 +8,16 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import './Calendar.css'
 import NavBar from '../navBar/NavBar';
+import 'moment/locale/he';
 
 
-moment.locale('en-GB');
+moment.locale('he');
 const localizer = BigCalendar.momentLocalizer(moment);
 
 
 class EventCalender extends Component {
 
 
-  
   BigCalendarStyle = () => {
 
     return {
@@ -135,8 +135,8 @@ onSelectEvent(pEvent) {
 
       <>
 
-  <NavBar></NavBar>
-          <h1 className = 'calendar_big_title'>
+    <NavBar></NavBar>
+    <h1 className = 'calendar_big_title'>
       לוח אירועים
     </h1>
     <div className = 'calendar_bar'>
@@ -156,7 +156,22 @@ onSelectEvent(pEvent) {
 
 
 <BigCalendar
-style={{height: '70vh'}}
+      messages={{
+        previous: 'חודש קודם',
+        next: 'חודש הבא',
+        today: 'היום',
+        month: 'חודש',
+        week: 'שבוע',
+        day: 'יום',
+        agenda: 'סֵדֶר הַיוֹם',
+        date: 'תאריך',
+        time: 'שעה',
+        event: 'אירוע',
+        Sun: 'ראשון',
+        June :'וני'
+      }}
+
+      style={{height: '70vh'}}
       localizer={localizer}
       events={this.state.events}
       popup= {true}
@@ -169,7 +184,6 @@ style={{height: '70vh'}}
       scrollToTime={new Date(1970,1,1,6)}
    
      // onSelectEvent={event => alert(event.title)}
-      onSelectSlot={this.handleSelect}
    
       step={30} //קובע את קצב הזמן שניתן לבחירה בתצוגות שבוע ויום
       defaultView='month'  //התצוגה הראושנית היא חודש
@@ -177,7 +191,7 @@ style={{height: '70vh'}}
       scrollToTime={new Date(1970, 1, 1, 6)}// התאריך האחרון אליו הגלילה למטה תגיע
       onSelectEvent = {event => this.onSelectEvent(event)  } //Fires selecting existing event
 
-     // onSelectSlot={this.handleSelect} //יפעל כאשר נבחר תאריך ביומן
+   //   onSelectSlot={this.handleSelect} //יפעל כאשר נבחר תאריך ביומן
     />
 
       </>
