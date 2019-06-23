@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import { secondFirebaseInstance } from '../Firebase'
 
 //import 'bootstrap/dist/css/bootstrap.css';
 
@@ -11,7 +12,7 @@ import CreateAptPage from './CreateAptPage';
 
 
 class CreateApt extends Component{
-    
+
     CreateAptStyle = () => {
         return{
             textAlign: 'right',
@@ -21,7 +22,6 @@ class CreateApt extends Component{
     constructor(props){
         super(props);
 
-//alert(this.props.buildingID)
         this.state = {
             email: '',
             password: '',
@@ -30,18 +30,6 @@ class CreateApt extends Component{
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    /*
-if(){
-    
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-      });
-      
-}
-    */
 
    handleChange = (event) =>{
         const target = event.target;
@@ -61,19 +49,38 @@ if(){
            alert("please type in all the filds")
        }
        else{
-        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
+
+        let aptId = null
+        secondFirebaseInstance.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
             alert('error...')
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
             // ...
-          });
-          const db = firebase.firestore();
-          db.collection('Apt').add({
-              email: this.state.email,
-              buildingId:this.state.buildingId
-            });
-            //this.addAptId();
+          })
+          .then(result =>{
+            const db = firebase.firestore();
+            aptId = result.user.uid
+            return db.collection('Apt').doc(aptId).set({
+                email: this.state.email,
+                buildingId:this.state.buildingId,
+                aptId : aptId
+              })
+          })
+          .then(result => {
+            const fb = firebase.firestore();
+            return fb.collection('Tenants').add({
+                email: this.state.email,
+                buildingId:this.state.buildingId,
+                aptId: aptId
+              })
+        })
+        .then(rseult => {
+            const fb = firebase.firestore();
+            return fb.collection('Building').doc(this.state.buildingId).update({
+                aptList: firebase.firestore.FieldValue.arrayUnion(aptId)
+              })
+        })
     }
 
 }
@@ -85,6 +92,8 @@ if(){
 //     });
 //     return
 // }
+
+
     render(){
         return(
             <div className="CreateApt container" style = 
@@ -109,3 +118,6 @@ if(){
 
 }
 export default CreateApt;
+
+
+        //    firebase.auth().currentUser.uid
