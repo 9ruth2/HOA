@@ -26,6 +26,7 @@
   }
   
   .NavBar_logout{
+    align-items: left;
     background-color:rgb(39, 156, 150);  border: none;
     color: white;
     text-align: center;
