@@ -6,11 +6,14 @@ class HomePage extends Component {
 
     render() {
         return(
-        <React.Fragment>
+        <div className = "HomePage">
            <NavBar/>
-            
             <img src="http://www.up2me.co.il/images/48991255.png" ></img>
-        </React.Fragment>
+            <p>
+                קצת עלינו
+            </p>
+
+        </div>
         )
     }
 

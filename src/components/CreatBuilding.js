@@ -3,13 +3,16 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import LogOut from './SignIn/LogOut';
+import NavBar from './navBar/NavBar';
+import './Style/Style.css';
+
 
 class CreatBuilding extends Component{
     
 
     CreatBuildingStyle = () => {
         return{
-            textAlign: 'right',
+            textAlign: 'center',
             paddingRight: '1em'  
         }
     }
@@ -64,26 +67,26 @@ class CreatBuilding extends Component{
     render(){
         return(
             <div className="CreatBuilding" style = {this.CreatBuildingStyle()}>
-                <LogOut/>
-                <h3>יצירת בניין</h3>
+               <NavBar></NavBar>
+                <h1 className="bigTitle">יצירת בניין</h1>
                 <form>
                     <label>
-                        <p>
+                        <p className="smallTitle">
                         כתובת הבניין
                         <br/>
-                        <input name="address" type="text" value={this.state.address} onChange={this.handleChange} />
+                        <input className="inputStyle" name="address" type="text" value={this.state.address} onChange={this.handleChange} />
                         </p>
                     </label>
                     <br/>
                     <label>
                         <p>
-                        מספר דירות
+                        מספר דירות בבניין זה
                         <br/>
-                        <input name="aptNum" type="number" value={this.state.aptNum} onChange={this.handleChange} />
+                        <input className="inputStyle" name="aptNum" type="number" value={this.state.aptNum} onChange={this.handleChange} />
                         </p>
                     </label>
                     <br/>
-                    <input onClick={this.handleSubmit} type="button" value="Submit" />
+                    <input className="inputStyle" onClick={this.handleSubmit} type="button" value="שלח" />
                 </form>
             </div>
             );
