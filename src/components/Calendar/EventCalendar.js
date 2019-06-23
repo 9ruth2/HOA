@@ -140,7 +140,6 @@ onSelectEvent(pEvent) {
       לוח אירועים
     </h1>
     <div className = 'calendar_bar'>
-
         <input className = 'calendar_title' name='title' onChange={event => this.handleChange(event)} placeholder='שם האירוע'/>
         <input className = 'calendar_startDate' name='startDate' onChange={event => this.handleChange(event)}  type='date' placeholder='start date'/>
         <input className = 'calendar_endDate' name='endDate' onChange={event => this.handleChange(event)}  type='date' placeholder='end date'/>

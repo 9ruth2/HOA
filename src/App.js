@@ -55,22 +55,27 @@ class App extends Component
   render() {
     return(
     <Switch>
-      <Route path="/calendar" exact component={EventCalendar} />
       <Route path="/sign-in" exact component={SignIn} />
-      <Route path="/HomePage" exact component={HomePage} />
-      <Route path="/message" exact component={Message} />
-      <Route path="/create-building" exact component={CreatBuilding} />
-      <Route path="/user-page" exact component={UserPage} />
-      <Route path="/create-apt" exact component={CreateApt} />
-      <Route path="/create-apt-page" exact component={CreateAptPage} />
-      <Route path="/tenant" exact component={Tenant} />
-      <Route path="/payment/create-payment" exact component={CreatePayment} />
-      <Route path="/payment/payment-table" exact component={PaymentTable} />
-      <Route path="/payment/payment-main-page" exact component={PaymentMainPage} />
-      <Redirect to='/HomePage'/>
+      <GuardRoute path="/calendar" exact component={EventCalendar} />
+      <GuardRoute path="/HomePage" exact component={HomePage} />
+      <GuardRoute path="/message" exact component={Message} />
+      <GuardRoute path="/create-building" exact component={CreatBuilding} />
+      <GuardRoute path="/user-page" exact component={UserPage} />
+      <GuardRoute path="/create-apt" exact component={CreateApt} />
+      <GuardRoute path="/create-apt-page" exact component={CreateAptPage} />
+      <GuardRoute path="/tenant" exact component={Tenant} />
+      <GuardRoute path="/payment/create-payment" exact component={CreatePayment} />
+      <GuardRoute path="/payment/payment-table" exact component={PaymentTable}/>
+      <GuardRoute path="/payment/payment-main-page" exact component={PaymentMainPage} />
+      <Redirect to='/sign-in' />
     </Switch>
     )
   }
+}
+
+function GuardRoute(props) {
+  if(firebase.auth().currentUser != null) return <Route {...props}/>
+  window.location.href = '/'
 }
 
 export default App;
