@@ -44,6 +44,7 @@ class Message extends Component {
             </div>
             <button className="messages_btn" type='button' onClick={() => this.onClickSave()}>שמור</button>
           </form>
+          <p></p>
           {this.getMessage()}
         </div>
       </React.Fragment>
@@ -73,7 +74,7 @@ class Message extends Component {
     )
   }
 
-  
+
   getMessage() {
     return this.state.messages.map(messageObj => {
       if (messageObj == null || messageObj.text == null || messageObj.text.length <= 0) return null
