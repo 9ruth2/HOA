@@ -2,8 +2,13 @@
   color: rgb(1, 1, 1);
   font-weight: bold;
   block-size: 100px;
+}
 
-
+.titleAllDay{
+  float: right;
+}
+.calendar_allDay{
+  float: right;
 }
 .AllallDay_caledar{
   font-family:Arial;
@@ -24,6 +29,7 @@
   border-radius: 30px;
   block-size: 50px;
   text-align: center;
+  float: right;
 
 }
 .calendar_save:hover{
@@ -35,6 +41,7 @@
   border-radius: 30px;
   block-size: 50px;
   text-align: center;
+  float: right;
 
 }
 .calendar_endDate{
@@ -42,6 +49,7 @@
   border-radius: 30px;
   block-size: 50px;
   text-align: center;
+  float: right;
 
 }
 .calendar_title{
@@ -49,6 +57,7 @@
   border-radius: 30px;
   block-size: 50px;
   text-align: center;
+  float: right;
 }
 .calendar_title:hover{
   background: rgb(194, 227, 220);
@@ -61,4 +70,8 @@
 .calendar_endDate:hover{
   background: rgb(194, 227, 220);
 
+}
+
+.calendar_big_title{
+  text-align: center;
 }

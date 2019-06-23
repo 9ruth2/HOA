@@ -1,23 +1,44 @@
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: rgb(114, 198, 236);
+.NavBar_ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /*border: 1px solid #e7e7e7;*/
+  background-color:rgb(39, 156, 150);
+  ;
   }
   
-  li {
-    float: left;
+ .NavBar_li {
+    float: right;
+  
   }
   
-  li a {
+  .NavBar_li_a {
     display: block;
-    color: black;
+    color: rgb(255, 255, 255);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
   }
   
-  li a:hover {
-    background-color: rgb(211, 211, 211);
+  .NavBar_li_a:hover {
+    background: rgb(194, 227, 220);
+  }
+  
+  .NavBar_logout{
+    background-color:rgb(39, 156, 150);  border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    /*display: inline-block;*/
+    font-size: 20px;
+    margin: 6px 20px;
+    cursor: pointer;
+
+
+  }
+  .NavBar_logout:hover{
+    background: rgb(194, 227, 220);
+
+
   }
