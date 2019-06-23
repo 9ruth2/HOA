@@ -7,6 +7,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import './Calendar.css'
+import NavBar from '../navBar/NavBar';
 
 
 moment.locale('en-GB');
@@ -124,8 +125,8 @@ onSelectEvent(pEvent) {
     
        const db = firebase.firestore();
        var temp = db.collection('Events').doc("Events")
-       temp.update({events: this.state.events.filter(item => item.id !== pEvent.id)});
-       this.setState({events: this.state.events.filter(item => item.id  !== pEvent.id)});
+        temp.update({events: this.state.events.filter(item => item.id !== pEvent.id)});
+        this.setState({events: this.state.events.filter(item => item.id  !== pEvent.id)});
    }
   }
   
@@ -134,13 +135,17 @@ onSelectEvent(pEvent) {
 
       <>
 
+  <NavBar></NavBar>
+          <h1 className = 'calendar_big_title'>
+      לוח אירועים
+    </h1>
     <div className = 'calendar_bar'>
 
         <input className = 'calendar_title' name='title' onChange={event => this.handleChange(event)} placeholder='שם האירוע'/>
         <input className = 'calendar_startDate' name='startDate' onChange={event => this.handleChange(event)}  type='date' placeholder='start date'/>
         <input className = 'calendar_endDate' name='endDate' onChange={event => this.handleChange(event)}  type='date' placeholder='end date'/>
-  
-            <label>יום שלם: </label>
+        
+            <label className = 'titleAllDay'>:יום שלם</label>
             <input className = 'calendar_allDay' name = 'allDay' type='checkbox' placeholder='all day' onChange={event => this.handleChange(event)}/>
       
        <button className = 'calendar_save' onClick={() => this.handleSubmit()}>שמור ביומן</button>
@@ -183,4 +188,3 @@ style={{height: '70vh'}}
 
 }
 export default EventCalender;
-

@@ -11,7 +11,7 @@ class LogOut extends Component{
       
     render(){
         return(
-              <button onClick={this.logout}>
+              <button className= 'NavBar_logout' onClick={this.logout}>
               התנתק
               </button>
             );
