@@ -6,15 +6,13 @@ import 'firebase/auth'
 import NavBar from '../navBar/NavBar'
 
 
-const uid = 'OUxhlc3PgBTAsaX1ZgBqe3mmlXN2'
-
 class Message extends Component {
 
   buildingId = null
+  fullName = ""
 
   state = {
     input: "",
-    belongToBuilding: "",
     messages: []
   }
 
@@ -27,7 +25,7 @@ class Message extends Component {
 
 
   render() {
-    if (/*firebase.auth().currentUser*/ uid == null) return null
+    if (firebase.auth().currentUser == null) return null
     return (
       <React.Fragment>
         <NavBar/>
@@ -45,6 +43,7 @@ class Message extends Component {
             </div>
             <button className="messages_btn" type='button' onClick={() => this.onClickSave()}>שמור</button>
           </form>
+          <p></p>
           {this.getMessage()}
         </div>
       </React.Fragment>
@@ -54,17 +53,17 @@ class Message extends Component {
   //----------------------- Functions ---------------------------
 
   componentDidMount() {
-    if (/*firebase.auth().currentUser*/ uid == null) return
-
-    firebase.firestore().collection("Apt").doc(uid).get().then(
+    if (firebase.auth().currentUser == null) return
+    firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
       result => {
         if (!result.exists) return
         this.buildingId = result.data().buildingId
+        this.fullName = result.data().fullName
         this.getMessagesFromServer()
       }
     )
-
   }
+
 
   getMessagesFromServer() {
     firebase.firestore().collection("Building").doc(this.buildingId).collection("Message").get().then(
@@ -75,12 +74,14 @@ class Message extends Component {
     )
   }
 
+
   getMessage() {
     return this.state.messages.map(messageObj => {
       if (messageObj == null || messageObj.text == null || messageObj.text.length <= 0) return null
       return <div key={messageObj.id} className="message_button_buuble">
-        <p>{messageObj.timestamp} :תאריך  {messageObj.author} :נכתב ע"י</p>
-        <p className="messages_talkbubble">{messageObj.text} :הודעה</p>
+        <p>נכתב ע"י: {messageObj.author}</p>
+        <p>{messageObj.timestamp} :תאריך</p>
+        <p className="messages_talkbubble"> הודעה: {messageObj.text}</p>
         <br />
         <button className="messages_btnDel" onClick={() => this.onClickDelete(messageObj.id)}>מחק</button>
       </div>
@@ -101,22 +102,30 @@ class Message extends Component {
       alert('no building to add the message to')
       return
     }
-    if (this.state.input !== '') {
-      const newMessageObj = {
-        text: this.state.input,
-        timestamp: new Date().toLocaleString('en-US', { hour12: false }),
-        author: (firebase.auth().currentUser == null) ? "UNKNOWN" : firebase.auth().currentUser.fullName,
-      }
+    if (this.state.input === '') return
+    const newMessageObj = {
+      text: this.state.input,
+      timestamp: new Date().toLocaleString('en-GB', { hour12: false }),
+      author: this.fullName
+    }
+ 
+    if(newMessageObj.author === undefined)
+      newMessageObj.author = '';
+    const db = firebase.firestore();
+    db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
+    .then(result => {
+      newMessageObj.id = result.id
       this.setState({
         messages: [...this.state.messages, newMessageObj]
       }, () => {
-        const db = firebase.firestore();
-        db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
+      //  db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
       });
-
       this.setState({ input: '' });
-    }
+    })
   }
 }
 
 export default Message
+
+
+

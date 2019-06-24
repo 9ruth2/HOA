@@ -93,8 +93,8 @@ class Tenant extends Component{
     
     render(){
         return (
-            <div className="TenantText container" style = {this.TenantStyle()}>
-<NavBar/>
+            <div className="TenantText container">
+            <NavBar/>
             <table style={this.TableStyle()}>
             <tr>
                 <input className="onEdit" value={this.state.fullName} style = {this.onEditStyle()} type='text' name="fullName" onChange={this.handleChange}></input>
