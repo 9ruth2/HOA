@@ -14,6 +14,7 @@ import 'moment/locale/he';
 moment.locale('he');
 const localizer = BigCalendar.momentLocalizer(moment);
 
+const uid = 'OUxhlc3PgBTAsaX1ZgBqe3mmlXN2'
 
 class EventCalender extends Component {
 
@@ -101,7 +102,7 @@ class EventCalender extends Component {
 
 
 
-  
+  /*
   componentDidMount(){
     const db = firebase.firestore();
     db.collection('Events').get().then(snapshot => {
@@ -113,9 +114,28 @@ class EventCalender extends Component {
             })
         }          
     })})
-
   } 
-  
+  */
+ componentDidMount() {
+  if (/*firebase.auth().currentUser*/ uid == null) return
+  firebase.firestore().collection("Events").doc(uid).get().then(
+    result => {
+      if (!result.exists) return
+      this.buildingId = result.data().buildingId
+      this.getEventsFromServer()
+    }
+  )
+ }
+
+  getEventsFromServer() {
+    firebase.firestore().collection("Building").doc(this.buildingId).collection("Events").get().then(
+      result => {
+        if (result.empty) return
+        this.setState({ messages: result.docs.map(doc => ({ id: doc.id, ...doc.data() })) })
+      }
+    )
+  }
+
 
 
  //Clicking an existing event allows you to remove it
@@ -166,8 +186,6 @@ onSelectEvent(pEvent) {
         date: 'תאריך',
         time: 'שעה',
         event: 'אירוע',
-        Sun: 'ראשון',
-        June :'וני'
       }}
 
       style={{height: '70vh'}}
@@ -197,7 +215,6 @@ onSelectEvent(pEvent) {
     );
 
   }
-  
 
 }
 export default EventCalender;
