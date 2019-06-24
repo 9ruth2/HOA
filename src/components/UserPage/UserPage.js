@@ -4,12 +4,17 @@ import ContactTable from '../ContactTable';
 import Tenant from '../Tenant'
 import HomePage from '../HomePage/HomePage';
 import NavBar from '../navBar/NavBar';
+
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
 //import App from "./App";
 
 class UserPage extends Component{
     render(){
         return(
             <div className="UserPage">
+                <NavBar/>
                 <div>
                 {this.getTenents()}
                 <ContactTable/>

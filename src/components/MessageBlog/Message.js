@@ -6,7 +6,7 @@ import 'firebase/auth'
 import NavBar from '../navBar/NavBar'
 
 
-const uid = 'OUxhlc3PgBTAsaX1ZgBqe3mmlXN2'
+const uid = ''
 
 class Message extends Component {
 
@@ -26,7 +26,7 @@ class Message extends Component {
 
 
   render() {
-    if (/*firebase.auth().currentUser*/ uid == null) return null
+    if (firebase.auth().currentUser == null) return null
     return (
       <React.Fragment>
         <NavBar/>
@@ -52,13 +52,17 @@ class Message extends Component {
   }
 
   //----------------------- Functions ---------------------------
-
+//1test@test.com
   componentDidMount() {
-    if (/*firebase.auth().currentUser*/ uid == null) return
-    firebase.firestore().collection("Apt").doc(uid).get().then(
+    console.log(firebase.auth().currentUser.uid)
+    if (firebase.auth().currentUser == null) return
+    firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
       result => {
         if (!result.exists) return
+        console.log(result.data().buildingId)
+        
         this.buildingId = result.data().buildingId
+        console.log(this.buildingId)
         this.getMessagesFromServer()
       }
     )

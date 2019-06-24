@@ -25,7 +25,8 @@ class CreateApt extends Component
         this.state = {
             email: '',
             password: '',
-            buildingId: this.props.buildingID
+            buildingId: this.props.buildingID,
+            tenantId: ''
     };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -69,7 +70,8 @@ class CreateApt extends Component
             return db.collection('Apt').doc(aptId).set({
                 email: this.state.email,
                 buildingId:this.state.buildingId,
-                aptId : aptId
+                aptId : aptId,
+                fullName:this.state.email
               })
           })
           .then(result => {
@@ -78,6 +80,14 @@ class CreateApt extends Component
                 email: this.state.email,
                 buildingId:this.state.buildingId,
                 aptId: aptId
+              })              
+        })
+        .then(result => {
+            this.setState({tenantId : result.id})
+            alert(this.state.tenantId)
+            const fb = firebase.firestore();
+            return fb.collection('Apt').doc(aptId).update({
+                tenants: firebase.firestore.FieldValue.arrayUnion(this.state.tenantId)
               })
         })
         .then(rseult => {
@@ -86,6 +96,9 @@ class CreateApt extends Component
                 aptList: firebase.firestore.FieldValue.arrayUnion(aptId)
               })
         })
+        
+    
+   
     }
 
 }
