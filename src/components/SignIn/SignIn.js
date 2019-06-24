@@ -158,7 +158,7 @@ function onClickSignIn()
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    alert('שכחת את הפרטים יא נעל')
+    alert('הפרטים אינם נכונים, נסה שנית')
   })
 }
 

@@ -6,11 +6,15 @@ import 'firebase/auth'
 import NavBar from '../navBar/NavBar'
 
 
+<<<<<<< HEAD
 const uid = ''
 
+=======
+>>>>>>> d29433836a5d87423f586f794ba84193ec210102
 class Message extends Component {
 
   buildingId = null
+  fullName = ""
 
   state = {
     input: "",
@@ -62,7 +66,11 @@ class Message extends Component {
         console.log(result.data().buildingId)
         
         this.buildingId = result.data().buildingId
+<<<<<<< HEAD
         console.log(this.buildingId)
+=======
+        this.fullName = result.data().fullName
+>>>>>>> d29433836a5d87423f586f794ba84193ec210102
         this.getMessagesFromServer()
       }
     )
@@ -80,11 +88,11 @@ class Message extends Component {
 
 
   getMessage() {
-    console.log(this.state.messages)
     return this.state.messages.map(messageObj => {
       if (messageObj == null || messageObj.text == null || messageObj.text.length <= 0) return null
       return <div key={messageObj.id} className="message_button_buuble">
-        <p>{messageObj.timestamp} :תאריך  {messageObj.author} :נכתב ע"י</p>
+        <p>נכתב ע"י: {messageObj.author}</p>
+        <p>{messageObj.timestamp} :תאריך</p>
         <p className="messages_talkbubble"> הודעה: {messageObj.text}</p>
         <br />
         <button className="messages_btnDel" onClick={() => this.onClickDelete(messageObj.id)}>מחק</button>
@@ -109,9 +117,12 @@ class Message extends Component {
     if (this.state.input === '') return
     const newMessageObj = {
       text: this.state.input,
-      timestamp: new Date().toLocaleString('en-US', { hour12: false }),
-      author: (firebase.auth().currentUser == null) ? "UNKNOWN" : firebase.auth().currentUser.fullName,
+      timestamp: new Date().toLocaleString('en-GB', { hour12: false }),
+      author: this.fullName
     }
+ 
+    if(newMessageObj.author === undefined)
+      newMessageObj.author = '';
     const db = firebase.firestore();
     db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
     .then(result => {
@@ -119,8 +130,7 @@ class Message extends Component {
       this.setState({
         messages: [...this.state.messages, newMessageObj]
       }, () => {
-        const db = firebase.firestore();
-        db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
+      //  db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
       });
       this.setState({ input: '' });
     })

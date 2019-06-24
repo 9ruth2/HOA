@@ -44,6 +44,17 @@ class CreateApt extends Component
                 password: target.value
             });
         }
+        if(target.name === 'fullName'){   
+            this.setState({
+                fullName: target.value
+            });
+        }
+
+        if(target.name === 'phoneNum'){   
+            this.setState({
+                phoneNum: target.value
+            });
+        }
    }
 
    handleSubmit(event){
@@ -51,7 +62,6 @@ class CreateApt extends Component
            alert("please type in all the filds")
        }
        else{
-
         let aptId = null
         secondFirebaseInstance.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
             alert('שם המשתמש קיים')
@@ -70,8 +80,15 @@ class CreateApt extends Component
             return db.collection('Apt').doc(aptId).set({
                 email: this.state.email,
                 buildingId:this.state.buildingId,
+<<<<<<< HEAD
                 aptId : aptId,
                 fullName:this.state.email
+=======
+                fullName: this.state.fullName,
+                phoneNum: this.state.phoneNum,
+                aptNum: this.state.aptNum +1,
+                aptId : aptId
+>>>>>>> d29433836a5d87423f586f794ba84193ec210102
               })
           })
           .then(result => {
@@ -109,6 +126,8 @@ class CreateApt extends Component
             {this.CreateAptStyle()}>
                 <Form>
                     <Form.Group controlId="formBasicEmail">
+                    <Form.Label>name</Form.Label>
+                        <Form.Control placeholder="name" name="fullName" type="text"  value={this.state.fullName} onChange={this.handleChange}/>
                         <Form.Label>Email address</Form.Label>
                         <Form.Control placeholder="Enter email" name="email" type="email"  value={this.state.email} onChange={this.handleChange}/>
                     </Form.Group>
