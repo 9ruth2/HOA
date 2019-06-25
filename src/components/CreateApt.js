@@ -25,8 +25,11 @@ class CreateApt extends Component
         this.state = {
             email: '',
             password: '',
+            aptId: '',
             buildingId: this.props.buildingID,
-            tenantId: ''
+            tenants: [],
+            fullName: '',
+            phoneNum: ''
     };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,7 +47,7 @@ class CreateApt extends Component
                 password: target.value
             });
         }
-        if(target.name === 'fullName'){   
+        if(target.name === 'fullName'){  
             this.setState({
                 fullName: target.value
             });
@@ -58,6 +61,9 @@ class CreateApt extends Component
    }
 
    handleSubmit(event){
+       if(this.state.fullName ===''){
+           this.setState({fullName:this.state.email})
+       }
        if(this.state.email == '' || this.state.password == ''){
            alert("please type in all the filds")
        }
@@ -81,34 +87,31 @@ class CreateApt extends Component
                 email: this.state.email,
                 buildingId:this.state.buildingId,
                 aptId : aptId,
-                fullName:this.state.email
+                fullName:this.state.fullName
               })
           })
           .then(result => {
             const fb = firebase.firestore();
-            return fb.collection('Tenants').add({
+            fb.collection('Tenants').add({
                 email: this.state.email,
                 buildingId:this.state.buildingId,
                 aptId: aptId
-              })              
-        })
-        .then(result => {
-            this.setState({tenantId : result.id})
-            alert(this.state.tenantId)
-            const fb = firebase.firestore();
-            return fb.collection('Apt').doc(aptId).update({
-                tenants: firebase.firestore.FieldValue.arrayUnion(this.state.tenantId)
               })
+            .then(result => {
+                this.setState({tenantId : result.id})
+                alert(this.state.tenantId)
+                const fb = firebase.firestore();
+                return fb.collection('Apt').doc(aptId).update({
+                    tenants: firebase.firestore.FieldValue.arrayUnion(this.state.tenantId)
+                })
+            })              
         })
         .then(rseult => {
             const fb = firebase.firestore();
             return fb.collection('Building').doc(this.state.buildingId).update({
                 aptList: firebase.firestore.FieldValue.arrayUnion(aptId)
-              })
+            })
         })
-        
-    
-   
     }
 
 }
