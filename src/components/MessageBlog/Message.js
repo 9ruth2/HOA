@@ -6,11 +6,8 @@ import 'firebase/auth'
 import NavBar from '../navBar/NavBar'
 
 
-<<<<<<< HEAD
 const uid = ''
 
-=======
->>>>>>> d29433836a5d87423f586f794ba84193ec210102
 class Message extends Component {
 
   buildingId = null
@@ -66,11 +63,8 @@ class Message extends Component {
         console.log(result.data().buildingId)
         
         this.buildingId = result.data().buildingId
-<<<<<<< HEAD
         console.log(this.buildingId)
-=======
         this.fullName = result.data().fullName
->>>>>>> d29433836a5d87423f586f794ba84193ec210102
         this.getMessagesFromServer()
       }
     )
