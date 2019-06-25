@@ -80,15 +80,8 @@ class CreateApt extends Component
             return db.collection('Apt').doc(aptId).set({
                 email: this.state.email,
                 buildingId:this.state.buildingId,
-<<<<<<< HEAD
                 aptId : aptId,
                 fullName:this.state.email
-=======
-                fullName: this.state.fullName,
-                phoneNum: this.state.phoneNum,
-                aptNum: this.state.aptNum +1,
-                aptId : aptId
->>>>>>> d29433836a5d87423f586f794ba84193ec210102
               })
           })
           .then(result => {

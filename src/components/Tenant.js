@@ -108,17 +108,27 @@ class Tenant extends Component{
         else{
             this.setState({
                 edit : false
-            });  
+            })  
             const db = firebase.firestore();
             db.collection('Tenants').doc(this.state.tenantId).update({
                fullName: this.state.fullName,
                phoneNumber:this.state.phoneNum,
                email:this.state.email,
                dob:this.state.dob 
-            })
+            }).then( resualt => {
+                const fb = firebase.firestore();
+                fb.collection('Apt').doc(this.state.aptId).update({
+                    fullName: this.state.fullName,
+                    phoneNumber:this.state.phoneNum,
+                    email:this.state.email,
+                    dob:this.state.dob 
+                 })
+                })
+            
+            
         }
     }
-    
+
     render(){
         return (
             <div className="TenantText container" style = {this.TenantStyle()}>
