@@ -25,11 +25,18 @@ class CreateApt extends Component
         this.state = {
             email: '',
             password: '',
+<<<<<<< HEAD
             aptId: '',
             buildingId: this.props.buildingID,
             tenants: [],
             fullName: '',
             phoneNum: ''
+=======
+            fullName: '',
+            phoneNum: '',
+            aptNum: 0,
+            buildingId: this.props.buildingID
+>>>>>>> cc712ab35c63946593d4aa1d34693386e899c5a9
     };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -86,8 +93,15 @@ class CreateApt extends Component
             return db.collection('Apt').doc(aptId).set({
                 email: this.state.email,
                 buildingId:this.state.buildingId,
+<<<<<<< HEAD
                 aptId : aptId,
                 fullName:this.state.fullName
+=======
+                fullName: this.state.fullName,
+                phoneNum: this.state.phoneNum,
+                aptNum: this.state.aptNum +1,
+                aptId : aptId
+>>>>>>> cc712ab35c63946593d4aa1d34693386e899c5a9
               })
           })
           .then(result => {

@@ -60,6 +60,7 @@ class CreatBuilding extends Component{
                 // user react router to extract param
                 this.props.history.push('./create-apt-page?buildingId='+result.id+'?'+this.state.aptNum);
                 db.collection("Building").doc(result.id).collection("Message").add({});
+                db.collection("Building").doc(result.id).collection("Events").add({});
             })
         }
         //this.prop.location.params
