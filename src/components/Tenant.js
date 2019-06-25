@@ -32,20 +32,48 @@ class Tenant extends Component{
             display: 'none'
         }
     }
+    
     constructor(props){
         super(props);
         this.state = {
-            aptId: '5kE4NUykOSLVxzmK4Rrf',
-            tenantId: 'UuBQJ0gnmQZvtPJD9fM0',
-            fullName: "רות ריצ'י",
-            phoneNum: '0502333411' ,
-            email: 'aruth2@gmail.com',
-            dob: '18/06/1992',
+            aptId: '',
+            tenantId: '',
+            fullName: '',
+            phoneNum: '' ,
+            email: '',
+            dob: '',
             edit: false
     };
+
+        const user = firebase.auth().currentUser;
+        let fullName = ''
+        let tenantId = ''
+        let email = ''
+
+
+
+        firebase.firestore().collection("Apt").doc(user.uid).get().then(
+            result => {
+              if (!result.exists) return
+              this.fullName = result.data().fullName
+              this.tenantId = result.data().tenants[0]
+              this.email = result.data().email
+              this.setState({
+                aptId: user.uid,
+                tenantId: this.tenantId,
+                fullName: this.email,
+                phoneNum: '' ,
+                email: this.email,
+                dob: '',
+            })
+
+            }
+          )
+   
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEdit = this.handleSubmit.bind(this);
+
     }
     handleChange(event){
         const target = event.target;
@@ -94,7 +122,7 @@ class Tenant extends Component{
     render(){
         return (
             <div className="TenantText container" style = {this.TenantStyle()}>
-<NavBar/>
+
             <table style={this.TableStyle()}>
             <tr>
                 <input className="onEdit" value={this.state.fullName} style = {this.onEditStyle()} type='text' name="fullName" onChange={this.handleChange}></input>
