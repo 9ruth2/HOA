@@ -131,7 +131,7 @@ class EventCalender extends Component {
     firebase.firestore().collection("Building").doc(this.buildingId).collection("Events").get().then(
       result => {
         if (result.empty) return
-        this.setState({ messages: result.docs.map(doc => ({ id: doc.id, ...doc.data() })) })
+        this.setState({ events: result.docs.map(doc => ({ id: doc.id, ...doc.data() })) })
       }
     )
   }
