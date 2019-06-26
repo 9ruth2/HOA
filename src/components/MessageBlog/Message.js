@@ -29,7 +29,7 @@ class Message extends Component {
     if (/*firebase.auth().currentUser*/ uid == null) return null
     return (
       <React.Fragment>
-        <NavBar/>
+        
         <div className="messages_body">
           <h1 className="messages_h1">לוח הודעות</h1>
           <form>
@@ -99,7 +99,7 @@ class Message extends Component {
 
   onClickSave() {
     if(this.buildingId == null || this.buildingId.length <= 0) {
-      alert('no building to add the message to')
+      alert('אין אפשרות להוסיף הודעה ללוח מאחר ואינך משוייך לבניין')
       return
     }
     if (this.state.input === '') return

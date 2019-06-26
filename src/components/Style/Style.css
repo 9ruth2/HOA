@@ -1,3 +1,12 @@
+
+html { 
+    background: url(http://www.up2me.co.il/images/23352292.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
 .bigTitle{
     text-shadow: 3px 2px rgb(235, 235, 235);
   }
@@ -50,4 +59,9 @@
     border: none;
     border-radius: 15px;
     box-shadow: 0 9px rgb(121, 116, 116);
+  }
+
+  .imgStyle{
+      width: 30%;
+      height: 30%;
   }

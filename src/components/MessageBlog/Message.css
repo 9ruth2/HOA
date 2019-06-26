@@ -1,3 +1,12 @@
+
+html { 
+  background: url(http://www.up2me.co.il/images/23352292.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .messages_h1{
   font-family: Arial, Helvetica, sans-serif;
   color: black;
@@ -7,7 +16,7 @@
 
 
 .messages_body{
-background: rgb(255, 255, 253);
+
 text-align: center;
 display: flex;
 font-family: Arial, Helvetica, sans-serif;
@@ -18,11 +27,11 @@ min-height: 100vh;
 
 
 .messages_textarea{
-  width: 400px;
+  width: 300px;
   height: 100px;
   text-align: right;
   font-family:Arial, Helvetica, sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
   text-decoration: none;
   outline: none;

@@ -1,3 +1,11 @@
+
+html { 
+  background: url(http://www.up2me.co.il/images/23352292.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 .calendar_bar{
   color: rgb(1, 1, 1);
   font-weight: bold;
