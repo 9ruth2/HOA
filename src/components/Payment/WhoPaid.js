@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-import './ContactTable.css';
+import './PaidTable.css';
 //import NavBar from '../navBar/NavBar';
 
 class ContactTable extends Component{
 
     state = {
-        tableData: []
+        tableData: [],
+        clicked: false
     }
 
     
@@ -24,7 +25,7 @@ class ContactTable extends Component{
             <table className="ContactTable" style = {this.ContactTableStyle()}>    
             <thead>
             <tr>
-                <th>מספר פלאפון</th>
+                <th>האם שולם</th>
                 <th>שם מלא</th>
                 <th>מספר דירה</th>
             </tr>
@@ -36,7 +37,17 @@ class ContactTable extends Component{
             );
         }
 
+
+    // ------------------- Functions ------------------------ 
     componentDidMount(){this.getContactTable();}
+
+
+    handleChange() {
+        this.setState({
+          clicked: !this.state.clicked
+        })
+      }
+      
 
     getContactTable(doc)
     {
@@ -51,12 +62,13 @@ class ContactTable extends Component{
     });
     }
 
+
     getTableRows() 
     {
         return this.state.tableData.map(dataRow => {
             return (
                 <tr>
-                    <td>{dataRow.phoneNum}</td>
+                    <td> <input type="checkbox" checked={this.state.clicked} onChange={this.handleChange} />כן</td>
                     <td>{dataRow.fullName}</td>
                     <td>{dataRow.aptNum}</td>
                 </tr>

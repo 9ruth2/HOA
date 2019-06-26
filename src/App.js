@@ -15,6 +15,7 @@ import CreatePayment from './components/Payment/CreatePayment';
 import PaymentTable from './components/Payment/PaymentTable';
 import PaymentMainPage from './components/Payment/PaymentMainPage';
 import SignIn from './components/SignIn/SignIn';
+import WhoPaid from './components/Payment/WhoPaid';
 import NewComponentText from './components/NewComponentText';
 import ContactTable from './components/ContactTable';
 import LogOut from './components/SignIn/LogOut';
@@ -67,6 +68,7 @@ class App extends Component
       <GuardRoute path="/payment/create-payment" exact component={CreatePayment} />
       <GuardRoute path="/payment/payment-table" exact component={PaymentTable}/>
       <GuardRoute path="/payment/payment-main-page" exact component={PaymentMainPage} />
+      <GuardRoute path="/payment/WhoPaid" exact component={WhoPaid} />
       <Redirect to='/sign-in' />
     </Switch>
     )

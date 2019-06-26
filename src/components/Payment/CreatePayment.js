@@ -7,11 +7,15 @@ import NavBar from '../navBar/NavBar';
 
 class CreatePayment extends Component{
 
+    buildingId = null
+    aptNum = 0
+
     constructor(props){
         super(props);
         this.state = {
             details: '',
-            amount: ''
+            amount: '',
+            ifPaid: false
     };
         this.handleAddPayment = this.handleAddPayment.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,8 +44,19 @@ class CreatePayment extends Component{
         
     }
 
-    handleSubmit(event){
-
+    componentDidMount() {
+        if (firebase.auth().currentUser == null) return
+        firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
+          result => {
+            if (!result.exists) return
+            this.buildingId = result.data().buildingId
+            this.aptNum = result.data().aptNum}
+        )
+      }
+    
+ 
+    handleSubmit(event)
+    {
         if(this.state.amount === '' || this.state.details === ''){
             alert('שגיאה: חסר שדות, הכנס בבקשה פירוט וסכום לתשלום')
         }
@@ -49,16 +64,27 @@ class CreatePayment extends Component{
             alert('שגיאה: סכום לתשלום לא תקין, אנא הכנס מספר חיובי')
         }
         else{
+            
             const db = firebase.firestore();
-            db.collection('Payment').doc().set({
+            db.collection('Building').doc(this.buildingId).collection('Payment').add({
                 details: this.state.details,
                 amount: this.state.amount
+            })
+            .then(() => {
+                if (firebase.auth().currentUser == null) return
+                const aptID = firebase.auth().currentUser.uid;
+                
+                return db.collection('Apt').doc(aptID).update({
+                paymentListForApt: firebase.firestore.FieldValue.arrayUnion(this.aptNum),
+            })
             })
             //this.props.push('./payment/create-payment');
             alert('הוספת התשלום החדש בוצעה בהצלחה!')
             this.props.history.push('/payment/payment-main-page');
         }
     }
+
+
     render(){
         return(
         //<Router>

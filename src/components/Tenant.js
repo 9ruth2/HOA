@@ -93,9 +93,10 @@ class Tenant extends Component{
     
     render(){
         return (
-            <div className="TenantText container">
+        <div className="TenantText" >
             <NavBar/>
             <table style={this.TableStyle()}>
+
             <tr>
                 <input className="onEdit" value={this.state.fullName} style = {this.onEditStyle()} type='text' name="fullName" onChange={this.handleChange}></input>
                 <td style={this.onSaveStyle()}>{this.state.fullName}</td>
@@ -117,12 +118,12 @@ class Tenant extends Component{
                 <td>תאריך לידה</td>
             </tr>
 
-
+            <div className ="tenant_button">
             <button type="click" value="עריכה" onClick={this.handleEdit} style={this.onSaveStyle()}>עריכה </button>
             <input type="submit" value="שמור" onClick={this.handleSubmit} style = {this.onEditStyle()}/>
-
+            </div>
+            <br/>
             </table>
-
         </div>
         );
         

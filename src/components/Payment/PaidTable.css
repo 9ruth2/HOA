@@ -1,19 +1,20 @@
-.ContactTable {
+.PaidTable {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
+    text-align: right;
     width: 50%;
   }
   
-  .ContactTable td, .ContactTable th {
+  .PaidTable td, .PaidTable th {
     border: 1px solid #ddd;
     padding: 8px;
   }
   
-  .ContactTable tr:nth-child(even){background-color: rgb(194, 227, 220);}
+  .PaidTable tr:nth-child(even){background-color: rgb(194, 227, 220);}
   
-  .ContactTable tr:hover {background-color:rgb(223, 155, 78);}
+  .PaidTable tr:hover {background-color:rgb(223, 155, 78);}
   
-  .ContactTable th {
+  .PaidTable th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;

@@ -4,9 +4,12 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import './PaymentTable.css';
 import NavBar from '../navBar/NavBar';
+import { Link } from 'react-router-dom'
 
 
 class PaymentTable extends Component{
+   
+    buildingId = null
 
     state = {
         tableData: []
@@ -20,24 +23,62 @@ class PaymentTable extends Component{
         }
     }
 
-    renderPayment(doc){
 
-        firebase.firestore().collection("Payment").get().then( querySnapshot => {
+    render() { 
+        return(
+            <div>
+                <NavBar/>
+            
+         <table id = "paymentTable" border= "1" style = {this.PaymentTableStyle()}>
+             
+             <thead>
+             <tr>
+                <th>   סטטוס תשלומי דיירים   </th>
+                <th>   סכום התשלום הכולל   </th>
+                <th>   פירוט התשלום   </th>
+            </tr>
+             </thead>
+             <tbody>
+             {this.getTableRows()}
+             </tbody>
+         </table>
+         </div>
+         );
+        }
+
+    //----------------------------- Functions -----------------------------
+
+    componentDidMount() 
+    {
+        if (firebase.auth().currentUser == null) return
+        firebase.firestore().collection('Apt').doc(firebase.auth().currentUser.uid).get().then(
+          result => {
+            if (!result.exists) return
+            this.buildingId = result.data().buildingId
+            this.renderPayment();
+         }
+        )
+    }
+    
+
+    renderPayment(doc)
+    {
+        debugger
+        firebase.firestore().collection('Building').doc(this.buildingId).collection('Payment').get().then( querySnapshot => {
+            if (querySnapshot.empty) return
         this.setState({ tableData: querySnapshot.docs.map(i => {
             return {
-                id: i.id,
-                ...i.data()
-            }
-        }) });
-      });
+                id: i.id,...i.data()}}) })
+      })
     }
 
-    getTableRows() {
+    getTableRows()
+    {
         console.log(this.state.tableData)
         return this.state.tableData.map(dataRow => {
             return (
                 <tr>
-                    <td>{this.getPaidUsers(dataRow.id)}</td>
+                    <td><button className="buttonStyle"><Link to="/payment/WhoPaid">פירוט</Link></button></td>
                     <td>{dataRow.amount}</td>
                     <td>{dataRow.details}</td>
                 </tr>
@@ -45,32 +86,7 @@ class PaymentTable extends Component{
         })
     }
 
-    getPaidUsers() {
-        
-    }
-  
-    componentDidMount(){this.renderPayment();}
 
-    render() { 
-    return(
-        <div>
-            <NavBar/>
-        
-     <table id = "paymentTable" border= "1" style = {this.PaymentTableStyle()}>
-         
-         <thead>
-         <tr>
-            <th>   סטטוס תשלומי דיירים   </th>
-            <th>   סכום התשלום הכולל   </th>
-            <th>   פירוט התשלום   </th>
-        </tr>
-         </thead>
-         <tbody>
-         {this.getTableRows()}
-         </tbody>
-     </table>
-     </div>
-     );
-    }
 }
+
 export default PaymentTable;

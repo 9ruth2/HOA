@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import TenentInfo from '../TenentInfo';
 import ContactTable from '../ContactTable';
+import PaidTable from '../Payment/PaidTable';
+import WhoPaidTable from '../Payment/WhoPaid';
 import Tenant from '../Tenant'
 import HomePage from '../HomePage/HomePage';
 import NavBar from '../navBar/NavBar';
