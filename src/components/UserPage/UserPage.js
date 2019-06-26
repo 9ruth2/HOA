@@ -18,7 +18,6 @@ class UserPage extends Component{
             <div className="UserPage">
                 <NavBar/>
                 <div>
-                {this.getTenents()}
                 <ContactTable/>
                 </div>
                 <div>
