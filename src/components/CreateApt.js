@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import CreateAptPage from './CreateAptPage';
 import { EXITED } from 'react-transition-group/Transition';
+import './Style/Style.css';
 
 
 class CreateApt extends Component
@@ -14,7 +15,7 @@ class CreateApt extends Component
 
     CreateAptStyle = () => {
         return{
-            textAlign: 'right',
+            textAlign: 'center',
             paddingRight: '1em'
         }
     }
@@ -70,7 +71,7 @@ class CreateApt extends Component
        else{
         let aptId = null
         secondFirebaseInstance.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
-            alert('שם המשתמש קיים')
+            alert('המייל קיים במערכת')
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -118,21 +119,21 @@ class CreateApt extends Component
 
     render(){
         return(
-            <div className="CreateApt container" style = 
+            <div className="CreateAptContainer" style = 
             {this.CreateAptStyle()}>
                 <Form>
                     <Form.Group controlId="formBasicEmail">
-                    <Form.Label>name</Form.Label>
-                        <Form.Control placeholder="name" name="fullName" type="text"  value={this.state.fullName} onChange={this.handleChange}/>
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control placeholder="Enter email" name="email" type="email"  value={this.state.email} onChange={this.handleChange}/>
+                    <Form.Label>שם מלא</Form.Label>
+                        <Form.Control className="inputStyleForm" placeholder="הכנס שם מלא" name="fullName" type="text"  value={this.state.fullName} onChange={this.handleChange}/>
+                        <Form.Label>כתובת מייל</Form.Label>
+                        <Form.Control className="inputStyleForm" placeholder="הכנס כתובת מייל" name="email" type="email"  value={this.state.email} onChange={this.handleChange}/>
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange}   />
+                        <Form.Label>סיסמא</Form.Label>
+                        <Form.Control className="inputStyleForm" type="password" placeholder="הכנס סיסמא חדשה" name="password" value={this.state.password} onChange={this.handleChange}   />
                     </Form.Group>
-                    <Button variant="primary" onClick={this.handleSubmit} type="button" value="Submit">
-                        Submit
+                    <Button className="buttonStyle" variant="primary" onClick={this.handleSubmit} type="button" value="Submit">
+                        אשר ושלח
                     </Button>
                 </Form>
             </div>
