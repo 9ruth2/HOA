@@ -4,42 +4,50 @@
   padding: 0;
   overflow: hidden;
   /*border: 1px solid #e7e7e7;*/
-  background-color:rgb(39, 156, 150);
-  ;
+  background-color:rgb(241, 190, 205);
+  
   }
   
  .NavBar_li {
     float: right;
+    border-radius: 2%;
   
+  }
+
+  .active {
+    background-color: rgb(174, 36, 76);
   }
   
   .NavBar_li_a {
     display: block;
-    color: rgb(255, 255, 255);
+    color: rgb(174, 36, 76);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    text-decoration-style: bold;
+    border-radius: 2%;
+    text-shadow:3px,3px, rgb(174, 36, 76);
+    font-weight: bold;
   }
   
-  .NavBar_li_a:hover {
-    background: rgb(194, 227, 220);
-  }
+  .NavBar_li_a:hover {background: rgb(194, 227, 220);}
   
   .NavBar_logout{
-    align-items: left;
-    background-color:rgb(39, 156, 150);  border: none;
+    background-color:transparent;  
+    padding-top: 7px;
+    border: none;
     color: white;
     text-align: center;
     text-decoration: none;
-    /*display: inline-block;*/
+    
     font-size: 20px;
-    margin: 6px 20px;
     cursor: pointer;
-
-
+    align-items: left;
   }
-  .NavBar_logout:hover{
-    background: rgb(194, 227, 220);
+  .NavBar_logout:hover{background: rgb(194, 227, 220); }
+  
+  .stylush{
+    width: 5%;
+    height: auto;
 
-
-  }
+}

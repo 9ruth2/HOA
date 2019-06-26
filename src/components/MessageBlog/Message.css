@@ -1,3 +1,12 @@
+
+html { 
+  background: url(http://www.up2me.co.il/images/23352292.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .messages_h1{
   font-family: Arial, Helvetica, sans-serif;
   color: black;
@@ -7,22 +16,24 @@
 
 
 .messages_body{
-background: rgb(255, 255, 253);
+
 text-align: center;
 display: flex;
 font-family: Arial, Helvetica, sans-serif;
 flex-direction: column;
 align-items: center;
 min-height: 100vh;
+direction: ltr;
+
 }
 
 
 .messages_textarea{
-  width: 400px;
+  width: 250px;
   height: 100px;
   text-align: right;
   font-family:Arial, Helvetica, sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
   text-decoration: none;
   outline: none;
@@ -31,7 +42,8 @@ min-height: 100vh;
   border: none;
   border-radius: 15px;
   box-shadow: 0 2px rgb(121, 116, 116);
-  
+  direction: ltr;
+
 }
 
 .message_button_buuble{
@@ -44,6 +56,8 @@ min-height: 100vh;
  padding-left: 10px;
  padding-right: 10px;
  margin-bottom: 25px;
+ direction: ltr;
+
 }
 
 

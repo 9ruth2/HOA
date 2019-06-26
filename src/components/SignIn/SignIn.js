@@ -18,6 +18,7 @@ import 'firebase/auth'
 import LogOut from './LogOut'
 import Tenant from '../Tenant';
 import { withRouter } from 'react-router-dom';
+import '../Style/Style.css';
 
 let username = "";
 let password = "";
@@ -26,9 +27,7 @@ let show = false;
 
 const useStyles = makeStyles(theme => ({
   '@global': {
-    body: {
-      backgroundColor: theme.palette.common.white,
-    },
+ 
   },
   paper: {
     marginTop: theme.spacing(8),

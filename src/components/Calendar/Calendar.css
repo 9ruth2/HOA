@@ -1,11 +1,23 @@
+
+html { 
+  background: url(http://www.up2me.co.il/images/23352292.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 .calendar_bar{
   color: rgb(1, 1, 1);
   font-weight: bold;
   block-size: 100px;
+
 }
 
 .titleAllDay{
   float: right;
+
+
+  
 }
 .calendar_allDay{
   float: right;
@@ -19,9 +31,6 @@
   width: 30px;
   padding: 50px;
   margin: 20px;
-
-
-
 }
 
 
@@ -32,6 +41,7 @@
   text-align: center;
   float: right;
   width:200px;
+  font-weight: bold;
 
 }
 .calendar_save:hover{
@@ -45,6 +55,7 @@
   text-align: center;
   float: right;
   width:200px;
+  font-weight: bold;
 
 
 }
@@ -55,6 +66,7 @@
   text-align: center;
   float: right;
   width:200px;
+  font-weight: bold;
 
 
 }
@@ -64,8 +76,10 @@
   block-size: 50px;
   text-align: center;
   float: right;
+  font-weight: bold;
   -webkit-text-fill-color: black;
   width:200px;
+
 
 }
 .calendar_title:hover{
@@ -74,11 +88,9 @@
 }
 .calendar_startDate:hover{
   background: rgb(194, 227, 220);
-
 }
 .calendar_endDate:hover{
   background: rgb(194, 227, 220);
-
 }
 
 .calendar_big_title{
@@ -86,4 +98,7 @@
 }
 .rbc-month-view {
   direction: rtl;
+  background-color: rgba(255, 255, 255, 0.726);
+  
+  padding: 4%;
 }

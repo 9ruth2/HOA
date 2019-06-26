@@ -61,6 +61,7 @@ class CreatBuilding extends Component{
                 this.props.history.push('./create-apt-page?buildingId='+result.id+'?'+this.state.aptNum);
                 db.collection("Building").doc(result.id).collection("Message").add({});
                 db.collection("Building").doc(result.id).collection("Payment").add({});
+                db.collection("Building").doc(result.id).collection("Events").add({});
             })
         }
         //this.prop.location.params

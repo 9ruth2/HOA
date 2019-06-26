@@ -1,20 +1,25 @@
 import React, { Component } from 'react'
 import LogOut from '../SignIn/LogOut';
 import NavBar from '../navBar/NavBar';
-import firebase from 'firebase/app'
+import Message from '../MessageBlog/Message';
+import firebase from 'firebase/app';
+import '../Style/Style.css';
 
 class HomePage extends Component {
 
     render() {
-        return(
-        <div className = "HomePage">
-           <NavBar/>
-            <img src="http://www.up2me.co.il/images/48991255.png" ></img>
-            <p>
-                קצת עלינו
-            </p>
+        return(      
+            <div className = "HomePage">
+            <NavBar/>
+                <p>
+                    <h1 align="center" className= "aboutAsTitle">ניהול נכון חיים נכון</h1>
+                    <h4 align="center" className= "aboutAsTitle">שיפור אורח החיים שלך ושל שכנייך מתחיל כאן</h4>
 
-        </div>
+                </p>
+                <div align="right" className="MessageArea">
+                    <Message/>
+                </div>
+            </div>
         )
     }
 }

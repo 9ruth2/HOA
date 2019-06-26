@@ -6,6 +6,8 @@ import 'firebase/auth'
 import NavBar from '../navBar/NavBar'
 
 
+const uid = ''
+
 class Message extends Component {
 
   buildingId = null
@@ -28,20 +30,20 @@ class Message extends Component {
     if (firebase.auth().currentUser == null) return null
     return (
       <React.Fragment>
-        <NavBar/>
+        
         <div className="messages_body">
-          <h1 className="messages_h1">לוח הודעות</h1>
+          <h1 className="messages_h1">לוח מודעות</h1>
           <form>
-            <label>:הכנס/י הודעה</label><br />
+            <label>:מוסרים משהו? צריכים משהו? כתבו לדיירי הבניין <br></br>הכנס/י הודעה</label><br />
             <div>
               <textarea className="messages_textarea"
                 type="text"
                 value={this.state.input}
                 onChange={this.handleChangeText}
-                placeholder="..כתוב כאן טקסט"
+                placeholder="..כתוב/י כאן את ההודעה שלך"
               />
             </div>
-            <button className="messages_btn" type='button' onClick={() => this.onClickSave()}>שמור</button>
+            <button className="messages_btn" type='button' onClick={() => this.onClickSave()}>שלח</button>
           </form>
           <p></p>
           {this.getMessage()}
@@ -51,14 +53,17 @@ class Message extends Component {
   }
 
   //----------------------- Functions ---------------------------
-
+//1test@test.com
   componentDidMount() {
+    console.log(firebase.auth().currentUser.uid)
     if (firebase.auth().currentUser == null) return
     firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
       result => {
         if (!result.exists) return
+        console.log(result.data().buildingId)
+        
         this.buildingId = result.data().buildingId
-        this.fullName = result.data().fullName
+        console.log(this.buildingId)
         this.getMessagesFromServer()
       }
     )
@@ -99,7 +104,7 @@ class Message extends Component {
 
   onClickSave() {
     if(this.buildingId == null || this.buildingId.length <= 0) {
-      alert('no building to add the message to')
+      alert('אין אפשרות להוסיף הודעה ללוח מאחר ואינך משוייך לבניין')
       return
     }
     if (this.state.input === '') return
