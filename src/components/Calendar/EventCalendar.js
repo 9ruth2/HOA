@@ -179,9 +179,9 @@ onSelectEvent(pEventId) {
       לוח אירועים
     </h1>
     <div className = 'calendar_bar'>
-        <input className = 'calendar_title' name='title' onChange={event => this.handleChange(event)} placeholder='שם האירוע'/>
-        <input className = 'calendar_startDate' name='startDate' onChange={event => this.handleChange(event)}  type='date' placeholder='start date'/>
-        <input className = 'calendar_endDate' name='endDate' onChange={event => this.handleChange(event)}  type='date' placeholder='end date'/>
+        <input className = 'calendar_title' name='title' onChange={event => this.handleChange(event)} placeholder='הכנס את שם האירוע'/>
+        <input className = 'calendar_startDate' name='startDate' onChange={event => this.handleChange(event)}  type='date' placeholder='start date' label="תאריך התחלה"/>
+        <input className = 'calendar_endDate' name='endDate' onChange={event => this.handleChange(event)}  type='date' placeholder='end date' label="תאריך סיום"/>
         
             <label className = 'titleAllDay'>:יום שלם</label>
             <input className = 'calendar_allDay' name = 'allDay' type='checkbox' placeholder='all day' onChange={event => this.handleChange(event)}/>

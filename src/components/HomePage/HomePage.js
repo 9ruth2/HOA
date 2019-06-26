@@ -12,9 +12,11 @@ class HomePage extends Component {
             <div className = "HomePage">
             <NavBar/>
                 <p>
-                    <h1>קצת עלינו</h1>
+                    <h1 align="center" className= "aboutAsTitle">קצת עלינו</h1>
                 </p>
-                <Message/>
+                <div align="right" className="MessageArea">
+                    <Message/>
+                </div>
             </div>
         )
     }

@@ -5,30 +5,36 @@
   overflow: hidden;
   /*border: 1px solid #e7e7e7;*/
   background-color:rgb(241, 190, 205);
+  
   }
   
  .NavBar_li {
     float: right;
+    border-radius: 2%;
   
   }
 
   .active {
-    background-color: #4CAF50;
+    background-color: rgb(174, 36, 76);
   }
   
   .NavBar_li_a {
     display: block;
-    color: rgb(255, 255, 255);
+    color: rgb(174, 36, 76);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    text-decoration-style: bold;
+    border-radius: 2%;
+    text-shadow:3px,3px, rgb(174, 36, 76);
+    font-weight: bold;
   }
   
   .NavBar_li_a:hover {background: rgb(194, 227, 220);}
   
   .NavBar_logout{
     background-color:transparent;  
-    padding-top: 6.5px;
+    padding-top: 7px;
     border: none;
     color: white;
     text-align: center;
@@ -37,7 +43,6 @@
     font-size: 20px;
     cursor: pointer;
     align-items: left;
-    font-family: Arial, Helvetica, sans-serif;
   }
   .NavBar_logout:hover{background: rgb(194, 227, 220); }
   

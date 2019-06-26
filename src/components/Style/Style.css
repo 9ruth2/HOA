@@ -1,4 +1,13 @@
 
+.MessageArea{
+  border: #000000;
+  align-content: right;
+  position: absolute;
+  right: 2%;
+  background-color: rgba(255, 255, 255, 0.678);
+  padding: 2%;
+  border-radius: 5%;
+}
 html { 
     background: url(http://www.up2me.co.il/images/23352292.jpg) no-repeat center center fixed; 
     -webkit-background-size: cover;
@@ -7,6 +16,9 @@ html {
     background-size: cover;
   }
 
+.aboutAsTitle{
+  text-align: center;
+}
 .bigTitle{
     text-shadow: 3px 2px rgb(235, 235, 235);
   }
@@ -59,9 +71,4 @@ html {
     border: none;
     border-radius: 15px;
     box-shadow: 0 9px rgb(121, 116, 116);
-  }
-
-  .imgStyle{
-      width: 30%;
-      height: 30%;
   }

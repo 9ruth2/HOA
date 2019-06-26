@@ -23,11 +23,13 @@ font-family: Arial, Helvetica, sans-serif;
 flex-direction: column;
 align-items: center;
 min-height: 100vh;
+direction: ltr;
+
 }
 
 
 .messages_textarea{
-  width: 300px;
+  width: 250px;
   height: 100px;
   text-align: right;
   font-family:Arial, Helvetica, sans-serif;
@@ -40,7 +42,8 @@ min-height: 100vh;
   border: none;
   border-radius: 15px;
   box-shadow: 0 2px rgb(121, 116, 116);
-  
+  direction: ltr;
+
 }
 
 .message_button_buuble{
@@ -53,6 +56,8 @@ min-height: 100vh;
  padding-left: 10px;
  padding-right: 10px;
  margin-bottom: 25px;
+ direction: ltr;
+
 }
 
 
