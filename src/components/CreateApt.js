@@ -25,7 +25,11 @@ class CreateApt extends Component
         this.state = {
             email: '',
             password: '',
-            buildingId: this.props.buildingID
+            aptId: '',
+            buildingId: this.props.buildingID,
+            tenants: [],
+            fullName: '',
+            phoneNum: ''
     };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,14 +47,27 @@ class CreateApt extends Component
                 password: target.value
             });
         }
+        if(target.name === 'fullName'){  
+            this.setState({
+                fullName: target.value
+            });
+        }
+
+        if(target.name === 'phoneNum'){   
+            this.setState({
+                phoneNum: target.value
+            });
+        }
    }
 
    handleSubmit(event){
+       if(this.state.fullName ===''){
+           this.setState({fullName:this.state.email})
+       }
        if(this.state.email == '' || this.state.password == ''){
            alert("please type in all the filds")
        }
        else{
-
         let aptId = null
         secondFirebaseInstance.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
             alert('שם המשתמש קיים')
@@ -69,22 +86,31 @@ class CreateApt extends Component
             return db.collection('Apt').doc(aptId).set({
                 email: this.state.email,
                 buildingId:this.state.buildingId,
-                aptId : aptId
+                aptId : aptId,
+                fullName:this.state.fullName
               })
           })
           .then(result => {
             const fb = firebase.firestore();
-            return fb.collection('Tenants').add({
+            fb.collection('Tenants').add({
                 email: this.state.email,
                 buildingId:this.state.buildingId,
                 aptId: aptId
               })
+            .then(result => {
+                this.setState({tenantId : result.id})
+                alert(this.state.tenantId)
+                const fb = firebase.firestore();
+                return fb.collection('Apt').doc(aptId).update({
+                    tenants: firebase.firestore.FieldValue.arrayUnion(this.state.tenantId)
+                })
+            })              
         })
         .then(rseult => {
             const fb = firebase.firestore();
             return fb.collection('Building').doc(this.state.buildingId).update({
                 aptList: firebase.firestore.FieldValue.arrayUnion(aptId)
-              })
+            })
         })
     }
 
@@ -96,6 +122,8 @@ class CreateApt extends Component
             {this.CreateAptStyle()}>
                 <Form>
                     <Form.Group controlId="formBasicEmail">
+                    <Form.Label>name</Form.Label>
+                        <Form.Control placeholder="name" name="fullName" type="text"  value={this.state.fullName} onChange={this.handleChange}/>
                         <Form.Label>Email address</Form.Label>
                         <Form.Control placeholder="Enter email" name="email" type="email"  value={this.state.email} onChange={this.handleChange}/>
                     </Form.Group>

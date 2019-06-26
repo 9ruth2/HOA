@@ -4,6 +4,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import { thisTypeAnnotation } from '@babel/types';
+import NavBar from './navBar/NavBar';
 
 
 
@@ -31,6 +32,7 @@ class CreateAptPage extends Component{
     render(){
         return(
             <div className="CreateAptPage" style =   {this.CreateAptPageStyle()}>
+              <NavBar/>
                 {this.printApt()}
             </div>
         );

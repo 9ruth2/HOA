@@ -14,6 +14,7 @@ import 'moment/locale/he';
 moment.locale('he');
 const localizer = BigCalendar.momentLocalizer(moment);
 
+//const uid = 'V1oEfd7SK8Xbzv8UDK2WmGnwqpr1'
 
 class EventCalender extends Component {
 
@@ -66,7 +67,10 @@ class EventCalender extends Component {
   }
 
   handleSubmit(event) {
-
+    if(this.buildingId == null || this.buildingId.length <= 0) {
+      alert('no building to add the message to')
+      return
+    }
     if (this.state.title == '') {
       alert('חסר את שם האירוע')
     }
@@ -79,60 +83,95 @@ class EventCalender extends Component {
     else if (this.state.endDate == '') {
       alert('חסר תאריך סיום')
     }
-    
     else {
+   /*    
       this.setState({
-        events: [...this.state.events,{
+            events: [...this.state.events,{
+            title: this.state.title,
+            allDay: this.state.allDay,
+            start: this.state.start,
+            end: this.state.end,
+            id: this.state.id++
+              }]
+            } , () =>{   
+            const db = firebase.firestore();
+            db.collection('Building').doc(this.buildingId).collection('Events').add({
+              events: this.state.events,
+              id: this.state.id
+           })
+
+        }
+      );
+  //  this.setState({title: ''})
+   
+    
+   */
+    const newEvent = {
+      title: this.state.title,
         title: this.state.title,
         allDay: this.state.allDay,
         start: this.state.start,
         end: this.state.end,
-        id: this.state.id++
-      }]
-    } , () =>{   const db = firebase.firestore();
-      db.collection('Events').doc('Events').update({
-        events: this.state.events,
-        id: this.state.id
-      })}
-      )
-   
+       }
+
+      this.setState({
+        events: [...this.state.events, newEvent]
+      }, () => {
+        const db = firebase.firestore();
+        db.collection('Building').doc(this.buildingId).collection('Events').add(newEvent)
+        .then(result => {
+        newEvent.id = result.id
+        });
+      }
+    )
+      this.setState({ title: '' });
+  }
+  }
+
+
+ componentDidMount() {
+  if (firebase.auth().currentUser==null /*uid == null*/) return
+  firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
+    result => {
+      if (!result.exists) return
+      this.buildingId = result.data().buildingId
+      this.getEventsFromServer()
     }
+  )
+ }
+
+  getEventsFromServer() {
+    firebase.firestore().collection("Building").doc(this.buildingId).collection("Events").get().then(
+      result => {
+        if (result.empty) return
+        this.setState({ events: result.docs.map(doc => ({ id: doc.id, ...doc.data() })) })
+      }
+    )
   }
 
 
 
-  
-  componentDidMount(){
-    const db = firebase.firestore();
-    db.collection('Events').get().then(snapshot => {
-      snapshot.forEach(docs => {
-        if(docs.exists){
-          this.setState({
-            events: docs.data().events,
-            id: docs.data().id
-            })
-        }          
-    })})
-
-  } 
-  
-
-
  //Clicking an existing event allows you to remove it
-onSelectEvent(pEvent) {
+onSelectEvent(pEventId) {
    const r = window.confirm("האם את/ה בטוח/ה שאת/ה רוצה למחוק את האירוע?")
    if(r === true){
     
        const db = firebase.firestore();
-       var temp = db.collection('Events').doc("Events")
-        temp.update({events: this.state.events.filter(item => item.id !== pEvent.id)});
-        this.setState({events: this.state.events.filter(item => item.id  !== pEvent.id)});
-   }
-  }
-  
-  render() {
-    return (
+       db.collection('Building').doc(this.buildingId).collection('Events').doc(pEventId).delete()
 
+       //var temp = db.collection('Events').doc("Events")
+        //temp.update({events: this.state.events.filter(item => item.id !== pEvent.id)});
+        this.setState({events: this.state.events.filter(item => item.id  !== pEventId)});
+
+       
+      }
+  
+      }
+
+  render() {
+    if (firebase.auth().currentUser==null/*uid == null*/) return null
+
+    return (
       <>
 
     <NavBar></NavBar>
@@ -166,8 +205,6 @@ onSelectEvent(pEvent) {
         date: 'תאריך',
         time: 'שעה',
         event: 'אירוע',
-        Sun: 'ראשון',
-        June :'וני'
       }}
 
       style={{height: '70vh'}}
@@ -188,7 +225,7 @@ onSelectEvent(pEvent) {
       defaultView='month'  //התצוגה הראושנית היא חודש
      // views={['month','week','day']}  //הופעה של רק שלושת אלה בצד (ללא אגנדה שזה לראות את כל האירועים )
       scrollToTime={new Date(1970, 1, 1, 6)}// התאריך האחרון אליו הגלילה למטה תגיע
-      onSelectEvent = {event => this.onSelectEvent(event)  } //Fires selecting existing event
+      onSelectEvent = {event => this.onSelectEvent(event.id)  } //Fires selecting existing event
 
    //   onSelectSlot={this.handleSelect} //יפעל כאשר נבחר תאריך ביומן
     />
@@ -197,7 +234,6 @@ onSelectEvent(pEvent) {
     );
 
   }
-  
 
 }
 export default EventCalender;

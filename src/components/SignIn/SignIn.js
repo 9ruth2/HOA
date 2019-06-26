@@ -157,7 +157,7 @@ function onClickSignIn()
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    alert('פרטים לא נכונים, אנא נסה שוב בבקשה')
+    alert('הפרטים אינם נכונים, נסה שנית')
   })
 }
 

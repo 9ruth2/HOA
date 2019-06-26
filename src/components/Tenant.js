@@ -32,20 +32,61 @@ class Tenant extends Component{
             display: 'none'
         }
     }
+    
+
     constructor(props){
         super(props);
-        this.state = {
-            aptId: '5kE4NUykOSLVxzmK4Rrf',
-            tenantId: 'UuBQJ0gnmQZvtPJD9fM0',
-            fullName: "רות ריצ'י",
-            phoneNum: '0502333411' ,
-            email: 'aruth2@gmail.com',
-            dob: '18/06/1992',
+        const user = firebase.auth().currentUser;
+
+        firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
+            result => {
+              if (!result.exists){
+                return
+              } 
+              else{
+                const tenantId = result.data().tenants[0];
+                alert(tenantId)
+              }
+            }
+        )
+        this.state = ({
+            aptId: user.uid,
+            tenantId: 'this.props.tenants[0]',
+            fullName: '',
+            phoneNum: '' ,
+            email: '',
+            dob: '',
             edit: false
-    };
+        })
+        
+        // firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
+        //     result => {
+        //       if (!result.exists){
+        //         return
+        //       } 
+        //       else{
+        //         const fullName = result.data().fullName
+        //         alert(fullName)
+        //         const tenantId = result.data().tenants[0]
+        //         const email = result.data().email
+        //         this.setState ({
+        //           aptId: user.uid,
+        //           tenantId: this.tenantId,
+        //           fullName: this.fullName,
+        //           phoneNum: '' ,
+        //           email: this.email,
+        //           dob: '',
+        //           edit: false
+        //           })
+        //       }
+
+        //     }
+        //   )
+   
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleEdit = this.handleSubmit.bind(this);
+        
+
     }
     handleChange(event){
         const target = event.target;
@@ -80,8 +121,9 @@ class Tenant extends Component{
         else{
             this.setState({
                 edit : false
-            });  
+            })  
             const db = firebase.firestore();
+            alert(this.state.tenantId)
             db.collection('Tenants').doc(this.state.tenantId).update({
                fullName: this.state.fullName,
                phoneNumber:this.state.phoneNum,
@@ -92,12 +134,13 @@ class Tenant extends Component{
     }
     
     render(){
+        const fullname = this.state.fullName
         return (
             <div className="TenantText container" style = {this.TenantStyle()}>
-<NavBar/>
+
             <table style={this.TableStyle()}>
             <tr>
-                <input className="onEdit" value={this.state.fullName} style = {this.onEditStyle()} type='text' name="fullName" onChange={this.handleChange}></input>
+                <input className="onEdit" value={this.fullname} style = {this.onEditStyle()} type='text' name="fullName" onChange={this.handleChange}></input>
                 <td style={this.onSaveStyle()}>{this.state.fullName}</td>
                 <td> שם מלא</td>
             </tr>
@@ -118,7 +161,7 @@ class Tenant extends Component{
             </tr>
 
 
-            <button type="click" value="עריכה" onClick={this.handleEdit} style={this.onSaveStyle()}>עריכה </button>
+            <button type="click" value="עריכה" onClick={this.handleSubmit} style={this.onSaveStyle()}>עריכה </button>
             <input type="submit" value="שמור" onClick={this.handleSubmit} style = {this.onEditStyle()}/>
 
             </table>
