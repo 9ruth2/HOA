@@ -37,27 +37,46 @@ class Tenant extends Component{
     constructor(props){
         super(props);
         const user = firebase.auth().currentUser;
-
-        firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
-            result => {
-              if (!result.exists){
-                return
-              } 
-              else{
-                const tenantId = result.data().tenants[0];
-                alert(tenantId)
-              }
-            }
-        )
         this.state = ({
             aptId: user.uid,
-            tenantId: 'this.props.tenants[0]',
+            tenantId: this.tenantId,
             fullName: '',
             phoneNum: '' ,
             email: '',
             dob: '',
             edit: false
         })
+        // let tenantId = '';
+        // const user = firebase.auth().currentUser;
+        firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
+            result => {
+              if (!result.exists){
+                return
+              } 
+              else{
+                  this.setState({
+                    fullName: result.data().fullName,
+                    phoneNum: result.data().phoneNum,
+                    email: result.data().email,
+                    dob: result.data().dob,
+                  })
+                // this.tenantId = result.data().tenants[0];
+                // alert(tenantId)
+              }
+            }
+        )
+        // this.state = ({
+        //     aptId: user.uid,
+        //     tenantId: this.tenantId,
+        //     fullName: '',
+        //     phoneNum: '' ,
+        //     email: '',
+        //     dob: '',
+        //     edit: false
+        // })
+        // alert(this.state.aptId)
+        // alert(this.state.tenantId)
+
         
         // firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
         //     result => {
@@ -85,6 +104,7 @@ class Tenant extends Component{
    
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleEdit = this.handleSubmit.bind(this);
         
 
     }
@@ -112,6 +132,7 @@ class Tenant extends Component{
             });
         }
     }
+
     handleSubmit(event){
         if(this.state.edit === false){
             this.setState({
@@ -121,12 +142,11 @@ class Tenant extends Component{
         else{
             this.setState({
                 edit : false
-            })  
+            });  
             const db = firebase.firestore();
-            alert(this.state.tenantId)
-            db.collection('Tenants').doc(this.state.tenantId).update({
+            db.collection('Apt').doc(firebase.auth().currentUser.uid).update({
                fullName: this.state.fullName,
-               phoneNumber:this.state.phoneNum,
+               phoneNum:this.state.phoneNum,
                email:this.state.email,
                dob:this.state.dob 
             })
@@ -134,14 +154,11 @@ class Tenant extends Component{
     }
     
     render(){
-        const fullname = this.state.fullName
         return (
-        <div className="TenantText" >
-            <NavBar/>
+            <div className="TenantText container" style = {this.TenantStyle()}>
             <table style={this.TableStyle()}>
-
             <tr>
-                <input className="onEdit" value={this.fullname} style = {this.onEditStyle()} type='text' name="fullName" onChange={this.handleChange}></input>
+                <input className="onEdit" value={this.state.fullName} style = {this.onEditStyle()} type='text' name="fullName" onChange={this.handleChange}></input>
                 <td style={this.onSaveStyle()}>{this.state.fullName}</td>
                 <td> שם מלא</td>
             </tr>
@@ -161,12 +178,12 @@ class Tenant extends Component{
                 <td>תאריך לידה</td>
             </tr>
 
-            <div className ="tenant_button">
+
             <button type="click" value="עריכה" onClick={this.handleEdit} style={this.onSaveStyle()}>עריכה </button>
             <input type="submit" value="שמור" onClick={this.handleSubmit} style = {this.onEditStyle()}/>
-            </div>
-            <br/>
+
             </table>
+
         </div>
         );
         
@@ -175,3 +192,66 @@ class Tenant extends Component{
 }
 
 export default Tenant;
+//     handleSubmit(event){
+//         if(this.state.edit === false){
+//             this.setState({
+//                 edit : true
+//             });
+//         }
+//         else{
+//             this.setState({
+//                 edit : false
+//             })  
+//             const db = firebase.firestore();
+//             alert(this.state.tenantId)
+//             db.collection('Tenants').doc(this.state.tenantId).update({
+//                fullName: this.state.fullName,
+//                phoneNumber:this.state.phoneNum,
+//                email:this.state.email,
+//                dob:this.state.dob 
+//             })
+//         }
+//     }
+    
+//     render(){
+//         const fullname = this.state.fullName
+//         return (
+//         <div className="TenantText" >
+//             {/* <NavBar/> */}
+//             <table style={this.TableStyle()}>
+
+//             <tr>
+//                 <input className="onEdit" value={this.fullname} style = {this.onEditStyle()} type='text' name="fullName" onChange={this.handleChange}></input>
+//                 <td style={this.onSaveStyle()}>{this.state.fullName}</td>
+//                 <td> שם מלא</td>
+//             </tr>
+//             <tr>
+//             <input className="onEdit" value={this.state.phoneNum} style = {this.onEditStyle()} type='number' name="phoneNum" onChange={this.handleChange}></input>
+//                 <td style={this.onSaveStyle()}>{this.state.phoneNum}</td>
+//                 <td>מספר פלאפון</td>
+//             </tr>
+//             <tr>
+//             <input className="onEdit" value={this.state.email} style = {this.onEditStyle()} type='email' name="email" onChange={this.handleChange}></input>
+//             <td style={this.onSaveStyle()}>{this.state.email}</td>
+//                 <td>דואר אלקטרוני</td>
+//             </tr>
+//             <tr>
+//             <input className="onEdit" value={this.state.dob} style = {this.onEditStyle()} type='date' name="dob" onChange={this.handleChange}></input>
+//                 <td style={this.onSaveStyle()}>{this.state.dob}</td>
+//                 <td>תאריך לידה</td>
+//             </tr>
+
+//             <div className ="tenant_button">
+//             <button type="click" value="עריכה" onClick={this.handleEdit} style={this.onSaveStyle()}>עריכה </button>
+//             <input type="submit" value="שמור" onClick={this.handleSubmit} style = {this.onEditStyle()}/>
+//             </div>
+//             <br/>
+//             </table>
+//         </div>
+//         );
+        
+//     }
+
+// }
+
+// export default Tenant;

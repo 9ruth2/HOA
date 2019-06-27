@@ -18,6 +18,8 @@ class UserPage extends Component{
             <div className="UserPage">
                 <NavBar/>
                 <div>
+                    <Tenant/>
+                    {this.getTenents}
                 <ContactTable/>
                 </div>
                 <div>
@@ -29,6 +31,7 @@ class UserPage extends Component{
         }
 
         getTenents() {
+
             // const tenents = [{}, {}, {}, {}]
             // return tenents.map(tenent => <Tenant/>)
             return(

@@ -30,20 +30,20 @@ class Message extends Component {
     if (firebase.auth().currentUser == null) return null
     return (
       <React.Fragment>
-        
+        {/* <NavBar/> */}
         <div className="messages_body">
-          <h1 className="messages_h1">לוח מודעות</h1>
+          <h1 className="messages_h1">לוח הודעות</h1>
           <form>
-            <label>:מוסרים משהו? צריכים משהו? כתבו לדיירי הבניין <br></br>הכנס/י הודעה</label><br />
+            <label>:הכנס/י הודעה</label><br />
             <div>
               <textarea className="messages_textarea"
                 type="text"
                 value={this.state.input}
                 onChange={this.handleChangeText}
-                placeholder="..כתוב/י כאן את ההודעה שלך"
+                placeholder="..כתוב כאן טקסט"
               />
             </div>
-            <button className="messages_btn" type='button' onClick={() => this.onClickSave()}>שלח</button>
+            <button className="messages_btn" type='button' onClick={() => this.onClickSave()}>שמור</button>
           </form>
           <p></p>
           {this.getMessage()}
@@ -104,7 +104,7 @@ class Message extends Component {
 
   onClickSave() {
     if(this.buildingId == null || this.buildingId.length <= 0) {
-      alert('אין אפשרות להוסיף הודעה ללוח מאחר ואינך משוייך לבניין')
+      alert('no building to add the message to')
       return
     }
     if (this.state.input === '') return
