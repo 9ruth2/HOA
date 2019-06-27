@@ -29,7 +29,8 @@ class CreateApt extends Component
             buildingId: this.props.buildingID,
             tenants: [],
             fullName: '',
-            phoneNum: ''
+            phoneNum: '',
+            aptNum: ''
     };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -56,6 +57,11 @@ class CreateApt extends Component
         if(target.name === 'phoneNum'){   
             this.setState({
                 phoneNum: target.value
+            });
+        }
+        if(target.name === 'aptNum'){   
+            this.setState({
+                aptNum: target.value
             });
         }
    }
@@ -87,7 +93,8 @@ class CreateApt extends Component
                 email: this.state.email,
                 buildingId:this.state.buildingId,
                 aptId : aptId,
-                fullName:this.state.fullName
+                fullName:this.state.fullName,
+                aptNum: this.state.aptNum
               })
           })
           .then(result => {
@@ -95,7 +102,8 @@ class CreateApt extends Component
             fb.collection('Tenants').add({
                 email: this.state.email,
                 buildingId:this.state.buildingId,
-                aptId: aptId
+                aptId: aptId,
+                aptNum: this.state.aptNum
               })
             .then(result => {
                 this.setState({tenantId : result.id})
@@ -122,7 +130,7 @@ class CreateApt extends Component
             {this.CreateAptStyle()}>
                 <Form>
                     <Form.Group controlId="formBasicEmail">
-                    <Form.Label>name</Form.Label>
+                        <Form.Label>name</Form.Label>
                         <Form.Control placeholder="name" name="fullName" type="text"  value={this.state.fullName} onChange={this.handleChange}/>
                         <Form.Label>Email address</Form.Label>
                         <Form.Control placeholder="Enter email" name="email" type="email"  value={this.state.email} onChange={this.handleChange}/>
@@ -130,6 +138,8 @@ class CreateApt extends Component
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange}   />
+                        <Form.Label>Apt Number</Form.Label>
+                        <Form.Control type="number" placeholder="מספר דירה" name="aptNum" value={this.state.aptNum} onChange={this.handleChange}   />
                     </Form.Group>
                     <Button variant="primary" onClick={this.handleSubmit} type="button" value="Submit">
                         Submit

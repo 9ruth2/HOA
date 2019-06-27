@@ -33,16 +33,21 @@ class CreateAptPage extends Component{
         return(
             <div className="CreateAptPage" style =   {this.CreateAptPageStyle()}>
                 {this.printApt()}
+                <button onClick={this.onSubmit}>סיום</button>
             </div>
         );
     }
 
+    onSubmit(){
+      
+    }
     printApt() {
         let i = 0;
         let apt = [];
         while (i < this.state.aptNum) {
           i++;
-          apt.push(<p>apt num: {i}</p>);
+          // apt.push(<p>apt num: {i}</p>);
+          apt.push(<input type="radio" name="hoa" value={this.i}/>)
           apt.push(<CreateApt buildingID = {this.state.buildingID} />);
         }
         return apt;

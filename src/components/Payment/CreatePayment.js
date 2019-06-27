@@ -50,8 +50,8 @@ class CreatePayment extends Component{
           result => {
             if (!result.exists) return
             this.buildingId = result.data().buildingId
-            this.aptNum = result.data().aptNum}
-        )
+            this.aptNum = result.data().aptNum
+        })
       }
     
  

@@ -127,9 +127,11 @@ class Tenant extends Component{
             });
         }
         if(target.name === 'dob'){   
-            this.setState({
-                dob: target.value
-            });
+            if(target.value!== 'dd/mm/yyy'){
+                this.setState({
+                    dob: target.value
+                });
+            }
         }
     }
 
@@ -143,13 +145,14 @@ class Tenant extends Component{
             this.setState({
                 edit : false
             });  
-            const db = firebase.firestore();
+            const db = firebase.firestore()
             db.collection('Apt').doc(firebase.auth().currentUser.uid).update({
                fullName: this.state.fullName,
                phoneNum:this.state.phoneNum,
                email:this.state.email,
                dob:this.state.dob 
             })
+            
         }
     }
     
@@ -163,7 +166,7 @@ class Tenant extends Component{
                 <td> שם מלא</td>
             </tr>
             <tr>
-            <input className="onEdit" value={this.state.phoneNum} style = {this.onEditStyle()} type='number' name="phoneNum" onChange={this.handleChange}></input>
+            <input className="onEdit" value={this.state.phoneNum} style = {this.onEditStyle()} type='tel' name="phoneNum" onChange={this.handleChange}></input>
                 <td style={this.onSaveStyle()}>{this.state.phoneNum}</td>
                 <td>מספר פלאפון</td>
             </tr>
@@ -173,7 +176,7 @@ class Tenant extends Component{
                 <td>דואר אלקטרוני</td>
             </tr>
             <tr>
-            <input className="onEdit" value={this.state.dob} style = {this.onEditStyle()} type='date' name="dob" onChange={this.handleChange}></input>
+            <input className="onEdit" value={this.state.dob} style = {this.onEditStyle()} type='date' name="dob" onChange={this.handleChange} placeholder={this.state.dob}></input>
                 <td style={this.onSaveStyle()}>{this.state.dob}</td>
                 <td>תאריך לידה</td>
             </tr>

@@ -39,7 +39,9 @@ class ContactTable extends Component{
 
 
     // ------------------- Functions ------------------------ 
-    componentDidMount(){this.getContactTable();}
+    componentDidMount(){
+        this.getContactTable();
+    }
 
 
     handleChange() {

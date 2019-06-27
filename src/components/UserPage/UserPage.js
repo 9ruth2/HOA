@@ -22,10 +22,6 @@ class UserPage extends Component{
                     {this.getTenents}
                 <ContactTable/>
                 </div>
-                <div>
-                    <button>הוסף דייר</button>
-                </div>
-                
             </div>
             );
         }
