@@ -38,17 +38,20 @@ class ContactTable extends Component{
 
     componentDidMount(){this.getContactTable();}
 
-    getContactTable(doc)
+    async getContactTable()
     {
+        const result = await firebase.firestore().collection('Apt').doc(firebase.auth().currentUser.uid).get()
+        const building = await firebase.firestore().collection("Building").doc(result.data().buildingId).get()
+        const promises = building.data().aptList.map(apt => firebase.firestore().collection('Apt').doc(apt).get())
 
-        firebase.firestore().collection("Apt").get().then( querySnapshot => {
-        this.setState({ tableData: querySnapshot.docs.map(i => {
+        const aptResults = await Promise.all(promises)
+
+        this.setState({ tableData: aptResults.map(i => {
             return {
                 aptId: i.id,
                 ...i.data()
             }
-        }) });
-    });
+        }) })
     }
 
     getTableRows() 
