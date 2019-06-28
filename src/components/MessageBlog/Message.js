@@ -29,10 +29,6 @@ class Message extends Component {
 
 
   render() {
-    // const user = firebase.firestore().collection('Apt').doc(firebase.auth().currentUser.uid).get()
-    // const userName = user.data().fullName
-    // this.setState({fullName:this.userName})
-
     if (firebase.auth().currentUser == null) return null
     return (
       <React.Fragment>
@@ -91,7 +87,7 @@ class Message extends Component {
       if (messageObj == null || messageObj.text == null || messageObj.text.length <= 0) return null
 
       return <div key={messageObj.id} className="message_button_buuble">
-        <p>נכתב ע"י: {this.state.fullName}</p>
+        <p>נכתב ע"י: {messageObj.author}</p>
         <p>{messageObj.timestamp} :תאריך</p>
         <p className="messages_talkbubble"> הודעה: {messageObj.text}</p>
         <br />
@@ -121,8 +117,11 @@ class Message extends Component {
       author: this.fullName
     }
  
-    if(newMessageObj.author === undefined)
-      newMessageObj.author = '';
+    if(newMessageObj.author === undefined) newMessageObj.author = '';
+    const user = firebase.firestore().collection('Apt').doc(firebase.auth().currentUser.uid).get().then(result=>{
+      newMessageObj.author =result.data().fullName
+    })
+      
     const db = firebase.firestore();
     db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
     .then(result => {
