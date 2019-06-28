@@ -28,21 +28,21 @@ class PaymentTable extends Component{
         return(
             <div>
                 <NavBar/>
-            
-         <table id = "paymentTable" border= "1" style = {this.PaymentTableStyle()}>
-             
-             <thead>
-             <tr>
-                <th>   סטטוס תשלומי דיירים   </th>
-                <th>   סכום התשלום הכולל   </th>
-                <th>   פירוט התשלום   </th>
-            </tr>
-             </thead>
-             <tbody>
-             {this.getTableRows()}
-             </tbody>
-         </table>
-         </div>
+                <h1 className="bigTitle">דוח תשלום ועד הבניין</h1>
+                <table id = "paymentTable" border= "1" style = {this.PaymentTableStyle()}>
+                    
+                    <thead>
+                    <tr>
+                        <th>   סטטוס תשלומי דיירים   </th>
+                        <th>   סכום התשלום הכולל   </th>
+                        <th>   פירוט התשלום   </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.getTableRows()}
+                    </tbody>
+                </table>
+            </div>
          );
         }
 
@@ -78,7 +78,7 @@ class PaymentTable extends Component{
         return this.state.tableData.map(dataRow => {
             return (
                 <tr>
-                    <td><button className="buttonStyle"><Link to="/payment/WhoPaid">פירוט</Link></button></td>
+                    <td><button className="buttonStylePay"><Link className="linkStylePay" to="/payment/WhoPaid">סטטוס ודיווח תשלום של דייר</Link></button></td>
                     <td>{dataRow.amount}</td>
                     <td>{dataRow.details}</td>
                 </tr>

@@ -4,6 +4,7 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import './PaidTable.css';
 import { textAlign } from '@material-ui/system';
+import NavBar from '../navBar/NavBar';
 
 
 class PaidTable extends Component
@@ -27,22 +28,26 @@ class PaidTable extends Component
     render()
     {
         return(
-            <table className="PaidTable" style = {this.PaidTableStyle()}>    
-            <thead>
+            <div>
+                <NavBar/>
 
-          <tr>
-            <td> האם שולם</td>
-            <td>סכום לתשלום</td>
-            <td>תשלום</td>
-            <td>שם</td>
-            <td>מספר דירה</td>
-          </tr>
-        
-            </thead>
-            <tbody>
-            {this.getTableRows()}
-            </tbody>
-        </table>
+                <table className="PaidTable" style = {this.PaidTableStyle()}>    
+                <thead>
+
+            <tr>
+                <td> האם שולם</td>
+                <td>סכום לתשלום</td>
+                <td>תשלום</td>
+                <td>שם</td>
+                <td>מספר דירה</td>
+            </tr>
+            
+                </thead>
+                <tbody>
+                {this.getTableRows()}
+                </tbody>
+            </table>
+        </div>
             );
      }
 

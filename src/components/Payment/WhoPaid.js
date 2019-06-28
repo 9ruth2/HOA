@@ -16,24 +16,28 @@ class ContactTable extends Component{
     ContactTableStyle = () => {
         return{
             border: '1em',
-            float: 'right'
+            float: 'center'
         }
     }
 
     render(){
         return(
-            <table className="ContactTable" style = {this.ContactTableStyle()}>    
-            <thead>
-            <tr>
-                <th>האם שולם</th>
-                <th>שם מלא</th>
-                <th>מספר דירה</th>
-            </tr>
-            </thead>
-            <tbody>
-            {this.getTableRows()}
-            </tbody>
-        </table>
+            <div>
+                <NavBar/>
+                <h1 className="bigTitle">פירוט עבור תשלום נבחר</h1>
+                <table className="ContactTable" style = {this.ContactTableStyle()}>    
+                <thead>
+                <tr>
+                    <th>האם שולם</th>
+                    <th>שם מלא</th>
+                    <th>מספר דירה</th>
+                </tr>
+                </thead>
+                <tbody>
+                {this.getTableRows()}
+                </tbody>
+            </table>
+        </div>
             );
         }
 
