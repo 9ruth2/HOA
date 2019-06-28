@@ -1,4 +1,8 @@
 
+.hoaSeeOnly{
+  display:none
+}
+
 .MessageArea{
   border: #000000;
   align-content: right;
