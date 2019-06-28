@@ -112,7 +112,7 @@ class Tenant extends Component{
                email:this.state.email,
                dob:this.state.dob 
             })
-            this.props.history.push('./user-page');
+           // this.props.history.push('user-page');
             
         }
     }
