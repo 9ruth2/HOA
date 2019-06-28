@@ -6,10 +6,21 @@
   right: 2%;
   background-color: rgba(255, 255, 255, 0.678);
   padding: 2%;
-  border-radius: 5%;
+  border-radius: 15px;
+  
+}
+.aboutAs{
+  align-content: center;
+  position: absolute;
+  right: 30%;
+  left: 30%;
+  background-color: rgba(255, 255, 255, 0.678);
+  padding: 2%;
+  border-radius: 15px;
+  direction: rtl;
 }
 html { 
-    background: url(http://www.up2me.co.il/images/23352292.jpg) no-repeat center center fixed; 
+    background: url(http://www.up2me.co.il/images/22605201.jpg) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -25,6 +36,23 @@ html {
   .smallTitle{
         text-shadow: 1px 1px rgb(235, 235, 235);
   }
+
+  .title{
+    width: 35%;
+    position: relative;
+    left: 33%;
+    padding: 1px;
+    border-radius: 15px;
+  }
+  .imgTitle{
+    
+    background-color: rgba(255, 255, 255, 0.233);
+    height: 200px;
+    width: auto;
+    border-radius: 20px;
+    padding: 2px;
+  }
+
   .buttonStyle {
     display: inline-block;
     padding: 15px 25px;
@@ -34,14 +62,14 @@ html {
     text-decoration: none;
     outline: none;
     color: #fff;
-    background-color:  rgb(39, 156, 150);
+    background-color:  #279c96;
     border: none;
     border-radius: 15px;
     box-shadow: 0 9px rgb(121, 116, 116);
     margin: 1%;
   }
   
-  .buttonStyle:hover {background-color: rgb(194, 227, 220);}
+  .buttonStyle:hover {background-color: #c2e3dc;}
   
   .buttonStyle:active {
     background-color: #d1ffd7;
@@ -96,4 +124,53 @@ html {
     border-radius: 15px;
     margin: 2%;
     padding: 2%;
+  }
+
+  .fadeIn{
+    animation-name: fadeIn;
+    -webkit-animation-name: fadeIn;	
+  
+    animation-duration: 1.5s;	
+    -webkit-animation-duration: 1.5s;
+  
+    animation-timing-function: ease-in-out;	
+    -webkit-animation-timing-function: ease-in-out;		
+  
+    visibility: visible !important;	
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      transform: scale(0);
+      opacity: 0.0;		
+    }
+    60% {
+      transform: scale(1.1);	
+    }
+    80% {
+      transform: scale(0.9);
+      opacity: 1;	
+    }	
+    100% {
+      transform: scale(1);
+      opacity: 1;	
+    }		
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% {
+      -webkit-transform: scale(0);
+      opacity: 0.0;		
+    }
+    60% {
+      -webkit-transform: scale(1.1);
+    }
+    80% {
+      -webkit-transform: scale(0.9);
+      opacity: 1;	
+    }	
+    100% {
+      -webkit-transform: scale(1);
+      opacity: 1;	
+    }		
   }
