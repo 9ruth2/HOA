@@ -24,6 +24,7 @@ class HomePage extends Component {
                     <div align="right" className="MessageArea">
                         <Message/>
                     </div>
+                    
                 </div>
                 <div className = "aboutAs">
                     <h2 className="bigTitle">?מי אנחנו</h2>
