@@ -94,7 +94,8 @@ class CreateApt extends Component
                 buildingId:this.state.buildingId,
                 aptId : aptId,
                 fullName:this.state.fullName,
-                aptNum: this.state.aptNum
+                aptNum: this.state.aptNum,
+                hoa: false
               })
           })
           .then(result => {
