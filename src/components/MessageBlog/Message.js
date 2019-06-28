@@ -15,8 +15,10 @@ class Message extends Component {
 
   state = {
     input: "",
-    messages: []
+    messages: [],
+    fullName : ""
   }
+  
 
   handleChangeText = event => {
     const value = event.target.value;
@@ -27,6 +29,10 @@ class Message extends Component {
 
 
   render() {
+    // const user = firebase.firestore().collection('Apt').doc(firebase.auth().currentUser.uid).get()
+    // const userName = user.data().fullName
+    // this.setState({fullName:this.userName})
+
     if (firebase.auth().currentUser == null) return null
     return (
       <React.Fragment>
@@ -83,8 +89,9 @@ class Message extends Component {
   getMessage() {
     return this.state.messages.map(messageObj => {
       if (messageObj == null || messageObj.text == null || messageObj.text.length <= 0) return null
+
       return <div key={messageObj.id} className="message_button_buuble">
-        <p>נכתב ע"י: {messageObj.author}</p>
+        <p>נכתב ע"י: {this.state.fullName}</p>
         <p>{messageObj.timestamp} :תאריך</p>
         <p className="messages_talkbubble"> הודעה: {messageObj.text}</p>
         <br />
