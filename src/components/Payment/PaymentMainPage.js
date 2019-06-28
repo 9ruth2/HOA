@@ -10,7 +10,7 @@ import '../Style/Style.css';
 class PaymentMainPage extends Component{
 
     state=({
-        classStyle:''
+        hoa:false
     })
 
     PaymentMainPagetStyle = () => {
@@ -20,25 +20,30 @@ class PaymentMainPage extends Component{
         }
     }
     hoaSeeOnly = () => {
-        const user = firebase.auth().currentUser.uid;
-        firebase.firestore().collection('Apt').doc(user).get().then(result=>{
-            if(result.data().hoa === true){
-                this.setState({classStyle:'hoaSeeOnly'})
-            }
+        firebase.firestore().collection('Apt').doc(firebase.auth().currentUser.uid).get()
+        .then(result =>{
+            const hoa = result.data().hoa
+            this.setState({
+                hoa:hoa
+            })
+            
         })
     }
     
     render(){
+
         this.hoaSeeOnly()
 
-
-
+        
         return(
             <div className = "PaymentMainPage" style = {this.PaymentMainPagetStyle()} >
                 <NavBar/>
                 <h1 className = "mainTitle">תשלומים</h1>
                 <h3 className = "smallTitle"> עמוד ראשי</h3>
-                <button className={this.state.classStyle} className="buttonStyle"><Link to="/payment/create-payment" className="LinkStyle">הוספת תשלום</Link></button>
+                <div style={{display: this.state.hoa ? 'block' : 'none' }}>
+                <button className="buttonStyle"><Link to="/payment/create-payment" className="LinkStyle">הוספת תשלום</Link></button>
+                </div>
+                
                 <p></p>
                 <button className="buttonStyle"><Link to="/payment/payment-table"className="LinkStyle">דוח תשלומים</Link></button>
 

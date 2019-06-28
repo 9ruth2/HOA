@@ -106,12 +106,30 @@ class Tenant extends Component{
                 edit : false
             });  
             const db = firebase.firestore()
-            db.collection('Apt').doc(firebase.auth().currentUser.uid).update({
-               fullName: this.state.fullName,
-               phoneNum:this.state.phoneNum,
-               email:this.state.email,
-               dob:this.state.dob 
-            })
+            try{
+                db.collection('Apt').doc(firebase.auth().currentUser.uid).update({
+                    fullName: this.state.fullName,
+                    phoneNum:this.state.phoneNum,
+                    email:this.state.email,
+                    dob:this.state.dob 
+                 })
+            }
+            catch{
+                try{
+                    db.collection('Apt').doc(firebase.auth().currentUser.uid).update({
+                        fullName: this.state.fullName,
+                        phoneNum:this.state.phoneNum,
+                        email:this.state.email
+                     })
+                }
+                catch{
+                    db.collection('Apt').doc(firebase.auth().currentUser.uid).update({
+                        phoneNum:this.state.phoneNum,
+                        email:this.state.email
+                     })
+                }
+            }
+            
            // this.props.history.push('user-page');
             
         }
