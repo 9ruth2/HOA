@@ -11,12 +11,11 @@ const uid = ''
 class Message extends Component {
 
   buildingId = null
-  fullName = ""
+  fullName = ''
 
   state = {
     input: "",
     messages: [],
-    fullName : ""
   }
   
 
@@ -65,10 +64,8 @@ class Message extends Component {
     firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
       result => {
         if (!result.exists) return
-        console.log(result.data().buildingId)
-        
         this.buildingId = result.data().buildingId
-        console.log(this.buildingId)
+        this.fullName = result.data().fullName
         this.getMessagesFromServer()
       }
     )
@@ -108,11 +105,13 @@ class Message extends Component {
   }
 
 
-  onClickSave() {
+  onClickSave()
+  {
     if(this.buildingId == null || this.buildingId.length <= 0) {
       alert('no building to add the message to')
       return
     }
+
     if (this.state.input === '') return
     const newMessageObj = {
       text: this.state.input,
@@ -121,19 +120,14 @@ class Message extends Component {
     }
  
     if(newMessageObj.author === undefined) newMessageObj.author = '';
-    const user = firebase.firestore().collection('Apt').doc(firebase.auth().currentUser.uid).get().then(result=>{
-      newMessageObj.author =result.data().fullName
-    })
+
       
     const db = firebase.firestore();
     db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
     .then(result => {
       newMessageObj.id = result.id
       this.setState({
-        messages: [...this.state.messages, newMessageObj]
-      }, () => {
-      //  db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
-      });
+        messages: [...this.state.messages, newMessageObj] });
       this.setState({ input: '' });
     })
   }

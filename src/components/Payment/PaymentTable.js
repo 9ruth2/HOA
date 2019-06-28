@@ -63,12 +63,10 @@ class PaymentTable extends Component{
 
     renderPayment(doc)
     {
-        debugger
         firebase.firestore().collection('Building').doc(this.buildingId).collection('Payment').get().then( querySnapshot => {
-            if (querySnapshot.empty) return
         this.setState({ tableData: querySnapshot.docs.map(i => {
-            return {
-                id: i.id,...i.data()}}) })
+           // if (i.data().amount !== null) 
+             return {id: i.id,...i.data()}}) })
       })
     }
 
@@ -76,6 +74,7 @@ class PaymentTable extends Component{
     {
         console.log(this.state.tableData)
         return this.state.tableData.map(dataRow => {
+            if(dataRow.amount != null)
             return (
                 <tr>
                     <td><button className="buttonStylePay"><Link className="linkStylePay" to="/payment/WhoPaid">סטטוס ודיווח תשלום של דייר</Link></button></td>

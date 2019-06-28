@@ -3,9 +3,9 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import './ContactTable.css';
-//import NavBar from '../navBar/NavBar';
 
-class ContactTable extends Component{
+class ContactTable extends Component
+{
 
     state = {
         tableData: []
@@ -19,7 +19,9 @@ class ContactTable extends Component{
         }
     }
 
-    render(){
+
+    render()
+    {
         return(
             <table className="ContactTable" style = {this.ContactTableStyle()}>    
             <thead>
@@ -34,7 +36,9 @@ class ContactTable extends Component{
             </tbody>
         </table>
             );
-        }
+    }
+
+//----------------- Functions -----------------
 
     componentDidMount(){this.getContactTable();}
 
@@ -52,8 +56,10 @@ class ContactTable extends Component{
                 ...i.data()
             }
         }) })
+        this.getTableRows() ;
     }
 
+    
     getTableRows() 
     {
         return this.state.tableData.map(dataRow => {
