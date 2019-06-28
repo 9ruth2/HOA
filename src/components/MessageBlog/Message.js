@@ -31,22 +31,25 @@ class Message extends Component {
     return (
       <React.Fragment>
         {/* <NavBar/> */}
+        <div id="object" class="slideLeft">
         <div className="messages_body">
-          <h1 className="messages_h1">לוח הודעות</h1>
+
+          <h1 className="messages_h1">לוח מודעות</h1>
           <form>
-            <label>:הכנס/י הודעה</label><br />
+            <label>מוסרים משהו? צריכים משהו? כתבו לדיירי הבניין</label>
             <div>
               <textarea className="messages_textarea"
                 type="text"
                 value={this.state.input}
                 onChange={this.handleChangeText}
-                placeholder="..כתוב כאן טקסט"
+                placeholder="..כתוב כאן את הודעתך   "
               />
             </div>
-            <button className="messages_btn" type='button' onClick={() => this.onClickSave()}>שמור</button>
+            <button className="messages_btn" type='button' onClick={() => this.onClickSave()}>שלח</button>
           </form>
           <p></p>
           {this.getMessage()}
+        </div>
         </div>
       </React.Fragment>
     )

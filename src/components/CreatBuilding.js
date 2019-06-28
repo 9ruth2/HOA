@@ -82,7 +82,7 @@ class CreatBuilding extends Component{
                     </label>
                     <br/>
                     <label>
-                        <p>
+                        <p className="smallTitle">
                         מספר דירות בבניין זה
                         <br/>
                         <input className="inputStyle" name="aptNum" type="number" value={this.state.aptNum} onChange={this.handleChange} />

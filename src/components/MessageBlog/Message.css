@@ -12,6 +12,7 @@ html {
   color: black;
   font-weight: bold;
   font-size: 43px;
+  text-shadow: 3px 1px, #666;
 }
 
 
@@ -38,7 +39,7 @@ direction: ltr;
   text-decoration: none;
   outline: none;
   color:rgb(0, 0, 0);
-  background-color: rgb(194, 227, 220);;
+  background-color: rgb(194, 227, 220);
   border: none;
   border-radius: 15px;
   box-shadow: 0 2px rgb(121, 116, 116);
@@ -57,6 +58,7 @@ direction: ltr;
  padding-right: 10px;
  margin-bottom: 25px;
  direction: ltr;
+ box-shadow: 0 2px rgb(121, 116, 116);
 
 }
 
@@ -118,4 +120,64 @@ border-bottom: 13px solid transparent;
   border: none;
   border-radius: 15px;
   box-shadow: 0 5px rgb(121, 116, 116);
+  margin: 7px;
+}
+
+#object{
+	visibility: hidden;
+}
+
+.slideLeft{
+	animation-name: slideLeft;
+	-webkit-animation-name: slideLeft;	
+
+	animation-duration: 2s;	
+	-webkit-animation-duration: 2s;
+
+	animation-timing-function: ease-in-out;	
+	-webkit-animation-timing-function: ease-in-out;		
+
+	visibility: visible !important;	
+}
+
+@keyframes slideLeft {
+	0% {
+		transform: translateX(150%);
+	}
+	50%{
+		transform: translateX(-8%);
+	}
+	65%{
+		transform: translateX(4%);
+	}
+	80%{
+		transform: translateX(-4%);
+	}
+	95%{
+		transform: translateX(2%);
+	}			
+	100% {
+		transform: translateX(0%);
+	}
+}
+
+@-webkit-keyframes slideLeft {
+	0% {
+		-webkit-transform: translateX(150%);
+	}
+	50%{
+		-webkit-transform: translateX(-8%);
+	}
+	65%{
+		-webkit-transform: translateX(4%);
+	}
+	80%{
+		-webkit-transform: translateX(-4%);
+	}
+	95%{
+		-webkit-transform: translateX(2%);
+	}			
+	100% {
+		-webkit-transform: translateX(0%);
+	}
 }

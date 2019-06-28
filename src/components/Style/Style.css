@@ -20,10 +20,10 @@ html {
   text-align: center;
 }
 .bigTitle{
-    text-shadow: 3px 2px rgb(235, 235, 235);
+    text-shadow: 3px 1px rgb(235, 235, 235);
   }
   .smallTitle{
-        text-shadow: 3px 2px rgb(235, 235, 235);
+        text-shadow: 1px 1px rgb(235, 235, 235);
   }
   .buttonStyle {
     display: inline-block;

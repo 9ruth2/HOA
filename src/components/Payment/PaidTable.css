@@ -10,15 +10,16 @@
     padding: 8px;
   }
   
-  .PaidTable tr:nth-child(even){background-color: rgb(194, 227, 220);}
+  .PaidTable tr:nth-child(even){background-color: rgba(253, 227, 235, 0.788);}
+  .PaidTable tr:nth-child(odd){background-color: rgba(235, 235, 245, 0.76);}
   
-  .PaidTable tr:hover {background-color:rgb(223, 155, 78);}
+  .PaidTable tr:hover {background-color:rgb(241, 190, 205);}
   
   .PaidTable th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: rgb(189, 191, 74);
+    background-color: rgb(174, 36, 76);
     color: white;
     text-align: center;
   }

@@ -3,6 +3,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import './PaidTable.css';
+import { textAlign } from '@material-ui/system';
 
 
 class PaidTable extends Component
@@ -18,7 +19,8 @@ class PaidTable extends Component
     PaidTableStyle = () => {
         return{
             border: '1em',
-            float: 'right'
+            float: 'center',
+            textAlign:'center'
         }
     }
 
