@@ -4,6 +4,28 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import './PaidTable.css';
 import NavBar from '../navBar/NavBar';
+import { Button } from '@material-ui/core/';
+import XLSX from 'xlsx';
+
+
+// function for export to excel //
+const set_right_to_left = wb => {
+    if (!wb.Workbook) wb.Workbook = {};
+    if (!wb.Workbook.Views) wb.Workbook.Views = [];
+    if (!wb.Workbook.Views[0]) wb.Workbook.Views[0] = {};
+    wb.Workbook.Views[0].RTL = true;
+  };
+            
+// a func to convert aoa to file //
+const aoaToFile = ({ fileName, sheetName = 'Sheet1', aoa }) => {
+    if (aoa) {
+        const workbook = XLSX.utils.book_new();
+        set_right_to_left(workbook);
+        const sheet = XLSX.utils.aoa_to_sheet(aoa);
+        XLSX.utils.book_append_sheet(workbook, sheet, sheetName);
+        XLSX.writeFile(workbook, fileName + '.xlsx');
+    }
+};
 
 const id ="JYsOsQmxzH9Pm4FEI0PJ"
 class ContactTable extends Component
@@ -28,10 +50,27 @@ class ContactTable extends Component
         }
     }
 
+    // a func to export to excel
+	exportToExcel = () => {
+        const columnNames = ["מספר דירה","שם מלא"];
+        const aoa = [columnNames].concat(this.state.tableData.map(this.newPaymentToArr));
+        aoaToFile({ fileName: 'apartment payment report.xlsx', aoa });
+    }
+            
+    // a func to convert object to arr
+    newPaymentToArr = newPayment => [{key:"aptNum"},{key:"fullName"}].map(r => newPayment[r.key]);
+
+
     render(){
         return(
             <div>
                 <NavBar/>
+                <Button
+                    size="large"
+                    variant="contained"
+                    color="primary"
+                    onClick={this.exportToExcel}>
+                </Button>
                 <h1 className="bigTitle">פירוט עבור תשלום נבחר</h1>
                 <table className="ContactTable" style = {this.ContactTableStyle()}>    
                 <thead>

@@ -8,9 +8,7 @@ import { Link } from 'react-router-dom'
 import { Button } from '@material-ui/core/';
 import XLSX from 'xlsx';
 
-// a func to convert object to arr
-const newPaymentToArr = newPayment => [{key: "amount"},{key:"details"}].map(r => newPayment[r.key]);
-
+// for the export to excel //
 const set_right_to_left = wb => {
     if (!wb.Workbook) wb.Workbook = {};
     if (!wb.Workbook.Views) wb.Workbook.Views = [];
@@ -45,27 +43,16 @@ class PaymentTable extends Component{
         }
     }
 
-     // a func to export to excel
+     // a func to export to excel //
 	exportToExcel = () => {
         const columnNames = ["סכום התשלום הכולל","פירוט התשלום"];
         const aoa = [columnNames].concat(this.state.tableData.map(this.newPaymentToArr));
         aoaToFile({ fileName: 'payment report.xlsx', aoa });
     }
             
-    // a func to convert object to arr
+    // a func to convert object to arr //
     newPaymentToArr = newPayment => [{key: "amount"},{key:"details"}].map(r => newPayment[r.key]);
     
-            
-    // a func to convert aoa to file //
-        aoaToFile = ({ fileName, sheetName = 'Sheet1', aoa }) => {
-        if (aoa) {
-            const workbook = XLSX.utils.book_new();
-            set_right_to_left(workbook);
-            const sheet = XLSX.utils.aoa_to_sheet(aoa);
-            XLSX.utils.book_append_sheet(workbook, sheet, sheetName);
-            XLSX.writeFile(workbook, fileName + '.xlsx');
-        }
-    };
 
     render() { 
         return(
