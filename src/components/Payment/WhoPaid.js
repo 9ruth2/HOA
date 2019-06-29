@@ -90,8 +90,6 @@ class WhoPaid extends Component
         firebase.firestore().collection("Building").doc(this.buildingId).collection('Payment').doc(id).update({
             paymentListForApt:paymentListForApt
         })
-
-     //   return this.state.checked(true)
     }
 
 
