@@ -5,9 +5,8 @@ import 'firebase/auth'
 import { secondFirebaseInstance } from '../Firebase'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import CreateAptPage from './CreateAptPage';
-import { EXITED } from 'react-transition-group/Transition';
-
+import {ToastsContainer, ToastsStore} from 'react-toasts';
+import { toast } from 'react-toastify';
 
 class CreateApt extends Component
 {
@@ -70,23 +69,22 @@ class CreateApt extends Component
        if(this.state.fullName ===''){
            this.setState({fullName:this.state.email})
        }
-       if(this.state.email == '' || this.state.password == ''){
-           alert("please type in all the filds")
-       }
+       if(this.state.email == '' || this.state.password == '' || this.state.aptNum == '')
+            ToastsStore.error("נא למלא את כל השדות")
+       
        else{
         let aptId = null
         secondFirebaseInstance.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
-            alert('שם המשתמש קיים')
+            ToastsStore.warning("שם המשתמש קיים")
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
             return Promise.resolve(null)
-            // ...
           })
           .then(result =>{
-              if(result==null){
+              if(result == null){
                   return
-              }
+            }
             const db = firebase.firestore();
             aptId = result.user.uid
             return db.collection('Apt').doc(aptId).set({
@@ -108,7 +106,6 @@ class CreateApt extends Component
               })
             .then(result => {
                 this.setState({tenantId : result.id})
-                //alert(this.state.tenantId)
                 const fb = firebase.firestore();
                 return fb.collection('Apt').doc(aptId).update({
                     tenants: firebase.firestore.FieldValue.arrayUnion(this.state.tenantId)
@@ -121,8 +118,8 @@ class CreateApt extends Component
                 aptList: firebase.firestore.FieldValue.arrayUnion(aptId)
             })
         })
-    }
-
+        ToastsStore.success(" דירה מספר "+this.state.aptNum+" נוספה בהצלחה")
+    } 
 }
 
     render(){
@@ -131,19 +128,20 @@ class CreateApt extends Component
             {this.CreateAptStyle()}>
                 <Form>
                     <Form.Group controlId="formBasicEmail">
-                        <Form.Label>name</Form.Label>
-                        <Form.Control placeholder="name" name="fullName" type="text"  value={this.state.fullName} onChange={this.handleChange}/>
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control placeholder="Enter email" name="email" type="email"  value={this.state.email} onChange={this.handleChange}/>
+                        <Form.Label>שם הדייר</Form.Label>
+                        <Form.Control placeholder="הכנס שם" name="fullName" type="text"  value={this.state.fullName} onChange={this.handleChange}/>
+                        <Form.Label>דוא"ל</Form.Label>
+                        <Form.Control placeholder="הכנס מייל" name="email" type="email"  value={this.state.email} onChange={this.handleChange}/>
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label>סיסמה</Form.Label>
                         <Form.Control type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange}   />
-                        <Form.Label>Apt Number</Form.Label>
+                        <Form.Label>מס' דירה</Form.Label>
                         <Form.Control type="number" placeholder="מספר דירה" name="aptNum" value={this.state.aptNum} onChange={this.handleChange}   />
                     </Form.Group>
+                    <ToastsContainer store={ToastsStore}/>
                     <Button variant="primary" onClick={this.handleSubmit} type="button" value="Submit">
-                        Submit
+                        שמור
                     </Button>
                 </Form>
             </div>

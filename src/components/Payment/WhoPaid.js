@@ -36,10 +36,27 @@ class ContactTable extends Component
         }
     }
 
+    // a func to export to excel
+	exportToExcel = () => {
+        const columnNames = ["מספר דירה","שם מלא"];
+        const aoa = [columnNames].concat(this.state.tableData.map(this.newPaymentToArr));
+        aoaToFile({ fileName: 'apartment payment report.xlsx', aoa });
+    }
+            
+    // a func to convert object to arr
+    newPaymentToArr = newPayment => [{key:"aptNum"},{key:"fullName"}].map(r => newPayment[r.key]);
+
+
     render(){
         return(
             <div>
                 <NavBar/>
+                <Button
+                    size="large"
+                    variant="contained"
+                    color="primary"
+                    onClick={this.exportToExcel}>
+                </Button>
                 <h1 className="bigTitle">פירוט עבור תשלום נבחר</h1>
                 <table className="ContactTable" style = {this.ContactTableStyle()}>    
                 <thead>
@@ -150,4 +167,4 @@ class ContactTable extends Component
 }
 
 
-export default ContactTable;
+export default WhoPaid;
