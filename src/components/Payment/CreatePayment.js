@@ -110,19 +110,20 @@ class CreatePayment extends Component
 
             let paymentListForApt = []
             for(let i = 0 ; i < this.aptAmount ; i++)
-                paymentListForApt[i] = false;
+                paymentListForApt[i] = 0;
 
             const db = firebase.firestore();
             db.collection('Building').doc(this.buildingId).collection('Payment').add({
                 details: this.state.details,
-                amount: this.state.amount
+                amount: this.state.amount,
+                paymentListForApt: paymentListForApt
             })
             .then(result => {
-          //      this.props.history.push('./payment/PaymentTable?paymentId='+result.id);
-                return db.collection('Building').doc(this.buildingId).collection('Payment').doc(result.id).update({
-                paymentListForApt: paymentListForApt})
+                const db = firebase.firestore();
+                db.collection('Building').doc(this.buildingId).collection('Payment').doc(result.id).update({
+                    id:result.id
+                })
             })
-            
             alert('הוספת התשלום החדש בוצעה בהצלחה!')
             this.props.history.push('/payment/payment-main-page');
         }

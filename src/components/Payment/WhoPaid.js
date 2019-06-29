@@ -4,8 +4,9 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import './PaidTable.css';
 import NavBar from '../navBar/NavBar';
+import { thisTypeAnnotation } from '@babel/types';
 
-const id ="JYsOsQmxzH9Pm4FEI0PJ"
+
 class ContactTable extends Component
 {
     buildingId = null
@@ -14,13 +15,20 @@ class ContactTable extends Component
     constructor(props)
     {
         super(props);
+        
+        const args = this.props.location.search.split('?')
+        const paymentId = args[1].split('=')[1]
+
         this.state = {
-            tableData: [],
-            checked: false
+            paymentId: paymentId,
+            tableData:[],
+            item : -1,
+            boxValue : false,
+            paymentListForApt:[]
         }
         this.handleChange = this.handleChange.bind(this);
     }
-    
+
     ContactTableStyle = () => {
         return{
             border: '1em',
@@ -60,9 +68,14 @@ class ContactTable extends Component
             this.buildingId = result.data().buildingId
             this.findNumOfApt();
             this.getWhoPay();
+            this.getPatmentList();
         })
     }
 
+
+    getPatmentList(){
+
+    }
 
     findNumOfApt()
     {
@@ -73,33 +86,40 @@ class ContactTable extends Component
     }
 
 
-    handleChange(e)
+    handleChange = (e) =>
     {
-       let item = e.target.name;
-        this.setState({cheked: e.target.checked})
-
-        let paymentListForApt = []
-        for(let i = 0 ; i < this.aptAmount ; i++)
-        {
-            if(i == item -1)
-                 paymentListForApt[i] = true;
-            else
-                 paymentListForApt[i] = false;
-        }
-
-        firebase.firestore().collection("Building").doc(this.buildingId).collection('Payment').doc(id).update({
-            paymentListForApt:paymentListForApt
+        const i = parseInt(e.target.name)
+        let arr = this.state.paymentListForApt
+        arr[i] = e.target.value
+        this.setState({
+            paymentListForApt:arr
         })
 
-     //   return this.state.checked(true)
+        firebase.firestore().collection("Building").doc(this.buildingId).collection('Payment').doc(this.state.paymentId).update({
+           paymentListForApt:this.state.paymentListForApt
+        })
+        
+
+
     }
 
 
     async getWhoPay()
     {
+
+        let arr = []
+        let temp = await firebase.firestore().collection("Building").doc(this.buildingId).collection('Payment').doc(this.state.paymentId).get()
+        
+        temp.data().paymentListForApt.map(i=>{
+            arr.push(i)
+        })
+        this.setState({paymentListForApt:arr})
+
         const result = await firebase.firestore().collection('Apt').doc(firebase.auth().currentUser.uid).get()
         const building = await firebase.firestore().collection("Building").doc(result.data().buildingId).get()
         const promises = building.data().aptList.map(apt => firebase.firestore().collection('Apt').doc(apt).get())
+
+        
 
         const aptResults = await Promise.all(promises)
 
@@ -109,14 +129,18 @@ class ContactTable extends Component
                 ...i.data()
             }
         }) })
+        
+
+
     }
 
     getTableRows() 
     {
         return this.state.tableData.map(dataRow => {
+            let i = parseInt(dataRow.aptNum)-1
             return (
                 <tr>
-                    <td> <input type="checkbox" name={dataRow.aptNum} /*checked={this.state.checked}*/ onChange={this.handleChange} />כן</td>
+                    <td> <input type="text" name={i} value={this.state.paymentListForApt[i]} onChange={this.handleChange} /></td>
                     <td>{dataRow.fullName}</td>
                     <td>{dataRow.aptNum}</td>
                 </tr>

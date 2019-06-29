@@ -30,12 +30,17 @@ const aoaToFile = ({ fileName, sheetName = 'Sheet1', aoa }) => {
 };
 
 class PaymentTable extends Component{
-   
-    buildingId = null
-
-    state = {
-        tableData: []
+    constructor(props){
+        super(props);
+    
+        
+        this.state = {
+            tableData: []
+        }
     }
+    buildingId = null
+    
+    
 
     PaymentTableStyle = () => {
         return{
@@ -114,18 +119,35 @@ class PaymentTable extends Component{
     {
         firebase.firestore().collection('Building').doc(this.buildingId).collection('Payment').get().then( querySnapshot => {
         this.setState({ tableData: querySnapshot.docs.map(i => {
+
              return {id: i.id,...i.data()}}) })
       })
     }
 
+    // onClick(e){
+    //     const id = e.target.name
+    //     this.props.history.push('./payment/WhoPaid?paymentId='+id);
+    // }
+
     getTableRows()
     {
-        console.log(this.state.tableData)
+        
         return this.state.tableData.map(dataRow => {
+        let nextadrr = '/payment/WhoPaid?paymentId='+dataRow.id;
             if(dataRow.amount != null)
             return (
                 <tr>
-                    <td><button className="buttonStylePay"><Link className="linkStylePay" to="/payment/WhoPaid">סטטוס ודיווח תשלום של דייר</Link></button></td>
+                    <td>
+                        {/* <button name={dataRow.id} className="buttonStylePay" onClick={this.onClick}>
+                        סטטוס ודיווח תשלום של דייר
+                        </button> */}
+
+                        <button className="buttonStylePay">
+                            <Link className="linkStylePay" to={nextadrr}>סטטוס ודיווח תשלום של דייר
+                            </Link>
+                        </button>
+
+                        </td>
                     <td>{dataRow.amount}</td>
                     <td>{dataRow.details}</td>
                 </tr>
