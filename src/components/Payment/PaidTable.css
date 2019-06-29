@@ -57,3 +57,21 @@
     text-shadow: 3px 1px rgb(235, 235, 235);
     text-align: center;
   }
+
+  .inputStyleT{
+    height: 15px;
+    width: 200px;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: rgb(174, 36, 76);
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 1px rgb(121, 116, 116);
+    padding: 5px;
+    margin: 1%;
+  }

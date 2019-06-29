@@ -81,13 +81,8 @@ class WhoPaid extends Component
         return(
             <div>
                 <NavBar/>
-                <input type="button"
-                    size="large"
-                    variant="contained"
-                    color="primary"
-                    onClick={this.exportToExcel}>
-                </input>
                 <h1 className="bigTitle">פירוט עבור תשלום נבחר</h1>
+                <button className="buttonStylePay" onClick={this.exportToExcel}>ייצוא פירוט תשלומים לאקסל</button>
                 <table className="ContactTable" style = {this.ContactTableStyle()}>    
                 <thead>
                 <tr>
@@ -188,7 +183,7 @@ class WhoPaid extends Component
             let i = parseInt(dataRow.aptNum)-1
             return (
                 <tr>
-                    <td> <input type="text" name={i} value={this.state.paymentListForApt[i]} onChange={this.handleChange} /></td>
+                    <td> <input placeholder="הכנס דיווח על תשלום" className="inputStyleT" type="text" name={i} value={this.state.paymentListForApt[i]} onChange={this.handleChange} /></td>
                     <td>{dataRow.fullName}</td>
                     <td>{dataRow.aptNum}</td>
                 </tr>
