@@ -16,6 +16,19 @@ class Message extends Component {
   state = {
     input: "",
     messages: [],
+    hoa:false
+  }
+  constructor(props){
+    super(props);
+    firebase.firestore().collection('Apt').doc( firebase.auth().currentUser.uid).get()
+        .then(result =>{
+            const hoa = result.data().hoa
+            this.setState({
+                hoa:hoa
+            })
+            
+        })
+
   }
   
 
@@ -31,7 +44,6 @@ class Message extends Component {
     if (firebase.auth().currentUser == null) return null
     return (
       <React.Fragment>
-        {/* <NavBar/> */}
         <div id="object" class="slideLeft">
         <div className="messages_body">
 
@@ -94,7 +106,7 @@ class Message extends Component {
         <p>{messageObj.timestamp} :תאריך</p>
         <p className="messages_talkbubble"> הודעה: {messageObj.text}</p>
         <br />
-        <button className="messages_btnDel" onClick={() => this.onClickDelete(messageObj.id)}>מחק</button>
+        <button style={{display: this.state.hoa ? 'block' : 'none' }} className="messages_btnDel" onClick={() => this.onClickDelete(messageObj.id)}>מחק</button>
       </div>
     })
   }
@@ -126,6 +138,16 @@ class Message extends Component {
     const db = firebase.firestore();
     db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
     .then(result => {
+
+
+
+      const user = firebase.auth().currentUser.uid
+      db.collection('Building').doc(this.buildingId).collection('Message').doc(result.id).update({
+        userId: firebase.auth().currentUser.uid
+      })
+
+
+
       newMessageObj.id = result.id
       this.setState({
       messages: [...this.state.messages, newMessageObj] });

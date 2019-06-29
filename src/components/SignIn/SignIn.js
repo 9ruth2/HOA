@@ -60,7 +60,7 @@ function SignIn(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-         מערכת לניהול ועד בית :
+         מערכת לניהול ועד בית : 
          התחברות
         </Typography>
         <form className={classes.form} noValidate onChange={handleChange}>
@@ -70,9 +70,9 @@ function SignIn(props) {
             required
             fullWidth
             id="userName"
-            label="שם משתמש"
-            name="userName"
-            autoComplete="userName"
+            label="אימייל"
+            name="email"
+            autoComplete="email"
             autoFocus
             onChange={handleChange}
           />
@@ -157,7 +157,7 @@ function onClickSignIn()
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    alert('הפרטים אינם נכונים, נסה שנית')
+    alert('אחד הפרטים אינם נכונים,אנא נסה שנית')
   })
 }
 
@@ -184,10 +184,10 @@ function renewPassword()
 
   auth.sendPasswordResetEmail(emailAddress).then(function(){
     // Email sent.
-    alert("נשלח אליך דואר אלקטרוני עם חידוש סיסמא")
+    alert("ברגעים אלו נשלח אליך דואר אלקטרוני לחידוש הסיסמא")
     show = false;
   }).catch(function(error) {
-    alert("הכתובת אינה נכונה")
+    alert("כתובת המייל שהזנת אינה נכונה")
     // An error happened.
   });
 }

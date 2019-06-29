@@ -45,8 +45,17 @@ class WhoPaid extends Component
             tableData:[],
             item : -1,
             boxValue : false,
-            paymentListForApt:[]
+            paymentListForApt:[],
+            hoa:false
         }
+        firebase.firestore().collection('Apt').doc( firebase.auth().currentUser.uid).get()
+        .then(result =>{
+            const hoa = result.data().hoa
+            this.setState({
+                hoa:hoa
+            })
+            
+        })
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -106,14 +115,12 @@ class WhoPaid extends Component
             this.buildingId = result.data().buildingId
             this.findNumOfApt();
             this.getWhoPay();
-            this.getPatmentList();
+            // this.getPatmentList();
         })
     }
 
 
-    getPatmentList(){
 
-    }
 
     findNumOfApt()
     {
@@ -124,18 +131,23 @@ class WhoPaid extends Component
     }
 
 
-    handleChange = (e) =>
-    {
-        const i = parseInt(e.target.name)
-        let arr = this.state.paymentListForApt
-        arr[i] = e.target.value
-        this.setState({
-            paymentListForApt:arr
-        })
-
-        firebase.firestore().collection("Building").doc(this.buildingId).collection('Payment').doc(this.state.paymentId).update({
-           paymentListForApt:this.state.paymentListForApt
-        })
+    handleChange = (e) =>{
+        if(this.state.hoa){
+            const i = parseInt(e.target.name)
+            let arr = this.state.paymentListForApt
+            arr[i] = e.target.value
+            this.setState({
+                paymentListForApt:arr
+            })
+    
+            firebase.firestore().collection("Building").doc(this.buildingId).collection('Payment').doc(this.state.paymentId).update({
+               paymentListForApt:this.state.paymentListForApt
+            }) 
+        }
+        else{
+            alert("רק ועד הבית יכול לבצע שינויים")
+        }
+        
         
 
 
