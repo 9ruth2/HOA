@@ -19,6 +19,7 @@ import LogOut from './LogOut'
 import Tenant from '../Tenant';
 import { withRouter } from 'react-router-dom';
 import '../Style/Style.css';
+import './SignIn.css'
 
 let username = "";
 let password = "";
@@ -108,9 +109,10 @@ function SignIn(props) {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link onClick={inputForgotPassword.bind()} to ='./sign-in' variant="body2">
+              
+            <button className = 'forgetButton' onClick={handleForgetPassword} /*variant="body2"*/>
               שכחת סיסמא?
-              </Link>
+              </button>
             </Grid>
             <Grid item>
               <div /*style={forgotPasswordStyle()}*/>
@@ -120,11 +122,7 @@ function SignIn(props) {
             </Grid>
           </Grid>
           <Grid container>
-            <Grid item xs>
-              <Link to="#" onClick={logingOut} variant="body2">
-              התנתק
-              </Link>
-            </Grid>
+    
             <Grid item>
 
             </Grid>
@@ -137,6 +135,7 @@ function SignIn(props) {
     </Container>
   );
 
+function handleForgetPassword(){}
 
 function handleChange(e)
 {
