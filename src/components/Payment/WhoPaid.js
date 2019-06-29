@@ -5,13 +5,21 @@ import 'firebase/auth'
 import './PaidTable.css';
 import NavBar from '../navBar/NavBar';
 
-class ContactTable extends Component{
+const id ="JYsOsQmxzH9Pm4FEI0PJ"
+class ContactTable extends Component
+{
+    buildingId = null
+    aptAmount = null
 
-    state = {
-        tableData: [],
-        clicked: false
+    constructor(props)
+    {
+        super(props);
+        this.state = {
+            tableData: [],
+            checked: false
+        }
+        this.handleChange = this.handleChange.bind(this);
     }
-
     
     ContactTableStyle = () => {
         return{
@@ -43,15 +51,51 @@ class ContactTable extends Component{
 
 
     // ------------------- Functions ------------------------ 
-    handleChange() {
-        this.setState({
-          clicked: !this.state.clicked
+
+    componentDidMount()
+    {
+        if (firebase.auth().currentUser == null) return
+        firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
+        result => { if (!result.exists) return
+            this.buildingId = result.data().buildingId
+            this.findNumOfApt();
+            this.getWhoPay();
         })
     }
 
-    componentDidMount(){this.getContactTable();}
 
-    async getContactTable()
+    findNumOfApt()
+    {
+        firebase.firestore().collection("Building").doc( this.buildingId).get().then(
+        result => { if (!result.exists) return
+            this.aptAmount = result.data().aptAmount
+        })
+    }
+
+
+    handleChange(e)
+    {
+       let item = e.target.name;
+        this.setState({cheked: e.target.checked})
+
+        let paymentListForApt = []
+        for(let i = 0 ; i < this.aptAmount ; i++)
+        {
+            if(i == item -1)
+                 paymentListForApt[i] = true;
+            else
+                 paymentListForApt[i] = false;
+        }
+
+        firebase.firestore().collection("Building").doc(this.buildingId).collection('Payment').doc(id).update({
+            paymentListForApt:paymentListForApt
+        })
+
+     //   return this.state.checked(true)
+    }
+
+
+    async getWhoPay()
     {
         const result = await firebase.firestore().collection('Apt').doc(firebase.auth().currentUser.uid).get()
         const building = await firebase.firestore().collection("Building").doc(result.data().buildingId).get()
@@ -72,7 +116,7 @@ class ContactTable extends Component{
         return this.state.tableData.map(dataRow => {
             return (
                 <tr>
-                    <td> <input type="checkbox" checked={this.state.clicked} onChange={this.handleChange} />כן</td>
+                    <td> <input type="checkbox" name={dataRow.aptNum} /*checked={this.state.checked}*/ onChange={this.handleChange} />כן</td>
                     <td>{dataRow.fullName}</td>
                     <td>{dataRow.aptNum}</td>
                 </tr>
@@ -81,34 +125,5 @@ class ContactTable extends Component{
     }
 }
 
-//     componentDidMount(){this.getContactTable();}
-    
-//     getContactTable(doc)
-//     {
-
-//         firebase.firestore().collection("Apt").get().then( querySnapshot => {
-//         this.setState({ tableData: querySnapshot.docs.map(i => {
-//             return {
-//                 aptId: i.id,
-//                 ...i.data()
-//             }
-//         }) });
-//     });
-//     }
-
-
-//     getTableRows() 
-//     {
-//         return this.state.tableData.map(dataRow => {
-//             return (
-//                 <tr>
-//                     <td> <input type="checkbox" checked={this.state.clicked} onChange={this.handleChange} />כן</td>
-//                     <td>{dataRow.fullName}</td>
-//                     <td>{dataRow.aptNum}</td>
-//                 </tr>
-//             )
-//         })
-//     }
-// }
 
 export default ContactTable;

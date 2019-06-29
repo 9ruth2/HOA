@@ -65,7 +65,6 @@ class PaymentTable extends Component{
     {
         firebase.firestore().collection('Building').doc(this.buildingId).collection('Payment').get().then( querySnapshot => {
         this.setState({ tableData: querySnapshot.docs.map(i => {
-           // if (i.data().amount !== null) 
              return {id: i.id,...i.data()}}) })
       })
     }

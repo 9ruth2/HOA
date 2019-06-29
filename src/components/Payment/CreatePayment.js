@@ -5,89 +5,27 @@ import 'firebase/auth'
 import './CreatePayment.css';
 import NavBar from '../navBar/NavBar';
 
-class CreatePayment extends Component{
+class CreatePayment extends Component
+{
 
     buildingId = null
-    aptNum = 0
+    aptAmount = null
 
-    constructor(props){
+    constructor(props)
+    {
         super(props);
         this.state = {
             details: '',
-            amount: '',
-            ifPaid: false
-    };
+            amount: ''
+         };
         this.handleAddPayment = this.handleAddPayment.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    
-    CreatePaymentStyle = () => {
-        return{
-            textAlign: 'center',
-            paddingRight: '1em'  
-        }
-    }
 
-    handleAddPayment(event){
-        const target = event.target;
 
-        if(target.type === 'text'){   
-            this.setState({
-                details: target.value
-            });
-        }
-        if(target.type === 'number'){
-                this.setState({
-                amount: target.value
-            });
-        }
-        
-    }
-
-    componentDidMount() {
-        if (firebase.auth().currentUser == null) return
-        firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
-          result => {
-            if (!result.exists) return
-            this.buildingId = result.data().buildingId
-            this.aptNum = result.data().aptNum
-        })
-      }
-    
- 
-    handleSubmit(event)
+    render()
     {
-        if(this.state.amount === '' || this.state.details === ''){
-            alert('שגיאה: חסר שדות, הכנס בבקשה פירוט וסכום לתשלום')
-        }
-        else if(this.state.amount<=0){
-            alert('שגיאה: סכום לתשלום לא תקין, אנא הכנס מספר חיובי')
-        }
-        else{
-            
-            const db = firebase.firestore();
-            db.collection('Building').doc(this.buildingId).collection('Payment').add({
-                details: this.state.details,
-                amount: this.state.amount
-            })
-            .then(() => {
-                if (firebase.auth().currentUser == null) return
-                const aptID = firebase.auth().currentUser.uid;
-                
-                return db.collection('Apt').doc(aptID).update({
-                paymentListForApt: firebase.firestore.FieldValue.arrayUnion(this.aptNum),
-            })
-            })
-            //this.props.push('./payment/create-payment');
-            alert('הוספת התשלום החדש בוצעה בהצלחה!')
-            this.props.history.push('/payment/payment-main-page');
-        }
-    }
-
-
-    render(){
         return(
-        //<Router>
             <div className="CreatePayment" style = {this.CreatePaymentStyle()}>
                 <NavBar/>
                 <h1 className="mainTitle">הוספת תשלום חדש</h1>
@@ -113,5 +51,82 @@ class CreatePayment extends Component{
             </div>
             );
         }
+
+// --------------------- Functions ----------------------
+    
+    CreatePaymentStyle = () => {
+        return{
+            textAlign: 'center',
+            paddingRight: '1em'  
+        }
+    }
+
+    handleAddPayment(event)
+    {
+        const target = event.target;
+
+        if(target.type === 'text'){   
+            this.setState({
+                details: target.value
+            });
+        }
+        if(target.type === 'number'){
+                this.setState({
+                amount: target.value
+            });
+        }
+        
+    }
+
+    componentDidMount()
+    {
+        if (firebase.auth().currentUser == null) return
+        firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
+        result => { if (!result.exists) return
+            this.buildingId = result.data().buildingId
+            this.findNumOfApt()
+        })
+    }
+
+
+    findNumOfApt()
+    {
+        firebase.firestore().collection("Building").doc( this.buildingId).get().then(
+        result => { if (!result.exists) return
+            this.aptAmount = result.data().aptAmount
+        })
+    }
+
+    handleSubmit(event)
+    {
+        if(this.state.amount === '' || this.state.details === ''){
+            alert('שגיאה: חסר שדות, הכנס בבקשה פירוט וסכום לתשלום')
+        }
+        else if(this.state.amount<=0){
+            alert('שגיאה: סכום לתשלום לא תקין, אנא הכנס מספר חיובי')
+        }
+        else
+        {
+
+            let paymentListForApt = []
+            for(let i = 0 ; i < this.aptAmount ; i++)
+                paymentListForApt[i] = false;
+
+            const db = firebase.firestore();
+            db.collection('Building').doc(this.buildingId).collection('Payment').add({
+                details: this.state.details,
+                amount: this.state.amount
+            })
+            .then(result => {
+          //      this.props.history.push('./payment/PaymentTable?paymentId='+result.id);
+                return db.collection('Building').doc(this.buildingId).collection('Payment').doc(result.id).update({
+                paymentListForApt: paymentListForApt})
+            })
+            
+            alert('הוספת התשלום החדש בוצעה בהצלחה!')
+            this.props.history.push('/payment/payment-main-page');
+        }
+    }
+
 }
 export default CreatePayment;

@@ -56,8 +56,9 @@ class Message extends Component {
     )
   }
 
+  
   //----------------------- Functions ---------------------------
-//1test@test.com
+
   componentDidMount() {
     console.log(firebase.auth().currentUser.uid)
     if (firebase.auth().currentUser == null) return
@@ -72,7 +73,8 @@ class Message extends Component {
   }
 
 
-  getMessagesFromServer() {
+  getMessagesFromServer()
+  {
     firebase.firestore().collection("Building").doc(this.buildingId).collection("Message").get().then(
       result => {
         if (result.empty) return
@@ -82,7 +84,8 @@ class Message extends Component {
   }
 
 
-  getMessage() {
+  getMessage() 
+  {
     return this.state.messages.map(messageObj => {
       if (messageObj == null || messageObj.text == null || messageObj.text.length <= 0) return null
 
@@ -97,11 +100,11 @@ class Message extends Component {
   }
 
 
-  onClickDelete(idToDelete) {
+  onClickDelete(idToDelete)
+  {
     const db = firebase.firestore();
     db.collection('Building').doc(this.buildingId).collection('Message').doc(idToDelete).delete()
     this.setState({ messages: this.state.messages.filter(item => item.id !== idToDelete) });
-   
   }
 
 
@@ -119,20 +122,18 @@ class Message extends Component {
       author: this.fullName
     }
  
-    if(newMessageObj.author === undefined) newMessageObj.author = '';
-
-      
+   
     const db = firebase.firestore();
     db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
     .then(result => {
       newMessageObj.id = result.id
       this.setState({
-        messages: [...this.state.messages, newMessageObj] });
+      messages: [...this.state.messages, newMessageObj] });
       this.setState({ input: '' });
     })
   }
-}
 
+}
 export default Message
 
 
