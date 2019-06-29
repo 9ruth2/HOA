@@ -156,7 +156,13 @@ function onClickSignIn()
 {
   firebase.auth().signInWithEmailAndPassword(username, password)
   .then(result => {
-    props.history.replace('HomePage')
+    if(firebase.auth().currentUser.uid === 'vusYD78f1XTaPQMNdeTS3sF1uDE3'){
+      props.history.replace('/create-building')
+    }
+    else{
+      props.history.replace('HomePage')
+    }
+    
   })
   .catch(function(error) {
     // Handle Errors here.
