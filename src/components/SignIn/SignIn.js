@@ -110,14 +110,12 @@ function SignIn(props) {
           <Grid container>
             <Grid item xs>
               
-            <button className = 'forgetButton' onClick={handleForgetPassword} /*variant="body2"*/>
-              שכחת סיסמא?
-              </button>
+  
             </Grid>
             <Grid item>
               <div /*style={forgotPasswordStyle()}*/>
-              <input type="email" onChange={handleChange} placeholder='כתובת דוא"ל' name="forgotPassword" />
-              <button type='button' onClick={renewPassword}>שליחה</button>
+              <input className="inputStyleForm" type="email" onChange={handleChange} placeholder='הכנס דוא"ל לשחזור סיסמא' name="forgotPassword" />
+              <button className="buttonStyleForm" type='button' onClick={renewPassword}>שלח</button>
               </div>
             </Grid>
           </Grid>
@@ -187,6 +185,10 @@ function logingOut (){
 //   }
 // }
 
+
+       // <button className = 'forgetButton' onClick={handleForgetPassword} /*variant="body2"*/>
+       //   שכחת סיסמא?
+       //   </button>
 
 function renewPassword()
 {
