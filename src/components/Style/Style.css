@@ -1,4 +1,10 @@
 
+.toast
+{
+  align-items: center;
+  position: relative;
+  align-content: center;
+}
 
 
 .MessageArea{

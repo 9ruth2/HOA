@@ -3,7 +3,6 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import './PaidTable.css';
-import { textAlign } from '@material-ui/system';
 import NavBar from '../navBar/NavBar';
 
 
