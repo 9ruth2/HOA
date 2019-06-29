@@ -67,11 +67,12 @@ class CreateAptPage extends Component{
     }
 
     printApt() {
+      let radioText = "הדייר מטה הינו נציג ועד הבניין"
         let i = 0;
         let apt = [];
         while (i < this.state.aptNum) {
           i++;
-          apt.push(<input  type="radio" name="hoa" value={i}  onChange={this.handleOptionChange}/>)
+          apt.push(<div><input  type="radio" name="hoa" value={i}  onChange={this.handleOptionChange}/> {radioText}</div>)
           apt.push(<CreateApt buildingID = {this.state.buildingID} />);
         }
         return apt;
