@@ -46,8 +46,6 @@ class Tenant extends Component{
             dob: '',
             edit: false
         })
-        // let tenantId = '';
-        // const user = firebase.auth().currentUser;
         firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
             result => {
               if (!result.exists){
@@ -60,47 +58,9 @@ class Tenant extends Component{
                     email: result.data().email,
                     dob: result.data().dob,
                   })
-                // this.tenantId = result.data().tenants[0];
-                // alert(tenantId)
               }
             }
         )
-        // this.state = ({
-        //     aptId: user.uid,
-        //     tenantId: this.tenantId,
-        //     fullName: '',
-        //     phoneNum: '' ,
-        //     email: '',
-        //     dob: '',
-        //     edit: false
-        // })
-        // alert(this.state.aptId)
-        // alert(this.state.tenantId)
-
-        
-        // firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
-        //     result => {
-        //       if (!result.exists){
-        //         return
-        //       } 
-        //       else{
-        //         const fullName = result.data().fullName
-        //         alert(fullName)
-        //         const tenantId = result.data().tenants[0]
-        //         const email = result.data().email
-        //         this.setState ({
-        //           aptId: user.uid,
-        //           tenantId: this.tenantId,
-        //           fullName: this.fullName,
-        //           phoneNum: '' ,
-        //           email: this.email,
-        //           dob: '',
-        //           edit: false
-        //           })
-        //       }
-
-        //     }
-        //   )
    
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -146,12 +106,31 @@ class Tenant extends Component{
                 edit : false
             });  
             const db = firebase.firestore()
-            db.collection('Apt').doc(firebase.auth().currentUser.uid).update({
-               fullName: this.state.fullName,
-               phoneNum:this.state.phoneNum,
-               email:this.state.email,
-               dob:this.state.dob 
-            })
+            try{
+                db.collection('Apt').doc(firebase.auth().currentUser.uid).update({
+                    fullName: this.state.fullName,
+                    phoneNum:this.state.phoneNum,
+                    email:this.state.email,
+                    dob:this.state.dob 
+                 })
+            }
+            catch{
+                try{
+                    db.collection('Apt').doc(firebase.auth().currentUser.uid).update({
+                        fullName: this.state.fullName,
+                        phoneNum:this.state.phoneNum,
+                        email:this.state.email
+                     })
+                }
+                catch{
+                    db.collection('Apt').doc(firebase.auth().currentUser.uid).update({
+                        phoneNum:this.state.phoneNum,
+                        email:this.state.email
+                     })
+                }
+            }
+            
+           // this.props.history.push('user-page');
             
         }
     }

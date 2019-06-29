@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="src/navBar/NavBar/animations.css"></link>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <title>קהילה בונה</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -73,6 +74,28 @@
 
 <script>
   $('nav').click(function() {
+    $(this).addClass("slideDown");
+  });
+</script>
+  </body>
+</html>
+
+<!-- -------------------home page slide down--------------------->
+<script>
+  $(window).scroll(function() {
+    $('home').each(function(){
+    var imagePos = $(this).offset().top;
+
+    var topOfWindow = $(window).scrollTop();
+      if (imagePos < topOfWindow+300) {
+        $(this).addClass("slideDown");
+      }
+    });
+  });
+</script>
+
+<script>
+  $('home').click(function() {
     $(this).addClass("slideDown");
   });
 </script>
