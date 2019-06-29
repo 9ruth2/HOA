@@ -8,7 +8,6 @@ import Button from 'react-bootstrap/Button';
 import {ToastsContainer, ToastsStore} from 'react-toasts';
 import { toast } from 'react-toastify';
 
-
 class CreateApt extends Component
 {
 
@@ -119,7 +118,7 @@ class CreateApt extends Component
                 aptList: firebase.firestore.FieldValue.arrayUnion(aptId)
             })
         })
-        ToastsStore.success("הדירה נוספה בהצלחה")
+        ToastsStore.success(" דירה מספר "+this.state.aptNum+" נוספה בהצלחה")
     } 
 }
 
@@ -140,10 +139,10 @@ class CreateApt extends Component
                         <Form.Label>מס' דירה</Form.Label>
                         <Form.Control type="number" placeholder="מספר דירה" name="aptNum" value={this.state.aptNum} onChange={this.handleChange}   />
                     </Form.Group>
+                    <ToastsContainer store={ToastsStore}/>
                     <Button variant="primary" onClick={this.handleSubmit} type="button" value="Submit">
                         שמור
                     </Button>
-                    <ToastsContainer store={ToastsStore} position={toast.POSITION.BOTTOM_CENTER}/>
                 </Form>
             </div>
         );
