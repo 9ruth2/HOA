@@ -6,7 +6,7 @@ import './PaidTable.css';
 import NavBar from '../navBar/NavBar';
 import { Button } from '@material-ui/core/';
 import XLSX from 'xlsx';
-
+import { thisTypeAnnotation } from '@babel/types';
 
 // function for export to excel //
 const set_right_to_left = wb => {
@@ -27,7 +27,7 @@ const aoaToFile = ({ fileName, sheetName = 'Sheet1', aoa }) => {
     }
 };
 
-const id ="JYsOsQmxzH9Pm4FEI0PJ"
+
 class WhoPaid extends Component
 {
     buildingId = null
@@ -36,13 +36,20 @@ class WhoPaid extends Component
     constructor(props)
     {
         super(props);
+        
+        const args = this.props.location.search.split('?')
+        const paymentId = args[1].split('=')[1]
+
         this.state = {
-            tableData: [],
-            checked: false
+            paymentId: paymentId,
+            tableData:[],
+            item : -1,
+            boxValue : false,
+            paymentListForApt:[]
         }
         this.handleChange = this.handleChange.bind(this);
     }
-    
+
     ContactTableStyle = () => {
         return{
             border: '1em',
@@ -55,7 +62,7 @@ class WhoPaid extends Component
         const columnNames = ["מספר דירה","שם מלא"];
         const aoa = [columnNames].concat(this.state.tableData.map(this.newPaymentToArr));
         aoaToFile({ fileName: 'apartment payment report.xlsx', aoa });
-    }
+     }
             
     // a func to convert object to arr
     newPaymentToArr = newPayment => [{key:"aptNum"},{key:"fullName"}].map(r => newPayment[r.key]);
@@ -65,12 +72,12 @@ class WhoPaid extends Component
         return(
             <div>
                 <NavBar/>
-                <Button
+                <input type="button"
                     size="large"
                     variant="contained"
                     color="primary"
                     onClick={this.exportToExcel}>
-                </Button>
+                </input>
                 <h1 className="bigTitle">פירוט עבור תשלום נבחר</h1>
                 <table className="ContactTable" style = {this.ContactTableStyle()}>    
                 <thead>
@@ -99,9 +106,14 @@ class WhoPaid extends Component
             this.buildingId = result.data().buildingId
             this.findNumOfApt();
             this.getWhoPay();
+            this.getPatmentList();
         })
     }
 
+
+    getPatmentList(){
+
+    }
 
     findNumOfApt()
     {
@@ -112,31 +124,40 @@ class WhoPaid extends Component
     }
 
 
-    handleChange(e)
+    handleChange = (e) =>
     {
-       let item = e.target.name;
-        this.setState({cheked: e.target.checked})
-
-        let paymentListForApt = []
-        for(let i = 0 ; i < this.aptAmount ; i++)
-        {
-            if(i == item -1)
-                 paymentListForApt[i] = true;
-            else
-                 paymentListForApt[i] = false;
-        }
-
-        firebase.firestore().collection("Building").doc(this.buildingId).collection('Payment').doc(id).update({
-            paymentListForApt:paymentListForApt
+        const i = parseInt(e.target.name)
+        let arr = this.state.paymentListForApt
+        arr[i] = e.target.value
+        this.setState({
+            paymentListForApt:arr
         })
+
+        firebase.firestore().collection("Building").doc(this.buildingId).collection('Payment').doc(this.state.paymentId).update({
+           paymentListForApt:this.state.paymentListForApt
+        })
+        
+
+
     }
 
 
     async getWhoPay()
     {
+
+        let arr = []
+        let temp = await firebase.firestore().collection("Building").doc(this.buildingId).collection('Payment').doc(this.state.paymentId).get()
+        
+        temp.data().paymentListForApt.map(i=>{
+            arr.push(i)
+        })
+        this.setState({paymentListForApt:arr})
+
         const result = await firebase.firestore().collection('Apt').doc(firebase.auth().currentUser.uid).get()
         const building = await firebase.firestore().collection("Building").doc(result.data().buildingId).get()
         const promises = building.data().aptList.map(apt => firebase.firestore().collection('Apt').doc(apt).get())
+
+        
 
         const aptResults = await Promise.all(promises)
 
@@ -146,14 +167,18 @@ class WhoPaid extends Component
                 ...i.data()
             }
         }) })
+        
+
+
     }
 
     getTableRows() 
     {
         return this.state.tableData.map(dataRow => {
+            let i = parseInt(dataRow.aptNum)-1
             return (
                 <tr>
-                    <td> <input type="checkbox" name={dataRow.aptNum} /*checked={this.state.checked}*/ onChange={this.handleChange} />כן</td>
+                    <td> <input type="text" name={i} value={this.state.paymentListForApt[i]} onChange={this.handleChange} /></td>
                     <td>{dataRow.fullName}</td>
                     <td>{dataRow.aptNum}</td>
                 </tr>
