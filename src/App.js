@@ -79,7 +79,8 @@ class App extends Component
 }
 
 function GuardRoute(props) {
-  if(firebase.auth().currentUser != null) return <Route {...props}/>
+  const user = firebase.auth().currentUser
+  if(user != null) return <Route {...props}/>
   window.location.href = '/'
 }
 

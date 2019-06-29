@@ -44,7 +44,7 @@ class CreateAptPage extends Component{
         alert("אנא בחר נציג בניין");
         return
       }
-      alert("the chosen hoa is: " + this.state.selectedOption)
+       alert("נציג ועד הבית הינו " + this.state.selectedOption + "\n בבקשה אשר או שנה לפני סיום ")
       const fb = firebase.firestore();
       fb.collection('Building').doc(this.state.buildingID).get().then(result=>{
         const arr= result.data().aptList;

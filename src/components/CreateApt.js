@@ -97,12 +97,14 @@ render()
         let aptId = null
         secondFirebaseInstance.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
            alert("שם המשתמש כבר קיים")
+
             var errorCode = error.code;
             var errorMessage = error.message;
             return Promise.resolve(null)
           })
           .then(result =>{
               if(result == null){
+                this.error = "null";
                   return
             }
             const db = firebase.firestore();
@@ -127,9 +129,15 @@ render()
             .then(result => {
                 this.setState({tenantId : result.id})
                 const fb = firebase.firestore();
-                return fb.collection('Apt').doc(aptId).update({
-                    tenants: firebase.firestore.FieldValue.arrayUnion(this.state.tenantId)
-                })
+                try{
+                    return fb.collection('Apt').doc(aptId).update({
+                        tenants: firebase.firestore.FieldValue.arrayUnion(this.state.tenantId)
+                    })
+                }
+                catch{
+                    return
+                }
+                
             })              
         })
         .then(rseult => {
