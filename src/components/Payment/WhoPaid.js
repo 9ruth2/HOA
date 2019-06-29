@@ -6,7 +6,7 @@ import './PaidTable.css';
 import NavBar from '../navBar/NavBar';
 
 const id ="JYsOsQmxzH9Pm4FEI0PJ"
-class ContactTable extends Component
+class WhoPaid extends Component
 {
     buildingId = null
     aptAmount = null
@@ -126,4 +126,4 @@ class ContactTable extends Component
 }
 
 
-export default ContactTable;
+export default WhoPaid;
