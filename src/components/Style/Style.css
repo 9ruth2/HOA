@@ -55,7 +55,7 @@ html {
     border-radius: 15px;
   }
   .imgTitle{
-    
+ 
     background-color: rgba(255, 255, 255, 0.233);
     height: 200px;
     width: auto;
@@ -113,9 +113,9 @@ html {
   }
 
   .inputStyleForm{
-    height: 1px;
+    height: 0.5px;
     display: inline-block;
-    font-size: 18px;
+    font-size: 14px;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
