@@ -7,7 +7,6 @@ class LogOut extends Component{
 
     logout = () => {
       firebase.auth().signOut();
-      // this.props.history.push('/HomePage');
       }
       
     render(){
