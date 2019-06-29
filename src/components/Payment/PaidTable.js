@@ -17,21 +17,13 @@ class PaidTable extends Component
     }
 
     
-    PaidTableStyle = () => {
-        return{
-            border: '1em',
-            float: 'center',
-            textAlign:'center'
-        }
-    }
-
     render()
     {
         return(
             <div>
                 <table className="PaidTable" style = {this.PaidTableStyle()}>    
                 <thead>
-
+            <h1>פירוט תשלומים לדירה</h1>
             <tr>
                 <td> האם שולם</td>
                 <td>סכום לתשלום</td>
@@ -63,6 +55,7 @@ class PaidTable extends Component
             this.getDetails();})
     }
 
+
     findNumOfApt()
     {
         firebase.firestore().collection("Building").doc( this.buildingId).get().then(
@@ -71,14 +64,6 @@ class PaidTable extends Component
         })
     }
 
-
-
-    handleChange() {
-        this.setState({
-          clicked: !this.state.clicked
-        })
-      }
-      
 
     getDetails(doc)
     {
@@ -103,6 +88,16 @@ class PaidTable extends Component
                     <td>{dataRow.aptNum}</td>
                 </tr>
             )})
+    }
+
+
+    PaidTableStyle = () =>
+    {
+        return{
+            border: '1em',
+            float: 'center',
+            textAlign:'center'
+        }
     }
 
 }
