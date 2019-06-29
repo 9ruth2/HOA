@@ -93,7 +93,7 @@ class PaidTable extends Component
     {
         firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(i => {
          this.setState({ tableData: i.docs.map(j => {
-        return {...j.data(),...this.arr[this.aptNum] }}) }) })
+        return {...j.data(), paid: this.arr[this.aptNum] }}) }) })
     
     }
 
@@ -104,7 +104,7 @@ class PaidTable extends Component
             if(dataRow.amount != null)
             return (
                 <tr>
-                    <td>כן</td>
+                    <td>dataRow.paid</td>
                     <td>{dataRow.amount/this.aptAmount}</td>
                     <td>{dataRow.details}</td>
                     <td>{dataRow.fullName}</td>
