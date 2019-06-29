@@ -120,8 +120,6 @@ class WhoPaid extends Component
     }
 
 
-
-
     findNumOfApt()
     {
         firebase.firestore().collection("Building").doc( this.buildingId).get().then(
