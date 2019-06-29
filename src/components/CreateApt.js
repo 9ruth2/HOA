@@ -5,6 +5,7 @@ import 'firebase/auth'
 import { secondFirebaseInstance } from '../Firebase'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import './Style/Style.css';
 
 class CreateApt extends Component
 {
@@ -31,21 +32,17 @@ class CreateApt extends Component
 render()
 {
     return(
-        <div className="CreateApt container" style = {this.CreateAptStyle()}>
+        <div className="CreateAptContainer" style = {this.CreateAptStyle()}>
         <Form>
-            <Form.Group controlId="formBasicEmail">
-                <Form.Label>שם הדייר</Form.Label>
-                <Form.Control placeholder="הכנס שם" name="fullName" type="text"  value={this.state.fullName} onChange={this.handleChange}/>
-                <Form.Label>דוא"ל</Form.Label>
-                <Form.Control placeholder="הכנס מייל" name="email" type="email"  value={this.state.email} onChange={this.handleChange}/>
+            <Form.Group  controlId="formBasicEmail">
+                <Form.Control className="inputStyleForm" placeholder="הכנס את שם הדייר" name="fullName" type="text"  value={this.state.fullName} onChange={this.handleChange}/>
+                <Form.Control className="inputStyleForm" placeholder="הכנס את כתובת הדואל של הדייר" name="email" type="email"  value={this.state.email} onChange={this.handleChange}/>
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
-                <Form.Label>סיסמה</Form.Label>
-                <Form.Control type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange}   />
-                <Form.Label>מס' דירה</Form.Label>
-                <Form.Control type="number" placeholder="מספר דירה" name="aptNum" value={this.state.aptNum} onChange={this.handleChange}   />
+                <Form.Control className="inputStyleForm" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange}   />
+                <Form.Control className="inputStyleForm" type="number" placeholder="הכנס מספר דירה" name="aptNum" value={this.state.aptNum} onChange={this.handleChange}   />
             </Form.Group>
-            <Button variant="primary" onClick={this.handleSubmit} type="button" value="Submit">
+            <Button  className = "buttonStyle" variant="primary" onClick={this.handleSubmit} type="button" value="Submit">
                 שמור
             </Button>
             {this.returnDiv()}
@@ -157,7 +154,7 @@ render()
 
     CreateAptStyle = () => {
         return{
-            textAlign: 'right',
+            textAlign: 'center',
             paddingRight: '1em'
         }
     }

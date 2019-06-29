@@ -73,7 +73,7 @@ class App extends Component
       <GuardRoute path="/payment/payment-main-page" exact component={PaymentMainPage} />
       <GuardRoute path="/payment/WhoPaid" exact component={WhoPaid} />
       <Redirect to='/sign-in' />
-    </Switch>
+    </Switch> 
     )
   }
 }
