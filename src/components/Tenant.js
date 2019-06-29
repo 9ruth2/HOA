@@ -4,6 +4,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import NavBar from './navBar/NavBar';
+import './Style/Style.css';
 
 
 class Tenant extends Component{
@@ -138,33 +139,34 @@ class Tenant extends Component{
     render(){
         return (
             <div className="TenantText container" style = {this.TenantStyle()}>
-            <table style={this.TableStyle()}>
-            <tr>
-                <input className="onEdit" value={this.state.fullName} style = {this.onEditStyle()} type='text' name="fullName" onChange={this.handleChange}></input>
-                <td style={this.onSaveStyle()}>{this.state.fullName}</td>
-                <td> שם מלא</td>
-            </tr>
-            <tr>
-            <input className="onEdit" value={this.state.phoneNum} style = {this.onEditStyle()} type='tel' name="phoneNum" onChange={this.handleChange}></input>
-                <td style={this.onSaveStyle()}>{this.state.phoneNum}</td>
-                <td>מספר פלאפון</td>
-            </tr>
-            <tr>
-            <input className="onEdit" value={this.state.email} style = {this.onEditStyle()} type='email' name="email" onChange={this.handleChange}></input>
-            <td style={this.onSaveStyle()}>{this.state.email}</td>
-                <td>דואר אלקטרוני</td>
-            </tr>
-            <tr>
-            <input className="onEdit" value={this.state.dob} style = {this.onEditStyle()} type='date' name="dob" onChange={this.handleChange} placeholder={this.state.dob}></input>
-                <td style={this.onSaveStyle()}>{this.state.dob}</td>
-                <td>תאריך לידה</td>
-            </tr>
+                <h1 className="bigTitle">פרטים אישיים</h1>
+                <table className="TenantTable" style={this.TableStyle()}>
+                    <tr>
+                        <input className="onEdit" value={this.state.fullName} style = {this.onEditStyle()} type='text' name="fullName" onChange={this.handleChange}></input>
+                        <td style={this.onSaveStyle()}>{this.state.fullName}</td>
+                        <td> שם מלא</td>
+                    </tr>
+                    <tr>
+                    <input className="onEdit" value={this.state.phoneNum} style = {this.onEditStyle()} type='tel' name="phoneNum" onChange={this.handleChange}></input>
+                        <td style={this.onSaveStyle()}>{this.state.phoneNum}</td>
+                        <td>מספר פלאפון</td>
+                    </tr>
+                    <tr>
+                    <input className="onEdit" value={this.state.email} style = {this.onEditStyle()} type='email' name="email" onChange={this.handleChange}></input>
+                    <td style={this.onSaveStyle()}>{this.state.email}</td>
+                        <td>דואר אלקטרוני</td>
+                    </tr>
+                    <tr>
+                    <input className="onEdit" value={this.state.dob} style = {this.onEditStyle()} type='date' name="dob" onChange={this.handleChange} placeholder={this.state.dob}></input>
+                        <td style={this.onSaveStyle()}>{this.state.dob}</td>
+                        <td>תאריך לידה</td>
+                    </tr>
 
 
-            <button type="click" value="עריכה" onClick={this.handleEdit} style={this.onSaveStyle()}>עריכה </button>
-            <input type="submit" value="שמור" onClick={this.handleSubmit} style = {this.onEditStyle()}/>
+                    <button className="buttonStyleForm" type="click" value="עריכת פרטים אישיים" onClick={this.handleEdit} style={this.onSaveStyle()}>עריכת פרטים אישיים</button>
+                    <input className="buttonStyleForm" type="submit" value="שמור שינויים" onClick={this.handleSubmit} style = {this.onEditStyle()}/>
 
-            </table>
+                </table>
 
         </div>
         );

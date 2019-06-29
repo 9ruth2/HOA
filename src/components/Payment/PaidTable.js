@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-import './PaidTable.css';
+import '../Style/Style.css';
 
 
 class PaidTable extends Component
@@ -21,22 +21,21 @@ class PaidTable extends Component
     {
         return(
             <div>
-                <table className="PaidTable" style = {this.PaidTableStyle()}>    
-                <thead>
-            <h1>פירוט תשלומים לדירה</h1>
-            <tr>
-                <td> האם שולם</td>
-                <td>סכום לתשלום</td>
-                <td>תשלום</td>
-                <td>שם</td>
-                <td>מספר דירה</td>
-            </tr>
-            
-                </thead>
-                <tbody>
-                {this.getTableRows()}
-                </tbody>
-            </table>
+                <table className="ContactTable" style = {this.PaidTableStyle()}>    
+                    <thead>
+                        <h1 textAlign="center" className="bigTitle">פירוט התשלומים שלי</h1>
+                        <tr>
+                            <th>הסכום ששולם</th>
+                            <th>סכום לתשלום</th>
+                            <th>פירוט התשלום</th>
+                            <th>שם הדייר</th>
+                            <th>מספר דירה</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     {this.getTableRows()}
+                    </tbody>
+                </table>
         </div>
             );
      }

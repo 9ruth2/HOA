@@ -5,31 +5,28 @@ import Tenant from '../Tenant'
 import NavBar from '../navBar/NavBar';
 import 'firebase/firestore'
 import 'firebase/auth'
+import '../Style/Style.css';
 
 
 class UserPage extends Component
 {
+    UserPageStyle = () => {
+        return{
+            textAlign: 'center',
+            paddingRight: '1em'  
+        }
+    }
+
     render()
     {
         return(
-            <div className="UserPage">
+            <div className="UserPage" style = {this.UserPageStyle()}>
                 <NavBar/>
-                <div>
-                    <Tenant/>
-                    {this.getTenents}
+                <Tenant/>
                 <ContactTable/>
-                </div>
                 <PaidTable/>
             </div>
             );
-        }
-
-        getTenents() {
-            return(
-                <div>
-                    <Tenant/>
-                </div>
-            )
         }
 }
 

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-import './ContactTable.css';
+import './Style/Style.css';
 
 class ContactTable extends Component
 {
@@ -23,18 +23,22 @@ class ContactTable extends Component
     render()
     {
         return(
-            <table className="ContactTable" style = {this.ContactTableStyle()}>    
-            <thead>
-            <tr>
-                <th>מספר פלאפון</th>
-                <th>שם מלא</th>
-                <th>מספר דירה</th>
-            </tr>
-            </thead>
-            <tbody>
-            {this.getTableRows()}
-            </tbody>
-        </table>
+            <div>
+                
+                <table className="ContactTable" style = {this.ContactTableStyle()}>   
+                    <thead>
+                    <h1 className="bigTitle">טבלת אנשי קשר - דיירי הבניין</h1> 
+                        <tr>
+                            <th>מספר פלאפון</th>
+                            <th>שם מלא</th>
+                            <th>מספר דירה</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.getTableRows()}
+                    </tbody>
+                </table>
+            </div>
             );
     }
 
