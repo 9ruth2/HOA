@@ -5,18 +5,10 @@ import 'firebase/auth'
 import { secondFirebaseInstance } from '../Firebase'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import {ToastsContainer, ToastsStore} from 'react-toasts';
-import { toast } from 'react-toastify';
 
 class CreateApt extends Component
 {
-
-    CreateAptStyle = () => {
-        return{
-            textAlign: 'right',
-            paddingRight: '1em'
-        }
-    }
+    error = null
 
     constructor(props){
         super(props);
@@ -35,7 +27,37 @@ class CreateApt extends Component
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-   handleChange = (event) => {
+
+render()
+{
+    return(
+        <div className="CreateApt container" style = {this.CreateAptStyle()}>
+        <Form>
+            <Form.Group controlId="formBasicEmail">
+                <Form.Label>שם הדייר</Form.Label>
+                <Form.Control placeholder="הכנס שם" name="fullName" type="text"  value={this.state.fullName} onChange={this.handleChange}/>
+                <Form.Label>דוא"ל</Form.Label>
+                <Form.Control placeholder="הכנס מייל" name="email" type="email"  value={this.state.email} onChange={this.handleChange}/>
+            </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+                <Form.Label>סיסמה</Form.Label>
+                <Form.Control type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange}   />
+                <Form.Label>מס' דירה</Form.Label>
+                <Form.Control type="number" placeholder="מספר דירה" name="aptNum" value={this.state.aptNum} onChange={this.handleChange}   />
+            </Form.Group>
+            <Button variant="primary" onClick={this.handleSubmit} type="button" value="Submit">
+                שמור
+            </Button>
+            {this.returnDiv()}
+        </Form>
+        </div>
+    );
+}
+    
+// -------------------- Functions --------------------------------
+
+   handleChange = (event) =>
+    {
         const target = event.target;
         if(target.type === 'email'){
             this.setState({
@@ -65,18 +87,19 @@ class CreateApt extends Component
         }
    }
 
-   handleSubmit(event){
+   handleSubmit(event)
+   {
        if(this.state.fullName ===''){
            this.setState({fullName:this.state.email})
        }
        if(this.state.email == '' || this.state.password == '' || this.state.aptNum == '')
-            ToastsStore.error("נא למלא את כל השדות")
-       
-       else{
+       alert("נא למלא את כל השדות")
+
+       else
+       {
         let aptId = null
         secondFirebaseInstance.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
-            ToastsStore.warning("שם המשתמש קיים")
-            // Handle Errors here.
+           alert("שם המשתמש כבר קיים")
             var errorCode = error.code;
             var errorMessage = error.message;
             return Promise.resolve(null)
@@ -118,36 +141,36 @@ class CreateApt extends Component
                 aptList: firebase.firestore.FieldValue.arrayUnion(aptId)
             })
         })
-        ToastsStore.success(" דירה מספר "+this.state.aptNum+" נוספה בהצלחה")
-    } 
-}
-
-    render(){
-        return(
-            <div className="CreateApt container" style = 
-            {this.CreateAptStyle()}>
-                <Form>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>שם הדייר</Form.Label>
-                        <Form.Control placeholder="הכנס שם" name="fullName" type="text"  value={this.state.fullName} onChange={this.handleChange}/>
-                        <Form.Label>דוא"ל</Form.Label>
-                        <Form.Control placeholder="הכנס מייל" name="email" type="email"  value={this.state.email} onChange={this.handleChange}/>
-                    </Form.Group>
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>סיסמה</Form.Label>
-                        <Form.Control type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange}   />
-                        <Form.Label>מס' דירה</Form.Label>
-                        <Form.Control type="number" placeholder="מספר דירה" name="aptNum" value={this.state.aptNum} onChange={this.handleChange}   />
-                    </Form.Group>
-                    <ToastsContainer store={ToastsStore}/>
-                    <Button variant="primary" onClick={this.handleSubmit} type="button" value="Submit">
-                        שמור
-                    </Button>
-                </Form>
-            </div>
-        );
+        this.error = "done";
+        } 
     }
-    
+
+    returnDiv()
+    {
+        if (this.error == "done" )
+        {
+            this.error = ''
+            return <div style ={this.MsgStyle()}><p>!הדירה נוספה בהצלחה</p></div>
+       }
+    }
+
+
+    CreateAptStyle = () => {
+        return{
+            textAlign: 'right',
+            paddingRight: '1em'
+        }
+    }
+
+
+    MsgStyle = () => {
+        return{
+            backgroundColor: 'white',
+            borderColor: 'white',
+            paddingRight: '1em',
+            marginLeft: '50em'
+        }
+    }
 
 }
 export default CreateApt;
