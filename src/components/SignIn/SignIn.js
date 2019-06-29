@@ -114,7 +114,7 @@ function SignIn(props) {
             </Grid>
             <Grid item>
               <div /*style={forgotPasswordStyle()}*/>
-              <input onChange={handleChange} placeholder='כתובת דוא"ל' name='forgotPassword'/>
+              <input type="email" onChange={handleChange} placeholder='כתובת דוא"ל' name="forgotPassword" />
               <button type='button' onClick={renewPassword}>שליחה</button>
               </div>
             </Grid>
@@ -146,15 +146,15 @@ function handleChange(e)
   if(e.target.name === 'email'){
     username = e.target.value;
   }
-  if(e.target.mame === 'forgotPassword'){
+  if(e.target.type === 'email'){
     forgotPassword = e.target.value;
+    renewPassword()
   } 
 }
 
 
 function onClickSignIn()
 {
-  alert(username)
   firebase.auth().signInWithEmailAndPassword(username, password)
   .then(result => {
     props.history.replace('HomePage')
