@@ -23,7 +23,11 @@ import '../Style/Style.css';
 let username = "";
 let password = "";
 let forgotPassword = "";
+
+
+
 let show = false;
+
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -47,6 +51,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
+
 
 
 function SignIn(props) {
@@ -138,7 +143,7 @@ function handleChange(e)
   if(e.target.type === 'password'){
     password = e.target.value;
   }
-  if(e.target.name === 'userName'){
+  if(e.target.name === 'email'){
     username = e.target.value;
   }
   if(e.target.mame === 'forgotPassword'){
@@ -149,6 +154,7 @@ function handleChange(e)
 
 function onClickSignIn()
 {
+  alert(username)
   firebase.auth().signInWithEmailAndPassword(username, password)
   .then(result => {
     props.history.replace('HomePage')
