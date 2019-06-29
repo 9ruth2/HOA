@@ -92,10 +92,10 @@ class PaidTable extends Component
     getTableRows() 
     {
         return this.state.tableData.map(dataRow => {
+            if(dataRow.amount != null)
             return (
                 <tr>
-            
-                    <td> <input type="checkbox" checked={this.state.clicked} onChange={this.handleChange} />כן</td>
+                    <td>כן</td>
                     <td>{dataRow.amount/this.aptAmount}</td>
                     <td>{dataRow.details}</td>
                     <td>{dataRow.fullName}</td>
