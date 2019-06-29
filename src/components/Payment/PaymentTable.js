@@ -62,14 +62,9 @@ class PaymentTable extends Component{
     render() { 
         return(
             <div>
-                <NavBar/>
-                <Button
-                    size="large"
-                    variant="contained"
-                    color="primary"
-                    onClick={this.exportToExcel}>
-                </Button>        
+                <NavBar/>        
                 <h1 className="bigTitle">דוח תשלום ועד הבניין</h1>
+                <button className="buttonStylePay" onClick={this.exportToExcel}>ייצוא הדוח לאקסל</button>
                 <table id = "paymentTable" border= "1" style = {this.PaymentTableStyle()}>
                     
                     <thead>

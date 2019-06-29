@@ -33,17 +33,18 @@ render()
 {
     return(
         <div className="CreateAptContainer" style = {this.CreateAptStyle()}>
+        <h4 className="smallTitle">הכנס פרטי דירה</h4>
         <Form>
             <Form.Group  controlId="formBasicEmail">
-                <Form.Control className="inputStyleForm" placeholder="הכנס את שם הדייר" name="fullName" type="text"  value={this.state.fullName} onChange={this.handleChange}/>
-                <Form.Control className="inputStyleForm" placeholder="הכנס את כתובת הדואל של הדייר" name="email" type="email"  value={this.state.email} onChange={this.handleChange}/>
+                <Form.Control className="inputStyleForm" placeholder="הכנס את שם הדייר הראשי" name="fullName" type="text"  value={this.state.fullName} onChange={this.handleChange}/>
+                <Form.Control className="inputStyleForm" placeholder="הכנס כתובת דואל של הדייר" name="email" type="email"  value={this.state.email} onChange={this.handleChange}/>
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
-                <Form.Control className="inputStyleForm" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange}   />
+                <Form.Control className="inputStyleForm" type="password" placeholder="הכנס סיסמא" name="password" value={this.state.password} onChange={this.handleChange}   />
                 <Form.Control className="inputStyleForm" type="number" placeholder="הכנס מספר דירה" name="aptNum" value={this.state.aptNum} onChange={this.handleChange}   />
             </Form.Group>
-            <Button  className = "buttonStyle" variant="primary" onClick={this.handleSubmit} type="button" value="Submit">
-                שמור
+            <Button  className = "buttonStyleForm" variant="primary" onClick={this.handleSubmit} type="button" value="Submit">
+                הזן פרטי דירה נוכחית למאגר
             </Button>
             {this.returnDiv()}
         </Form>

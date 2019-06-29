@@ -25,7 +25,7 @@ class CreateAptPage extends Component{
 
     CreateAptPageStyle = () => {
         return{
-            textAlign: 'right',
+            textAlign: 'center',
             paddingRight: '1em'
         }
     }
@@ -33,8 +33,10 @@ class CreateAptPage extends Component{
     render(){
         return(
             <div className="CreateAptPage" style =   {this.CreateAptPageStyle()}>
+                      <h1 className="bigTitle">מסך יצירת בניין</h1>
+                      <h4 className="smallTitle">שים לב! אין לצאת ממסך זה לפני סיום הזנת כל הדיירים למערכת</h4>
                 {this.printApt()}
-                <button onClick={this.onSubmit}>סיום</button>
+                <button className="buttonStyle" onClick={this.onSubmit}>סיום</button>
             </div>
         );
     }
@@ -69,7 +71,7 @@ class CreateAptPage extends Component{
         let apt = [];
         while (i < this.state.aptNum) {
           i++;
-          apt.push(<input type="radio" name="hoa" value={i}  onChange={this.handleOptionChange}  />)
+          apt.push(<input  type="radio" name="hoa" value={i}  onChange={this.handleOptionChange}/>)
           apt.push(<CreateApt buildingID = {this.state.buildingID} />);
         }
         return apt;
