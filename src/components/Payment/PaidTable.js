@@ -10,7 +10,6 @@ class PaidTable extends Component
     buildingId = null
     aptAmount = null
     aptNum = null
-    arr = []
 
     state = {
         tableData: [],
@@ -61,10 +60,8 @@ class PaidTable extends Component
             this.buildingId = result.data().buildingId
             this.aptNum = result.data().aptNum
             this.findNumOfApt()
-            this.getWhatIsPaid()
             this.getDetails();})
     }
-
 
     findNumOfApt()
     {
@@ -75,6 +72,7 @@ class PaidTable extends Component
     }
 
 
+
     handleChange() {
         this.setState({
           clicked: !this.state.clicked
@@ -82,18 +80,12 @@ class PaidTable extends Component
       }
       
 
-    getWhatIsPaid()
-    {
-        firebase.firestore().collection("Building").doc(this.buildingId).collection("Payment").get().then
-        ( query =>  { this.arr = query.data().paymentListForApt})
-    }
-        
-
     getDetails(doc)
     {
         firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(i => {
-         this.setState({ tableData: i.docs.map(j => {
-        return {...j.data(), paid: this.arr[this.aptNum] }}) }) })
+                firebase.firestore().collection("Building").doc(this.buildingId).collection("Payment").get().then( query => {
+                    this.setState({ tableData: query.docs.map(j => {
+                        return {...i.data(),...j.data() }}) }) })})
     
     }
 
@@ -104,7 +96,7 @@ class PaidTable extends Component
             if(dataRow.amount != null)
             return (
                 <tr>
-                    <td>dataRow.paid</td>
+                    <td>{dataRow.paymentListForApt[this.aptNum-1]}</td>
                     <td>{dataRow.amount/this.aptAmount}</td>
                     <td>{dataRow.details}</td>
                     <td>{dataRow.fullName}</td>
