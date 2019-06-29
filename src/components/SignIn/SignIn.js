@@ -26,7 +26,7 @@ let forgotPassword = "";
 
 
 
-let show = false;
+// let show = false;
 
 
 const useStyles = makeStyles(theme => ({
@@ -108,7 +108,7 @@ function SignIn(props) {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link onClick={inputForgotPassword.bind()} to ='./sign-in' variant="body2">
+              <Link /*onClick={inputForgotPassword.bind()}*/ to ='./sign-in' variant="body2">
               שכחת סיסמא?
               </Link>
             </Grid>
@@ -173,14 +173,14 @@ function logingOut (){
 }
 
 
-function inputForgotPassword()
-{
-  if(show){
-    show = false }
-  else{
-    show = true;
-  }
-}
+// function inputForgotPassword()
+// {
+//   if(show){
+//     show = false }
+//   else{
+//     show = true;
+//   }
+// }
 
 
 function renewPassword()
@@ -191,7 +191,7 @@ function renewPassword()
   auth.sendPasswordResetEmail(emailAddress).then(function(){
     // Email sent.
     alert("ברגעים אלו נשלח אליך דואר אלקטרוני לחידוש הסיסמא")
-    show = false;
+    // show = false;
   }).catch(function(error) {
     alert("כתובת המייל שהזנת אינה נכונה")
     // An error happened.
