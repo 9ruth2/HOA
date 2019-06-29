@@ -20,7 +20,7 @@ class Message extends Component {
   }
   constructor(props){
     super(props);
-  firebase.firestore().collection('Apt').doc( firebase.auth().currentUser.uid).get()
+    firebase.firestore().collection('Apt').doc( firebase.auth().currentUser.uid).get()
         .then(result =>{
             const hoa = result.data().hoa
             this.setState({
@@ -28,6 +28,7 @@ class Message extends Component {
             })
             
         })
+
   }
   
 
@@ -105,7 +106,7 @@ class Message extends Component {
         <p>{messageObj.timestamp} :תאריך</p>
         <p className="messages_talkbubble"> הודעה: {messageObj.text}</p>
         <br />
-        <button className="messages_btnDel" onClick={() => this.onClickDelete(messageObj.id)}>מחק</button>
+        <button style={{display: this.state.hoa ? 'block' : 'none' }} className="messages_btnDel" onClick={() => this.onClickDelete(messageObj.id)}>מחק</button>
       </div>
     })
   }
