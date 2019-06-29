@@ -57,15 +57,15 @@ class WhoPaid extends Component
         }
     }
 
-    // // a func to export to excel
-	// exportToExcel = () => {
-    //     const columnNames = ["מספר דירה","שם מלא"];
-    //     const aoa = [columnNames].concat(this.state.tableData.map(this.newPaymentToArr));
-    //     aoaToFile({ fileName: 'apartment payment report.xlsx', aoa });
-    // }
+    // a func to export to excel
+	exportToExcel = () => {
+        const columnNames = ["מספר דירה","שם מלא"];
+        const aoa = [columnNames].concat(this.state.tableData.map(this.newPaymentToArr));
+        aoaToFile({ fileName: 'apartment payment report.xlsx', aoa });
+     }
             
-    // // a func to convert object to arr
-    // newPaymentToArr = newPayment => [{key:"aptNum"},{key:"fullName"}].map(r => newPayment[r.key]);
+    // a func to convert object to arr
+    newPaymentToArr = newPayment => [{key:"aptNum"},{key:"fullName"}].map(r => newPayment[r.key]);
 
 
     render(){
