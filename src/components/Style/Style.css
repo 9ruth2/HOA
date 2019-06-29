@@ -1,4 +1,12 @@
 
+.toast
+{
+  align-items: center;
+  position: relative;
+  align-content: center;
+}
+
+
 .MessageArea{
   border: #000000;
   align-content: right;

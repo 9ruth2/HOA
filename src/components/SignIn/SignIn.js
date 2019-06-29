@@ -103,7 +103,7 @@ function SignIn(props) {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link onClick={inputForgotPassword.bind()} href='./sign-in' variant="body2">
+              <Link onClick={inputForgotPassword.bind()} to ='./sign-in' variant="body2">
               שכחת סיסמא?
               </Link>
             </Grid>
@@ -116,7 +116,7 @@ function SignIn(props) {
           </Grid>
           <Grid container>
             <Grid item xs>
-              <Link href="#" onClick={logingOut} variant="body2">
+              <Link to="#" onClick={logingOut} variant="body2">
               התנתק
               </Link>
             </Grid>

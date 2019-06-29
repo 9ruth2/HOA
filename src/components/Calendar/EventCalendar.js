@@ -34,8 +34,20 @@ class EventCalender extends Component {
       start: '',
       end: '',
       id: 1,
-      events: []
+      events: [],
+      hoa:false
     };
+
+
+    firebase.firestore().collection('Apt').doc( firebase.auth().currentUser.uid).get()
+        .then(result =>{
+            const hoa = result.data().hoa
+            this.setState({
+                hoa:hoa
+            })
+            
+        })
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -153,7 +165,9 @@ class EventCalender extends Component {
 
  //Clicking an existing event allows you to remove it
 onSelectEvent(pEventId) {
-   const r = window.confirm("האם את/ה בטוח/ה שאת/ה רוצה למחוק את האירוע?")
+  if(this.state.hoa){
+
+    const r = window.confirm("האם את/ה בטוח/ה שאת/ה רוצה למחוק את האירוע?")
    if(r === true){
     
        const db = firebase.firestore();
@@ -165,6 +179,8 @@ onSelectEvent(pEventId) {
 
        
       }
+  }
+   
   
       }
 

@@ -11,12 +11,24 @@ const uid = ''
 class Message extends Component {
 
   buildingId = null
-  fullName = ""
+  fullName = ''
 
   state = {
     input: "",
     messages: [],
-    fullName : ""
+    hoa:false
+  }
+  constructor(props){
+    super(props);
+    firebase.firestore().collection('Apt').doc( firebase.auth().currentUser.uid).get()
+        .then(result =>{
+            const hoa = result.data().hoa
+            this.setState({
+                hoa:hoa
+            })
+            
+        })
+
   }
   
 
@@ -32,7 +44,6 @@ class Message extends Component {
     if (firebase.auth().currentUser == null) return null
     return (
       <React.Fragment>
-        {/* <NavBar/> */}
         <div id="object" class="slideLeft">
         <div className="messages_body">
 
@@ -57,25 +68,25 @@ class Message extends Component {
     )
   }
 
+  
   //----------------------- Functions ---------------------------
-//1test@test.com
+
   componentDidMount() {
     console.log(firebase.auth().currentUser.uid)
     if (firebase.auth().currentUser == null) return
     firebase.firestore().collection("Apt").doc(firebase.auth().currentUser.uid).get().then(
       result => {
         if (!result.exists) return
-        console.log(result.data().buildingId)
-        
         this.buildingId = result.data().buildingId
-        console.log(this.buildingId)
+        this.fullName = result.data().fullName
         this.getMessagesFromServer()
       }
     )
   }
 
 
-  getMessagesFromServer() {
+  getMessagesFromServer()
+  {
     firebase.firestore().collection("Building").doc(this.buildingId).collection("Message").get().then(
       result => {
         if (result.empty) return
@@ -85,7 +96,8 @@ class Message extends Component {
   }
 
 
-  getMessage() {
+  getMessage() 
+  {
     return this.state.messages.map(messageObj => {
       if (messageObj == null || messageObj.text == null || messageObj.text.length <= 0) return null
 
@@ -94,25 +106,27 @@ class Message extends Component {
         <p>{messageObj.timestamp} :תאריך</p>
         <p className="messages_talkbubble"> הודעה: {messageObj.text}</p>
         <br />
-        <button className="messages_btnDel" onClick={() => this.onClickDelete(messageObj.id)}>מחק</button>
+        <button style={{display: this.state.hoa ? 'block' : 'none' }} className="messages_btnDel" onClick={() => this.onClickDelete(messageObj.id)}>מחק</button>
       </div>
     })
   }
 
 
-  onClickDelete(idToDelete) {
+  onClickDelete(idToDelete)
+  {
     const db = firebase.firestore();
     db.collection('Building').doc(this.buildingId).collection('Message').doc(idToDelete).delete()
     this.setState({ messages: this.state.messages.filter(item => item.id !== idToDelete) });
-   
   }
 
 
-  onClickSave() {
+  onClickSave()
+  {
     if(this.buildingId == null || this.buildingId.length <= 0) {
       alert('no building to add the message to')
       return
     }
+
     if (this.state.input === '') return
     const newMessageObj = {
       text: this.state.input,
@@ -120,25 +134,28 @@ class Message extends Component {
       author: this.fullName
     }
  
-    if(newMessageObj.author === undefined) newMessageObj.author = '';
-    const user = firebase.firestore().collection('Apt').doc(firebase.auth().currentUser.uid).get().then(result=>{
-      newMessageObj.author =result.data().fullName
-    })
-      
+   
     const db = firebase.firestore();
     db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
     .then(result => {
+
+
+
+      const user = firebase.auth().currentUser.uid
+      db.collection('Building').doc(this.buildingId).collection('Message').doc(result.id).update({
+        userId: firebase.auth().currentUser.uid
+      })
+
+
+
       newMessageObj.id = result.id
       this.setState({
-        messages: [...this.state.messages, newMessageObj]
-      }, () => {
-      //  db.collection('Building').doc(this.buildingId).collection('Message').add(newMessageObj)
-      });
+      messages: [...this.state.messages, newMessageObj] });
       this.setState({ input: '' });
     })
   }
-}
 
+}
 export default Message
 
 

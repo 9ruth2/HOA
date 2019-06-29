@@ -3,13 +3,12 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import './PaidTable.css';
-import { textAlign } from '@material-ui/system';
-import NavBar from '../navBar/NavBar';
 
 
 class PaidTable extends Component
 {
     buildingId = null
+    aptAmount = null
 
     state = {
         tableData: [],
@@ -29,8 +28,6 @@ class PaidTable extends Component
     {
         return(
             <div>
-                <NavBar/>
-
                 <table className="PaidTable" style = {this.PaidTableStyle()}>    
                 <thead>
 
@@ -61,8 +58,18 @@ class PaidTable extends Component
             if (!result.exists) return
             this.buildingId = result.data().buildingId
             this.aptNum = result.data().aptNum
+            this.findNumOfApt()
             this.getDetails();})
     }
+
+    findNumOfApt()
+    {
+        firebase.firestore().collection("Building").doc( this.buildingId).get().then(
+        result => { if (!result.exists) return
+            this.aptAmount = result.data().aptAmount
+        })
+    }
+
 
 
     handleChange() {
@@ -85,11 +92,11 @@ class PaidTable extends Component
     getTableRows() 
     {
         return this.state.tableData.map(dataRow => {
+            if(dataRow.amount != null)
             return (
                 <tr>
-            
-                    <td> <input type="checkbox" checked={this.state.clicked} onChange={this.handleChange} />כן</td>
-                    <td>{dataRow.amount}</td>
+                    <td>כן</td>
+                    <td>{dataRow.amount/this.aptAmount}</td>
                     <td>{dataRow.details}</td>
                     <td>{dataRow.fullName}</td>
                     <td>{dataRow.aptNum}</td>
