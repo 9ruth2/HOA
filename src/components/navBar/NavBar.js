@@ -68,8 +68,8 @@ class NavBar extends Component {
                     <li className="NavBar_li"><Link to = "/HomePage" className="NavBar_li_a">דף הבית</Link></li>
                     <li className="NavBar_li"><Link to = "calendar" className="NavBar_li_a" >אירועים</Link></li>
                     <li className="NavBar_li"><Link to = "payment/payment-main-page" className="NavBar_li_a">תשלומים ודוחות</Link></li>
-                    {/* <li className="NavBar_li"><Link to = "/create-building" className="NavBar_li_a" style={{display: this.state.hoa ? 'block' : 'none' }} >ניהול בניינים</Link></li> */}
                     <li className="NavBar_li"><Link to = "/user-page" className="NavBar_li_a">איזור אישי</Link></li>
+                    {/* <li className="NavBar_li"><Link to = "/create-building" className="NavBar_li_a" style={{display: this.state.hoa ? 'block' : 'none' }} >ניהול בניינים</Link></li> */}
                     <li className="NavBar_li">
                     <button className="NavBar_logout" > <LogOut/> </button>
                     </li>
