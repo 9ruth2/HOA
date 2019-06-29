@@ -4,10 +4,11 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import './PaidTable.css';
 import NavBar from '../navBar/NavBar';
+
 import { thisTypeAnnotation } from '@babel/types';
 
 
-class ContactTable extends Component
+class WhoPaid extends Component
 {
     buildingId = null
     aptAmount = null
@@ -51,12 +52,12 @@ class ContactTable extends Component
         return(
             <div>
                 <NavBar/>
-                <Button
+                <input type="button"
                     size="large"
                     variant="contained"
                     color="primary"
                     onClick={this.exportToExcel}>
-                </Button>
+                </input>
                 <h1 className="bigTitle">פירוט עבור תשלום נבחר</h1>
                 <table className="ContactTable" style = {this.ContactTableStyle()}>    
                 <thead>
