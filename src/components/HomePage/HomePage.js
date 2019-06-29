@@ -25,11 +25,16 @@ class HomePage extends Component {
                     
                 </div>
                 <div className = "aboutAs">
-                    <h2 className="bigTitle">?מי אנחנו</h2>
+                    <h2 className="bigTitle">מי אנחנו?</h2>
                     <p>פרויקט קהילה בונה מבית הקרן לירושלים ומנהל קהילתי יובלים הוא מודל עבודה לשיפור איכות החיים באמצעות קידום שיפוצים פיזיים בדירות, בבניינים ובחצרות, תוך קיום מפגשי תרבות, תוכן, קיימות ומנהיגות לקידום קשרים בקהילה, שכנות טובה ותרבות דיור. 
     אתר זה נועד לסייע לכם בניהול התחזוקה של הבניין וכפלטפורמה לתקשורת בין הדיירים.
                     </p>
+                    <img className="imgLogo" src="http://www.up2me.co.il/images/40326134.png" />
+                    <img className="imgLogo" src="http://www.up2me.co.il/images/27135588.jpg" />
+                    <img className="imgLogo" src="http://www.up2me.co.il/images/96617855.png" />
+                    <img className="imgLogo" src="http://www.up2me.co.il/images/73282662.jpg" />
                 </div>
+ 
                 </div>
             </div>
 
@@ -38,5 +43,9 @@ class HomePage extends Component {
         )
     }
 }
-
+               /*
+                <div className="imgHome">
+                    <img className="imgHome" src="http://www.up2me.co.il/images/37834236.jpg"/>
+                </div>
+                */
 export default HomePage

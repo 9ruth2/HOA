@@ -47,7 +47,7 @@ class Message extends Component {
         <div id="object" class="slideLeft">
         <div className="messages_body">
 
-          <h1 className="messages_h1">לוח מודעות</h1>
+        <h2 className="bigTitle">לוח מודעות</h2>
           <form>
             <label>מוסרים משהו? צריכים משהו? כתבו לדיירי הבניין</label>
             <div>
@@ -55,7 +55,7 @@ class Message extends Component {
                 type="text"
                 value={this.state.input}
                 onChange={this.handleChangeText}
-                placeholder="..כתוב כאן את הודעתך   "
+                placeholder="..כתוב/י כאן את הודעתך   "
               />
             </div>
             <button className="messages_btn" type='button' onClick={() => this.onClickSave()}>שלח</button>
