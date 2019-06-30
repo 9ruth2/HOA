@@ -27,7 +27,7 @@ class ContactTable extends Component
                 
                 <table className="ContactTable" style = {this.ContactTableStyle()}>   
                     <thead>
-                    <h1 className="bigTitle">טבלת אנשי קשר - דיירי הבניין</h1> 
+                    <h1 style ={{float:"right"}} className="bigTitle">טבלת אנשי קשר - דיירי הבניין</h1> 
                         <tr>
                             <th>מספר פלאפון</th>
                             <th>שם מלא</th>
