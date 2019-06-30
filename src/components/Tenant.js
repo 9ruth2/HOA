@@ -13,7 +13,8 @@ class Tenant extends Component{
         return{
             textAlign: 'right',
             paddingRight: '1em',
-            float: 'right'
+            float: 'right',
+            marginRight: '30%'
         }
     }
     TableStyle = () => {

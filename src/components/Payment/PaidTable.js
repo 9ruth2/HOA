@@ -23,7 +23,7 @@ class PaidTable extends Component
             <div>
                 <table className="ContactTable" style = {this.PaidTableStyle()}>    
                     <thead>
-                        <h1 textAlign="center" className="bigTitle">פירוט התשלומים שלי</h1>
+                        <h1 style ={{float:"right"}} className="bigTitle">פירוט התשלומים שלי</h1>
                         <tr>
                             <th>הסכום ששולם</th>
                             <th>סכום לתשלום</th>
