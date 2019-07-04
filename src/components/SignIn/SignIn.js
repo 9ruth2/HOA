@@ -133,7 +133,7 @@ function SignIn(props) {
     </Container>
   );
 
-function handleForgetPassword(){}
+// function handleForgetPassword(){}
 
 function handleChange(e)
 {
@@ -145,7 +145,7 @@ function handleChange(e)
   }
   if(e.target.type === 'email'){
     forgotPassword = e.target.value;
-    renewPassword()
+    
   } 
 }
 
